@@ -1,14 +1,19 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 
 
 export default class Login extends Component {
 
+    state = {
+        showSpinner: true,
+    }
+
     componentDidMount() {
+        firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(user => {
             if (user){
                 const resetAction = NavigationActions.reset({
@@ -16,8 +21,10 @@ export default class Login extends Component {
                     actions: [NavigationActions.navigate({ routeName: 'Home', params:{uid:user.uid} })],
                   });
                 this.props.navigation.dispatch(resetAction);
+            } else {
+                this.setState({showSpinner: false})
             }
-        })
+        }) 
     }
 
     authenticate = (token) => {
@@ -31,6 +38,7 @@ export default class Login extends Component {
     }
 
     login = async () => {
+        this.setState({showSpinner: true})
         const ADD_ID = '1773849149576744'
         const options = {
             permissions: ['public_profile', 'user_birthday', 'user_work_history', 'email']
@@ -48,11 +56,11 @@ export default class Login extends Component {
     render(){
         return(
             <View
-                style={styles.container}
-            >
-                <FacebookButton 
-                    onPress={this.login}
-                />
+                style={styles.container}>
+                {this.state.showSpinner ? 
+                    <ActivityIndicator animating={this.state.showSpinner} /> :
+                    <FacebookButton onPress={this.login}/>
+                }
             </View>
         )
     }
