@@ -11,10 +11,11 @@ export default class Home extends Component {
   state = {
     profileIndex: 0,
     profiles: [],
+    user: this.props.navigation.state.user
   }
 
   componentWillMount() {
-    const {uid} = this.props.navigation.state.params
+    const {uid} = this.props.navigation.state.params.user
     this.updateUserLocation(uid)
     this.getProfiles(uid)
   }

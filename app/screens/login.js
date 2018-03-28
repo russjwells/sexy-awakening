@@ -14,17 +14,30 @@ export default class Login extends Component {
 
     componentDidMount() {
         firebase.auth().signOut()
-        firebase.auth().onAuthStateChanged(user => {
-            if (user){
-                const resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [NavigationActions.navigate({ routeName: 'Home', params:{uid:user.uid} })],
-                  });
-                this.props.navigation.dispatch(resetAction);
+        firebase.auth().onAuthStateChanged(auth => {
+            if (auth){
+                this.firebaseRef = firebase.database().ref('users')
+                this.firebaseRef.child(auth.uid).on('value', snap => {
+                    const user = snap.val()
+                    if (user != null) {
+                        this.firebaseRef.child(auth.uid).off('value')
+                        this.goHome(user)
+                    }
+                })
             } else {
                 this.setState({showSpinner: false})
             }
         }) 
+    }
+
+    goHome(user) {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Home', params:{user}}),
+            ],
+          });
+        this.props.navigation.dispatch(resetAction);
     }
 
     authenticate = (token) => {
@@ -34,7 +47,7 @@ export default class Login extends Component {
     }
 
     createUser = (uid, userData) => {
-        firebase.database().ref('users').child(uid).update(userData)
+        firebase.database().ref('users').child(uid).update({...userData, uid})
     }
 
     login = async () => {
