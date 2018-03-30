@@ -6,12 +6,13 @@ import GeoFire from 'geofire'
 
 import Card from '../components/card'
 import SimpleScroller from '../components/simpleScroller'
+import Profile from './profile'
 
 export default class Home extends Component {
   state = {
     profileIndex: 0,
     profiles: [],
-    user: this.props.navigation.state.user
+    user: this.props.navigation.state.params.user
   }
 
   componentWillMount() {
@@ -83,7 +84,7 @@ export default class Home extends Component {
     return (
       <SimpleScroller 
       screens={[
-        <View style={{flex: 1, backgroundColor:'red'}} />,
+        <Profile user={this.state.user}/>,
         this.cardStack(),
         ]} />
       //this.cardStack()

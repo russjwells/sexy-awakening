@@ -13,9 +13,9 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        firebase.auth().signOut()
+        //firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(auth => {
-            if (auth){
+            if (auth) {
                 this.firebaseRef = firebase.database().ref('users')
                 this.firebaseRef.child(auth.uid).on('value', snap => {
                     const user = snap.val()
@@ -52,11 +52,11 @@ export default class Login extends Component {
 
     login = async () => {
         this.setState({showSpinner: true})
-        const ADD_ID = '1773849149576744'
+        const APP_ID = '1773849149576744'
         const options = {
-            permissions: ['public_profile', 'user_birthday', 'user_work_history', 'email']
+            permissions: ['public_profile', 'user_birthday', 'user_work_history', 'email'],
         }
-        const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync(ADD_ID, options)
+        const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync(APP_ID, options)
         if (type === 'success') {
             const fields = ['id', 'first_name', 'last_name', 'gender', 'birthday', 'work']
             const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
