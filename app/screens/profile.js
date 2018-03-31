@@ -5,13 +5,18 @@ import {
     Text,
 } from 'react-native'
 
+import CircleImage from '../components/circleImage'
+
 export default class Profile extends Component {
     render () {
-        const {first_name, work} = this.props.user
+        const {first_name, work, id} = this.props.user
+        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container} >
                 <View style={styles.profile}>
-                    <Text>{first_name}</Text>
+                    <CircleImage facebookID={id} size={120}/>
+                    <Text style={{fontSize:20}}>{first_name}</Text>
+                    <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                 </View>
             </View>
         )
