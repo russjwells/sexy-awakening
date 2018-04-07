@@ -13,7 +13,7 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        firebase.auth().signOut()
+        //firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(auth => {
             if (auth) {
                 this.firebaseRef = firebase.database().ref('users')
@@ -54,7 +54,7 @@ export default class Login extends Component {
         this.setState({showSpinner: true})
         const APP_ID = '1773849149576744'
         const options = {
-            permissions: ['public_profile', 'user_birthday', 'user_work_history', 'email'],
+            permissions: ['public_profile', 'email'],
         }
         const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync(APP_ID, options)
         if (type === 'success') {
