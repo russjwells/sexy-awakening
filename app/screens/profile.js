@@ -3,6 +3,7 @@ import {
     StyleSheet,
     View,
     Text,
+    Switch,
 } from 'react-native'
 
 import CircleImage from '../components/circleImage'
@@ -11,12 +12,14 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider'
 export default class Profile extends Component {
     state = {
         ageRangeValues: [18, 36],
-        distanceValue: [4]
+        distanceValue: [4],
+        showMen: false,
+        showWomen: true,
     }
 
     render () {
         const {first_name, work, id} = this.props.user
-        const {ageRangeValues, distanceValue} = this.state
+        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container} >
@@ -49,6 +52,20 @@ export default class Profile extends Component {
                         onValuesChange={val => this.setState({ageRangeValues: val})}
                     />
                 </View>
+                <View style={styles.switch}>
+                    <Text style={styles.label}>Show Men</Text>
+                    <Switch 
+                        value={showMen}
+                        onValueChange={val => this.setState({showMen:val})}
+                    />
+                </View>
+                <View style={styles.switch}>
+                    <Text style={styles.label}>Show Women</Text>
+                    <Switch 
+                        value={showWomen}
+                        onValueChange={val => this.setState({showWomen:val})}
+                    />
+                </View>
             </View>
         )
     }
@@ -75,4 +92,10 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
     },
+    switch: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 20,
+        marginRight: 20,
+    }
 })
