@@ -47,7 +47,12 @@ export default class Login extends Component {
     }
 
     createUser = (uid, userData) => {
-        firebase.database().ref('users').child(uid).update({...userData, uid})
+        const defaults = {
+            uid,
+            distance: 5,
+            ageRange: [18,24],
+        }
+        firebase.database().ref('users').child(uid).update({...userData, ...defaults})
     }
 
     login = async () => {

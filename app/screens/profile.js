@@ -5,16 +5,23 @@ import {
     Text,
     Switch,
 } from 'react-native'
+import * as firebase from 'firebase'
 
 import CircleImage from '../components/circleImage'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 export default class Profile extends Component {
     state = {
-        ageRangeValues: [18, 36],
-        distanceValue: [4],
-        showMen: false,
-        showWomen: true,
+        ageRangeValues: this.props.user.ageRange,
+        distanceValue: [this.props.user.distance],
+        showMen: this.props.user.showMen,
+        showWomen: this.props.user.showWomen,
+    }
+
+    updateUser = (key, value) => {
+        const {uid} = this.props.user
+        firebase.database().ref('users').child(uid)
+        .update({[key]:value})
     }
 
     render () {
@@ -38,6 +45,7 @@ export default class Profile extends Component {
                         max={30}
                         values={this.state.distanceValue}
                         onValuesChange={val => this.setState({distanceValue: val})}
+                        onValuesChangeFinish={val => this.updateUser('distance', val[0])}
                     />
                 </View>
                 <View style={styles.label}>
@@ -50,20 +58,27 @@ export default class Profile extends Component {
                         max={100}
                         values={this.state.ageRangeValues}
                         onValuesChange={val => this.setState({ageRangeValues: val})}
+                        onValuesChangeFinish={val => this.updateUser('ageRange', val)}
                     />
                 </View>
                 <View style={styles.switch}>
                     <Text style={styles.label}>Show Men</Text>
                     <Switch 
                         value={showMen}
-                        onValueChange={val => this.setState({showMen:val})}
+                        onValueChange={val => {
+                            this.setState({showMen:val})
+                            this.updateUser('showMen', val)
+                        }}
                     />
                 </View>
                 <View style={styles.switch}>
                     <Text style={styles.label}>Show Women</Text>
                     <Switch 
                         value={showWomen}
-                        onValueChange={val => this.setState({showWomen:val})}
+                        onValueChange={val => {
+                            this.setState({showWomen:val})
+                            this.updateUser('showWomen', val)
+                        }}
                     />
                 </View>
             </View>
