@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import moment from 'moment'
 
 export default (profiles, user) => {
     const rejectMe = _.reject(profiles, profile => profile.uid === user.uid)
@@ -13,5 +14,20 @@ export default (profiles, user) => {
         return (userShowMen || userShowWomen) && (profileShowMen || profileShowWomen)
     })
 
-    return filterGender
+    const userBirthday = moment(user.birthday, "MM/DD/YYYY")
+    const userAge = moment().diff(userBirthday, 'years')
+
+    const filterAgeRange = _.filter(filterGender, profile => {
+        const profileBirthday = moment(profile.birthday, 'MM/DD/YYYY')
+        const profileAge = moment().diff(profileBirthday, 'years')
+
+        const withinRangeUser = _.inRange(profileAge, user.ageRange[0], user.ageRange[1] + 1)
+        const withinRangeProfile = _.inRange(userAge, profile.ageRange[0], profile.ageRange[1] + 1)
+
+        return withinRangeUser && withinRangeProfile
+    })
+
+    const filtered = _.uniqBy(filterAgeRange, 'uid')
+
+    return filtered
 }
