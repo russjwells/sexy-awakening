@@ -16,22 +16,31 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    const {uid} = this.props.navigation.state.params.user
+    const {uid} = this.state.user
     this.updateUserLocation(uid)
-    this.getProfiles(uid)
+    firebase.database().ref('users').child(uid).on('value', snap => {
+      const user = snap.val()
+      this.setState({
+        user,
+        profiles:[],
+        profileIndex:0,
+      })
+      this.getProfiles(user.uid, user.distance)
+    })
+    
   }
 
   getUser = (uid) => {
     return firebase.database().ref('users').child(uid).once('value')
   }
 
-  getProfiles = async (uid) => {
+  getProfiles = async (uid, distance) => {
     const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
     const userLocation = await geoFireRef.get(uid)
     console.log('userLocation', userLocation)
     const geoQuery = geoFireRef.query({
       center: userLocation,
-      radius: 10 //km
+      radius: distance, //km
     })
     geoQuery.on('key_entered', async (uid, location, distance) => {
       console.log(uid + ' at ' + location + ' is ' + distance + 'km from the center')
