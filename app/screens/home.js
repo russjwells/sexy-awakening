@@ -36,9 +36,16 @@ export default class Home extends Component {
     return firebase.database().ref('users').child(uid).once('value')
   }
 
+  getSwiped = (uid) => {
+    return firebase.database().ref('relationships').child(uid).child('liked')
+      .once('value')
+      .then(snap => snap.val() || {})
+  }
+
   getProfiles = async (uid, distance) => {
     const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
     const userLocation = await geoFireRef.get(uid)
+    const swipedProfiles = this.getSwiped(uid)
     console.log('userLocation', userLocation)
     const geoQuery = geoFireRef.query({
       center: userLocation,
@@ -49,7 +56,7 @@ export default class Home extends Component {
       const user = await this.getUser(uid)
       console.log(user.val().first_name)
       const profiles = [...this.state.profiles, user.val()]
-      const filtered = filter(profiles, this.state.user)
+      const filtered = filter(profiles, this.state.user, swipedProfiles)
       this.setState({profiles: filtered})
     })
   }
@@ -71,27 +78,21 @@ export default class Home extends Component {
     }
   }
 
-  relate = (userUid, type, profileUid, status) => {
-    firebase.database().ref('relationships').child(userUid).child(type)
-        .update({[profileUid]:status})
+  relate = (userUid, profileUid, status) => {
+    let relationUpdate = {}
+    relationUpdate[`${userUid}/liked/${profileUid}`] = status
+    relationUpdate[`${profileUid}/likedBack/${userUid}`] = status
+
+    firebase.database().ref('relationships').update(relationUpdate)
   }
 
   nextCard = (swipedRight, profileUid) => {
     const userUid = this.state.user.uid
     this.setState({profileIndex: this.state.profileIndex + 1})
     if (swipedRight) {
-      //created liked relationship
-      console.log("liked")
-      this.relate(userUid, 'liked', profileUid, true)
-      this.relate(profileUid, 'likedBack', userUid, true)
-      
-
+      this.relate(userUid, profileUid, true)
     } else {
-      //create not liked relationship
-      console.log("not liked")
-      this.relate(userUid, 'liked', profileUid, false)
-      this.relate(profileUid, 'likedBack', userUid, false)
-
+      this.relate(userUid, profileUid, false)
     }
   }
 
