@@ -71,8 +71,28 @@ export default class Home extends Component {
     }
   }
 
-  nextCard = () => {
+  relate = (userUid, type, profileUid, status) => {
+    firebase.database().ref('relationships').child(userUid).child(type)
+        .update({[profileUid]:status})
+  }
+
+  nextCard = (swipedRight, profileUid) => {
+    const userUid = this.state.user.uid
     this.setState({profileIndex: this.state.profileIndex + 1})
+    if (swipedRight) {
+      //created liked relationship
+      console.log("liked")
+      this.relate(userUid, 'liked', profileUid, true)
+      this.relate(profileUid, 'likedBack', userUid, true)
+      
+
+    } else {
+      //create not liked relationship
+      console.log("not liked")
+      this.relate(userUid, 'liked', profileUid, false)
+      this.relate(profileUid, 'likedBack', userUid, false)
+
+    }
   }
 
   cardStack = () => {
