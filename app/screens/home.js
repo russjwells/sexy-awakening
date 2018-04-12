@@ -45,7 +45,7 @@ export default class Home extends Component {
   getProfiles = async (uid, distance) => {
     const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
     const userLocation = await geoFireRef.get(uid)
-    const swipedProfiles = this.getSwiped(uid)
+    const swipedProfiles = await this.getSwiped(uid)
     console.log('userLocation', userLocation)
     const geoQuery = geoFireRef.query({
       center: userLocation,
