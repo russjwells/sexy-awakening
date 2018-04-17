@@ -3,7 +3,10 @@ import {
     FlatList,
     ListView,
     Text,
+    View,
 } from 'react-native'
+
+import CircleImage from '../components/circleImage'
 
 export default class Matches extends Component {
 
@@ -15,13 +18,37 @@ export default class Matches extends Component {
         this.setState({dataSource:demoProfiles})
     }
 
+    renderItem = ({item}) => {
+        const {id, first_name, work} = item
+        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+
+        return (
+            <View style={{flexDirection:'row', backgroundColor:'white', padding:10}} >
+                <CircleImage size={80} facebookID={id}/>
+                <View style={{justifyContent:'center', marginLeft:10}}>
+                    <Text style={{fontSize:18}}>{first_name}</Text>
+                    <Text style={{fontSize:15, color:'darkgrey'}}>{bio}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    renderSeparator = (sectionID, rowID) => {
+        return(
+            <View key={rowID} style={{height:1, backgroundColor:'whitesmoke', marginLeft:100}} />
+        )
+    }
+    
+    _keyExtractor = (item, index) => item.id;
 
     render() {
         return (
             <FlatList 
-                style={{flex:1, backgroundColor: 'green'}}
+                style={{flex:1, backgroundColor: 'white'}}
                 data={this.state.dataSource}
-                renderItem={({item}) => <Text>{item.first_name}</Text>}
+                renderItem={this.renderItem}
+                ItemSeparatorComponent={this.renderSeparator}
+                keyExtractor={this._keyExtractor}
             />
         )
     }
