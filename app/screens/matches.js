@@ -4,6 +4,7 @@ import {
     ListView,
     Text,
     View,
+    TouchableHighlight,
 } from 'react-native'
 
 import CircleImage from '../components/circleImage'
@@ -59,6 +60,9 @@ export default class Matches extends Component {
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
 
         return (
+            <TouchableHighlight
+                onPress={() => this.props.navigation.navigate('Chat')}
+            >
             <View style={{flexDirection:'row', backgroundColor:'white', padding:10}} >
                 <CircleImage size={80} facebookID={id}/>
                 <View style={{justifyContent:'center', marginLeft:10}}>
@@ -66,6 +70,7 @@ export default class Matches extends Component {
                     <Text style={{fontSize:15, color:'darkgrey'}}>{bio}</Text>
                 </View>
             </View>
+            </TouchableHighlight>
         )
     }
 
