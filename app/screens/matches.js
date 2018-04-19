@@ -8,14 +8,50 @@ import {
 
 import CircleImage from '../components/circleImage'
 
+import _ from 'lodash'
+
+import * as firebase from 'firebase'
+
 export default class Matches extends Component {
 
     state = {
-        dataSource: {}
+        dataSource: demoProfiles,
+        matches: [],
     }
 
     componentWillMount() {
-        this.setState({dataSource:demoProfiles})
+        //this.setState({dataSource:demoProfiles})
+        this.getMatches(this.props.user.uid)
+        //console.log('uid-cwm', this.props.user.uid)
+    }
+
+    getUser = (uid) => {
+        return firebase.database().ref('users').child(uid).once('value')
+            .then(snap => snap.val())
+    }
+
+    getOverlap = (liked, likedBack) => {
+        const likedTrue = _.pickBy(liked, value => value)
+        const likedBackTrue = _.pickBy(likedBack, value => value)
+        //console.log(likedTrue, likedBackTrue)
+        return _.intersection(_.keys(likedTrue), _.keys(likedBackTrue))
+    }
+
+    getMatches = (uid) => {
+        firebase.database().ref('relationships').child(uid).on('value', snap => {
+            const relations = snap.val()
+            const allMatches = this.getOverlap(relations.liked, relations.likedBack)
+            console.log('allMatches', allMatches)
+            const promises = allMatches.map(profileUid => {
+                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                return foundProfile ? foundProfile : this.getUser(profileUid)
+            })
+            Promise.all(promises).then(data => this.setState({
+                dataSource: data,
+                matches: data
+            
+            }))
+        })
     }
 
     renderItem = ({item}) => {
@@ -38,7 +74,7 @@ export default class Matches extends Component {
             <View key={rowID} style={{height:1, backgroundColor:'whitesmoke', marginLeft:100}} />
         )
     }
-    
+
     _keyExtractor = (item, index) => item.id;
 
     render() {
