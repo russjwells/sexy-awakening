@@ -61,7 +61,7 @@ export default class Matches extends Component {
 
         return (
             <TouchableHighlight
-                onPress={() => this.props.navigation.navigate('Chat')}
+                onPress={() => this.props.navigation.navigate('Chat', {user: this.props.user, profile: item})}
             >
             <View style={{flexDirection:'row', backgroundColor:'white', padding:10}} >
                 <CircleImage size={80} facebookID={id}/>
