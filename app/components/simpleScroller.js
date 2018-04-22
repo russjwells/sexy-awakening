@@ -53,7 +53,7 @@ export default class SimpleScroller extends Component {
             <Animated.View
                 style={[styles.scroller, animatedStyles, {width:scrollerWidth}]}
                 {...this.scrollResponder.panHandlers}>
-                {this.props.screens.map((screen, i) => <View style={{width, height}}>{screen}</View>)}
+                {this.props.screens.map((screen, i) => <View key={i} style={{width, height}}>{screen}</View>)}
             </Animated.View>
         )
     }
