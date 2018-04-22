@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     slider: {
         marginLeft: 20,
         marginRight: 20,
+        marginTop: 10,
     },
     switch: {
         flexDirection: 'row',
