@@ -13,7 +13,7 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        //firebase.auth().signOut()
+        firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(auth => {
             if (auth) {
                 this.firebaseRef = firebase.database().ref('users')
@@ -57,6 +57,7 @@ export default class Login extends Component {
 
     login = async () => {
         this.setState({showSpinner: true})
+        const saAPP_ID = '224960994730731'
         const APP_ID = '1773849149576744'
         const options = {
             permissions: ['public_profile', 'email'],

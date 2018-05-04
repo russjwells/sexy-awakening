@@ -9,6 +9,11 @@ const firebaseConfig = {
   databaseURL: "https://clone-tinder-137.firebaseio.com",
 }
 
+const sexyawakeningFirebaseConfig = {
+  apiKey: "AIzaSyAdxY6JsatQhYxlegoI-7Of6isVs6Fk1Vk",
+  databaseURL: "https://sexy-awakening.firebaseio.com",
+}
+
 firebase.initializeApp(firebaseConfig)
 
 const RouteConfigs = {
