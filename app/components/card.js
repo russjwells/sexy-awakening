@@ -14,8 +14,30 @@ export default class Card extends Component {
         null,
         {dx:this.pan.x, dy:this.pan.y},
       ]),
-      onPanResponderRelease: (e, {dx}) => {
+      onPanResponderRelease: (e, {dx, dy}) => {
         const absDx = Math.abs(dx)
+        const absDy = Math.abs(dy)
+        let saDirection = "undefined"
+        console.log('card moved: '+dx +', '+dy );
+        
+        if (absDx > absDy){
+          if (dx > 0){
+            saDirection="right"
+          }
+          if (dx < 0){
+            saDirection="left"
+          }
+        }
+        if (absDy > absDx){
+          if (dy > 0){
+            saDirection="down"
+          }
+          if (dy < 0){
+            saDirection="up"
+          }
+        }
+        console.log("swipe: " + saDirection)
+
         const direction = absDx / dx
         const swipedRight = direction > 0
         if (absDx > 120) {
