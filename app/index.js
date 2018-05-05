@@ -14,7 +14,7 @@ const sexyawakeningFirebaseConfig = {
   databaseURL: "https://sexy-awakening.firebaseio.com",
 }
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(sexyawakeningFirebaseConfig)
 
 const RouteConfigs = {
     Login: {screen:Login},

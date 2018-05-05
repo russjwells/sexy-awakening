@@ -59,6 +59,7 @@ export default class Home extends Component {
       const profiles = [...this.state.profiles, user.val()]
       const filtered = filter(profiles, this.state.user, swipedProfiles)
       this.setState({profiles: filtered})
+      //this.setState({profiles: profiles})
     })
   }
 

@@ -21,9 +21,9 @@ export default class Matches extends Component {
     }
 
     componentWillMount() {
-        //this.setState({dataSource:demoProfiles})
-        this.getMatches(this.props.user.uid)
-        //console.log('uid-cwm', this.props.user.uid)
+        //this.setState({dataSource:demoProfiles}) old
+        this.getMatches(this.props.user.uid) //temp off
+        //console.log('uid-cwm', this.props.user.uid) old
     }
 
     getUser = (uid) => {
@@ -42,7 +42,7 @@ export default class Matches extends Component {
         firebase.database().ref('relationships').child(uid).on('value', snap => {
             const relations = snap.val()
             const allMatches = this.getOverlap(relations.liked, relations.likedBack)
-            console.log('allMatches', allMatches)
+            console.log('allMatches:', allMatches)
             const promises = allMatches.map(profileUid => {
                 const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
                 return foundProfile ? foundProfile : this.getUser(profileUid)
