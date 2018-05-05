@@ -18,6 +18,8 @@ export default class Card extends Component {
         const absDx = Math.abs(dx)
         const absDy = Math.abs(dy)
         let saDirection = "undefined"
+        let limitPass = false
+        const swipeLimiter = 120
         console.log('card moved: '+dx +', '+dy );
         
         if (absDx > absDy){
@@ -27,6 +29,9 @@ export default class Card extends Component {
           if (dx < 0){
             saDirection="left"
           }
+          if (Math.abs(dx) > swipeLimiter){
+            limitPass = true
+          }
         }
         if (absDy > absDx){
           if (dy > 0){
@@ -35,16 +40,20 @@ export default class Card extends Component {
           if (dy < 0){
             saDirection="up"
           }
+          if (Math.abs(dy) > swipeLimiter){
+            limitPass = true
+          }
         }
         console.log("swipe: " + saDirection)
+        const swipedDirection = saDirection
 
         const direction = absDx / dx
         const swipedRight = direction > 0
-        if (absDx > 120) {
+        if (limitPass) {
             Animated.decay(this.pan, {
                 velocity: {x:3 * direction, y:0},
                 deceleration: 0.995,
-            }).start(() => this.props.onSwipeOff(swipedRight, this.props.profile.uid))
+            }).start(() => this.props.onSwipeOff(swipedDirection, this.props.profile.uid))
         } else {
             Animated.spring(this.pan, {
                 toValue: {x:0, y:0},

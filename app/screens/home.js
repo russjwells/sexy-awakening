@@ -80,22 +80,48 @@ export default class Home extends Component {
     }
   }
 
-  relate = (userUid, profileUid, status) => {
+  relate = (userUid, profileUid, swipedDirection) => {
     let relationUpdate = {}
-    relationUpdate[`${userUid}/liked/${profileUid}`] = status
-    relationUpdate[`${profileUid}/likedBack/${userUid}`] = status
+    let relation = ""
+    if (swipedDirection === 'right'){
+      relation = 'sex'
+    }
+    if (swipedDirection === 'up'){
+      relation = 'romance'
+    }
+    if (swipedDirection === 'left'){
+      relation = 'friendship'
+    }
+    if (swipedDirection === 'down'){
+      relation = 'pass'
+    }
+    relationUpdate[`${userUid}/${relation}/${profileUid}`] = true
+    relationUpdate[`${profileUid}/${relation}Back/${userUid}`] = true
 
     firebase.database().ref('relationships').update(relationUpdate)
   }
 
-  nextCard = (swipedRight, profileUid) => {
+  nextCard = (swipedDirection, profileUid) => {
     const userUid = this.state.user.uid
     this.setState({profileIndex: this.state.profileIndex + 1})
-    if (swipedRight) {
-      this.relate(userUid, profileUid, true)
-    } else {
-      this.relate(userUid, profileUid, false)
+    if (swipedDirection === 'right'){
+      console.log("hooray sex")
     }
+    if (swipedDirection === 'up'){
+      console.log("hooray romance")
+    }
+    if (swipedDirection === 'left'){
+      console.log("hooray friendship")
+    }
+    if (swipedDirection === 'down'){
+      console.log("passsssss")
+    }
+    this.relate(userUid, profileUid, swipedDirection)
+    //if (swipedDirection) {
+    //  this.relate(userUid, profileUid, true)
+    //} else {
+    //  this.relate(userUid, profileUid, false)
+    //}
   }
 
   cardStack = () => {
