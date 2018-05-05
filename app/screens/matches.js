@@ -41,7 +41,13 @@ export default class Matches extends Component {
     getMatches = (uid) => {
         firebase.database().ref('relationships').child(uid).on('value', snap => {
             const relations = snap.val()
-            const allMatches = this.getOverlap(relations.liked, relations.likedBack)
+            //const allMatches = this.getOverlap(relations.liked, relations.likedBack)
+            const allSex = this.getOverlap(relations.sex, relations.sexBack)
+            const allRomance = this.getOverlap(relations.romance, relations.romanceBack)
+            const allFriendship = this.getOverlap(relations.friendship, relations.friendshipBack)
+            
+
+            const allMatches = allSex.concat(allRomance.concat(allFriendship))
             console.log('allMatches:', allMatches)
             const promises = allMatches.map(profileUid => {
                 const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
