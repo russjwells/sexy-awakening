@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export default (profiles, user, swipedProfiles) => {
     const rejectMe = _.reject(profiles, profile => profile.uid === user.uid)
-
+    //console.log('rejectMe', rejectMe)
     const filterGender = _.filter(rejectMe, profile => {
         const userShowMen = user.showMen && profile.gender === 'male'
         const userShowWomen = user.showWomen && profile.gender === 'female'
@@ -13,10 +13,11 @@ export default (profiles, user, swipedProfiles) => {
 
         return (userShowMen || userShowWomen) && (profileShowMen || profileShowWomen)
     })
-
+    //console.log('filterGender', filterGender)
     const userBirthday = moment(user.birthday, "MM/DD/YYYY")
+    //console.log('userBirthday', user.birthday)
     const userAge = moment().diff(userBirthday, 'years')
-
+    //console.log('user', user)
     const filterAgeRange = _.filter(filterGender, profile => {
         const profileBirthday = moment(profile.birthday, 'MM/DD/YYYY')
         const profileAge = moment().diff(profileBirthday, 'years')
@@ -26,13 +27,13 @@ export default (profiles, user, swipedProfiles) => {
 
         return withinRangeUser && withinRangeProfile
     })
-
-    const filtered = _.uniqBy(filterAgeRange, 'uid')
-
+    //console.log('filterAgeRange', filterAgeRange)
+    const filtered = _.uniqBy(filterGender, 'uid')
+    //console.log('filtered', filtered)
     const filterSwiped = _.filter(filtered, profile => {
         const swiped = profile.uid in swipedProfiles
         return !swiped
     })
-
+    //console.log('filterSwiped', filterSwiped)
     return filterSwiped
 }

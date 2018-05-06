@@ -11,6 +11,8 @@ import Matches from './matches'
 
 import filter from '../modules/filter'
 
+import _ from 'lodash'
+
 export default class Home extends Component {
   state = {
     profileIndex: 0,
@@ -38,7 +40,34 @@ export default class Home extends Component {
   }
 
   getSwiped = (uid) => {
-    return firebase.database().ref('relationships').child(uid).child('liked')
+    
+    const swipedSex = firebase.database().ref('relationships').child(uid).child('sex').once('value').then(snap => snap.val())
+    const swipedRomance = firebase.database().ref('relationships').child(uid).child('romance').once('value').then(snap => snap.val())
+    const swipedFriendship = firebase.database().ref('relationships').child(uid).child('friendship').once('value').then(snap => snap.val())
+    const swipedPass = firebase.database().ref('relationships').child(uid).child('pass').once('value').then(snap => snap.val())
+    console.log('swiped sex', {swipedSex})
+    const allSwiped = [...swipedSex, ...swipedRomance, ...swipedFriendship, ...swipedPass]
+    console.log('all swiped', allSwiped)
+    return allSwiped || {}
+  }
+
+  getSwipedSex = (uid) => {
+    return firebase.database().ref('relationships').child(uid).child('sex')
+      .once('value')
+      .then(snap => snap.val() || {})
+  }
+  getSwipedRomance = (uid) => {
+    return firebase.database().ref('relationships').child(uid).child('romance')
+      .once('value')
+      .then(snap => snap.val() || {})
+  }
+  getSwipedFriendship = (uid) => {
+    return firebase.database().ref('relationships').child(uid).child('friendship')
+      .once('value')
+      .then(snap => snap.val() || {})
+  }
+  getSwipedPass = (uid) => {
+    return firebase.database().ref('relationships').child(uid).child('pass')
       .once('value')
       .then(snap => snap.val() || {})
   }
@@ -46,8 +75,21 @@ export default class Home extends Component {
   getProfiles = async (uid, distance) => {
     const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
     const userLocation = await geoFireRef.get(uid)
-    const swipedProfiles = await this.getSwiped(uid)
-    console.log('userLocation', userLocation)
+    //console.log('userLocation', userLocation)
+    const swipedSex = await this.getSwipedSex(uid)
+    const swipedRomance = await this.getSwipedRomance(uid)
+    const swipedFriendship = await this.getSwipedFriendship(uid)
+    const swipedPass = await this.getSwipedPass(uid)
+    console.log('swipedSex', swipedSex)
+    console.log('swipedRomance', swipedRomance)
+    console.log('swipedFriendship', swipedFriendship)
+    console.log('swipedPass', swipedPass)
+    //const allllofem = Array.concat(swipedSex, swipedRomance, swipedFriendship, swipedPass)
+    const swipedProfiles = _.merge(swipedSex, swipedRomance, swipedFriendship, swipedPass)
+    //const swipedProfiles = [{...swipedSex}, {...swipedRomance}, {...swipedFriendship}, {...swipedPass}]
+    console.log('swipedProfiles', swipedProfiles)
+    //console.log('allofem', allllofem)
+    
     const geoQuery = geoFireRef.query({
       center: userLocation,
       radius: distance, //km
@@ -55,11 +97,12 @@ export default class Home extends Component {
     geoQuery.on('key_entered', async (uid, location, distance) => {
       console.log(uid + ' at ' + location + ' is ' + distance + 'km from the center')
       const user = await this.getUser(uid)
-      console.log(user.val().first_name)
+      console.log('querying for ' + user.val().first_name)
       const profiles = [...this.state.profiles, user.val()]
+      //console.log('profiles', profiles)
       const filtered = filter(profiles, this.state.user, swipedProfiles)
-      //this.setState({profiles: filtered})
-      this.setState({profiles: profiles})
+      this.setState({profiles: filtered})
+      //this.setState({profiles: profiles})
     })
   }
 
