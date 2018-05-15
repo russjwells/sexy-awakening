@@ -38,7 +38,7 @@ export default class Profile extends Component {
                 </View>
                 <View style={styles.menu} >
                     <View style={styles.menuItem}>
-                        <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user, settings: this.props.state})}>
+                        <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
                                     Edit Profile
@@ -79,55 +79,6 @@ export default class Profile extends Component {
                             Map
                         </Text>
                     </View>
-                </View>
-                <View>
-                    <Text>Filters</Text>
-                </View>
-                <View style={styles.label}>
-                    <Text>Distance</Text>
-                    <Text style={{color: 'darkgrey'}}>{this.state.distanceValue} km</Text>
-                </View>
-                <View style={styles.slider}>
-                    <MultiSlider 
-                        min={1}
-                        max={30}
-                        values={this.state.distanceValue}
-                        onValuesChange={val => this.setState({distanceValue: val})}
-                        onValuesChangeFinish={val => this.updateUser('distance', val[0])}
-                    />
-                </View>
-                <View style={styles.label}>
-                    <Text>Age Range</Text>
-                    <Text style={{color: 'darkgrey'}}>{this.state.ageRangeValues.join('-')}</Text>
-                </View>
-                <View style={styles.slider}>
-                    <MultiSlider 
-                        min={1}
-                        max={100}
-                        values={this.state.ageRangeValues}
-                        onValuesChange={val => this.setState({ageRangeValues: val})}
-                        onValuesChangeFinish={val => this.updateUser('ageRange', val)}
-                    />
-                </View>
-                <View style={styles.switch}>
-                    <Text style={styles.label}>Show Men</Text>
-                    <Switch 
-                        value={showMen}
-                        onValueChange={val => {
-                            this.setState({showMen:val})
-                            this.updateUser('showMen', val)
-                        }}
-                    />
-                </View>
-                <View style={styles.switch}>
-                    <Text style={styles.label}>Show Women</Text>
-                    <Switch 
-                        value={showWomen}
-                        onValueChange={val => {
-                            this.setState({showWomen:val})
-                            this.updateUser('showWomen', val)
-                        }}
-                    />
                 </View>
             </View>
         )
