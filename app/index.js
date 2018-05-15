@@ -3,6 +3,9 @@ import * as firebase from 'firebase'
 import Home from './screens/home'
 import Login from './screens/login'
 import Chat from './screens/chat'
+import Settings from './screens/settings'
+import EditProfile from './screens/editProfile'
+import Subscription from './screens/subscription'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDg4fI6UyL6hYvDHwELQ75pjwspQW8_kDA",
@@ -20,6 +23,10 @@ const RouteConfigs = {
     Login: {screen:Login},
     Home: {screen:Home},
     Chat: {screen:Chat},
+    Settings: {screen:Settings},
+    EditProfile: {screen:EditProfile},
+    Subscription: {screen:Subscription}
+
 }
 const StackNavigatorConfig = {
     headerMode: 'none'

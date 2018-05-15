@@ -188,7 +188,7 @@ export default class Home extends Component {
     return (
       <SimpleScroller 
       screens={[
-        <Profile user={this.state.user}/>,
+        <Profile navigation={this.props.navigation} user={this.state.user}/>,
         this.cardStack(),
         <Matches navigation={this.props.navigation} user={this.state.user}/>
         ]} />
