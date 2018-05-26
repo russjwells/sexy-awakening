@@ -168,6 +168,17 @@ export default class Home extends Component {
     //}
   }
 
+  handleScroll = (currentView) => {
+    
+    if (currentView==1){
+      currentView=0
+    }
+    if (currentView==-3){
+      currentView=-2
+    }
+    console.log('current view: ' + currentView)
+  }
+
   cardStack = () => {
     const {profileIndex} = this.state
     return(
@@ -194,7 +205,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <View style={styles.navbar}>
           <View style={styles.navleft}>
-            <Text>Profile</Text>
+            <Text></Text>
           </View>
           <View style={styles.navcenter}>
             <Text>Sexy Awakening</Text>
@@ -208,7 +219,8 @@ export default class Home extends Component {
             <Profile navigation={this.props.navigation} user={this.state.user}/>,
             this.cardStack(),
             <Matches navigation={this.props.navigation} user={this.state.user}/>
-          ]} 
+          ]}
+          onScroll={this.handleScroll} 
         />
       </View>
       //this.cardStack()
@@ -224,12 +236,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 80,
     paddingTop: 20,
+    backgroundColor: 'white',
   },
   navleft:{
     flex: 1,
   },
   navcenter:{
-    flex: 1,
+    flex: 2,
   },
   navright:{
     flex: 1,

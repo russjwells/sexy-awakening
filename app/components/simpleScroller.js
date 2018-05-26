@@ -30,6 +30,7 @@ export default class SimpleScroller extends Component {
                     const direction = vx / Math.abs(vx)
                     const scrollPos = direction > 0 ? Math.ceil(this.pan._value / width) : Math.floor(this.pan._value / width)
                     move = scrollPos * width
+                    this.props.onScroll(scrollPos)
                 }
                 const minScroll = (this.props.screens.length - 1) * -width
                 Animated.spring(this.pan, {
@@ -37,6 +38,10 @@ export default class SimpleScroller extends Component {
                 bounciness: 0,
                 }).start()
     } 
+
+    onScroll = () => {
+
+    }
 
     clamp = (num, min, max) => {
         return num <= min ? min : num >= max ? max : num

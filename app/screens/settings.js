@@ -224,9 +224,11 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
         backgroundColor: 'black',
+        marginBottom: 10,
     },
     sectionTitleText: {
         color: 'white',
+        paddingLeft: 20,
     },
     profile: {
         flex: 1,

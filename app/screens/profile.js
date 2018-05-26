@@ -85,17 +85,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-    },
-    navbar:{
-        flexDirection: 'row',
-        height: 80,
-        paddingTop: 20,
-    },
-    navback:{
-        flex: 1,
-    },
-    navlocation:{
-        flex: 3,
+        justifyContent: 'flex-start',
     },
     profile: {
         flex: 1,
@@ -103,7 +93,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     menu: {
-        flex: 1,
         backgroundColor: 'black',
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
         borderColor: 'red',
         alignItems: 'center',
         width: 200,
-        height: 200,
+        height: 100,
         
     },
     menuIcon: {
@@ -137,22 +126,4 @@ const styles = StyleSheet.create({
     menuButton: {
         flex: 1,
     },
-    label: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginLeft: 20,
-        marginRight: 20,
-    },
-    slider: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 10,
-    },
-    switch: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginLeft: 20,
-        marginRight: 20,
-    }
 })
