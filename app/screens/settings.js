@@ -160,6 +160,36 @@ export default class Settings extends Component {
                             }}
                         />
                     </View>
+                    <View style={styles.switch}>
+                        <Text style={styles.label}>Poly</Text>
+                        <Switch 
+                            value={showWomen}
+                            onValueChange={val => {
+                                this.setState({showWomen:val})
+                                this.updateUser('showWomen', val)
+                            }}
+                        />
+                    </View>
+                    <View style={styles.switch}>
+                        <Text style={styles.label}>Energy Sensitive</Text>
+                        <Switch 
+                            value={showWomen}
+                            onValueChange={val => {
+                                this.setState({showWomen:val})
+                                this.updateUser('showWomen', val)
+                            }}
+                        />
+                    </View>
+                    <View style={styles.switch}>
+                        <Text style={styles.label}>Vegan</Text>
+                        <Switch 
+                            value={showWomen}
+                            onValueChange={val => {
+                                this.setState({showWomen:val})
+                                this.updateUser('showWomen', val)
+                            }}
+                        />
+                    </View>
                     </View>
                 </View>
             </View>

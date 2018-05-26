@@ -5,6 +5,7 @@ import {
     Text,
     Switch,
     TouchableHighlight,
+    Dimensions,
 } from 'react-native'
 import * as firebase from 'firebase'
 
@@ -47,10 +48,19 @@ export default class Profile extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={styles.menuItem}>
+                        <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user})}>
+                            <View style={styles.menuTextWrap}>
+                                <Text style={styles.menuText}>
+                                    Personal Status
+                                </Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={styles.menuItem}>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Settings', {user: this.props.user, ageRangeValues: this.state.ageRangeValues, distanceValue: this.state.distanceValue, showMen: this.state.showMen, showWomen:this.state.showWomen})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Settings
+                                    Connection Settings
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -59,25 +69,10 @@ export default class Profile extends Component {
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Membership
+                                    Membership Level
                                 </Text>
                             </View>
                         </TouchableHighlight>
-                    </View>
-                    <View style={styles.menuItem}>
-                        <Text style={styles.menuText}>
-                            Shop
-                        </Text>
-                    </View>
-                    <View style={styles.menuItem}>
-                        <Text style={styles.menuText}>
-                            Inventory
-                        </Text>
-                    </View>
-                    <View style={styles.menuItem}>
-                        <Text style={styles.menuText}>
-                            Map
-                        </Text>
                     </View>
                 </View>
             </View>
@@ -85,10 +80,22 @@ export default class Profile extends Component {
     }
 }
 
+//const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    navbar:{
+        flexDirection: 'row',
+        height: 80,
+        paddingTop: 20,
+    },
+    navback:{
+        flex: 1,
+    },
+    navlocation:{
+        flex: 3,
     },
     profile: {
         flex: 1,
@@ -98,13 +105,15 @@ const styles = StyleSheet.create({
     menu: {
         flex: 1,
         backgroundColor: 'blue',
-        flexDirection: 'column',
+        flexDirection: 'row',
         flexWrap: 'wrap',
     },
     menuItem: {
-        flex: 1,
         borderColor: 'white',
         alignItems: 'center',
+        width: 200,
+        height: 200,
+        
     },
     menuText: {
         color: 'white',

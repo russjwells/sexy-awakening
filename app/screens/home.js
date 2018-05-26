@@ -1,6 +1,6 @@
 import Expo from 'expo'
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
 import NavigationBar from 'react-native-navbar'
@@ -191,6 +191,18 @@ export default class Home extends Component {
       title: 'Hello, world',
     }
     return (
+      <View style={styles.container}>
+        <View style={styles.navbar}>
+          <View style={styles.navleft}>
+            <Text>Profile</Text>
+          </View>
+          <View style={styles.navcenter}>
+            <Text>Sexy Awakening</Text>
+          </View>
+          <View style={styles.navright}>
+          <Text>Matches</Text>
+          </View>
+        </View>
         <SimpleScroller 
           screens={[
             <Profile navigation={this.props.navigation} user={this.state.user}/>,
@@ -198,6 +210,7 @@ export default class Home extends Component {
             <Matches navigation={this.props.navigation} user={this.state.user}/>
           ]} 
         />
+      </View>
       //this.cardStack()
     )
   }
@@ -205,6 +218,20 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  navbar:{
+    flexDirection: 'row',
+    height: 80,
+    paddingTop: 20,
+  },
+  navleft:{
+    flex: 1,
+  },
+  navcenter:{
+    flex: 1,
+  },
+  navright:{
     flex: 1,
   },
 })
