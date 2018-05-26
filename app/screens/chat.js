@@ -3,6 +3,8 @@ import {
     View,
     KeyboardAvoidingView,
     StyleSheet,
+    Text,
+    TouchableHighlight,
 } from 'react-native'
 
 import {GiftedChat} from 'react-native-gifted-chat'
@@ -46,6 +48,16 @@ export default class Chat extends Component {
         const avatar = `https://graph.facebook.com/${this.state.profile.uid}/picture?height=80` 
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={80}>
+                <View style={styles.chatnav}>
+                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
+                        <View style={styles.navBack}>
+                            <Text>Back</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <View style={styles.navChatTitle}>
+                        <Text>Chat with {this.state.profile.first_name}</Text>
+                    </View>
+                </View>
                 <GiftedChat
                     messages={this.state.messages}
                     user={{_id:this.state.user.uid, avatar}}
@@ -61,4 +73,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
+    chatnav: {
+        flexDirection: 'row',
+        height: 80,
+        paddingTop: 20,
+    },
+    navBack: {
+        flex: 1,
+    },
+    navChatTitle: {
+        flex: 4,
+    }
 })

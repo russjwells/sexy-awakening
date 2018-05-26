@@ -51,7 +51,7 @@ export default class Profile extends Component {
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Personal Status
+                                    Status
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -104,28 +104,35 @@ const styles = StyleSheet.create({
     },
     menu: {
         flex: 1,
-        backgroundColor: 'blue',
+        backgroundColor: 'black',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     menuItem: {
-        borderColor: 'white',
+        borderColor: 'red',
         alignItems: 'center',
         width: 200,
         height: 200,
         
     },
+    menuIcon: {
+        width: 20,
+        height: 20,
+    },
     menuText: {
-        color: 'white',
+        color: 'black',
         marginLeft: 20,
         marginRight: 20,
+        
     },
     menuTextWrap: {
         flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+        paddingTop: 20,
+        paddingBottom: 20,
     },
     menuButton: {
         flex: 1,
