@@ -100,8 +100,7 @@ export default class Settings extends Component {
                         <View style={styles.sectionTitle}>
                             <Text style={styles.sectionTitleText}>Interests</Text>
                         </View>
-                    </View>
-                    <View style={styles.switch}>
+                        <View style={styles.switch}>
                         <Text style={styles.label}>Cannabis</Text>
                         <Switch 
                             value={showWomen}
@@ -160,6 +159,7 @@ export default class Settings extends Component {
                                 this.updateUser('showWomen', val)
                             }}
                         />
+                    </View>
                     </View>
                 </View>
             </View>

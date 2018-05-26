@@ -59,7 +59,7 @@ export default class Profile extends Component {
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Subscription
+                                    Membership
                                 </Text>
                             </View>
                         </TouchableHighlight>

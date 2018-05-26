@@ -5,6 +5,8 @@ import {
     Text,
     View,
     TouchableHighlight,
+    StyleSheet,
+    StatusBar,
 } from 'react-native'
 
 import CircleImage from '../components/circleImage'
@@ -90,17 +92,37 @@ export default class Matches extends Component {
 
     render() {
         return (
-            <FlatList 
-                style={{flex:1, backgroundColor: 'white'}}
-                data={this.state.dataSource}
-                renderItem={this.renderItem}
-                ItemSeparatorComponent={this.renderSeparator}
-                keyExtractor={this._keyExtractor}
-            />
+                <FlatList 
+                    style={styles.list}
+                    data={this.state.dataSource}
+                    renderItem={this.renderItem}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    keyExtractor={this._keyExtractor}
+                />
         )
     }
 }
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    relationtypefilter:{
+        flex: 1,
+        alignContent: 'space-between',
+        flexDirection: 'row',
+    },
+    menuOption: {
+        flex: 1,
+    },
+    chats: {
+        flex: 9,
+    },
+    list: {
+        flex: 1,
+        backgroundColor: 'red',
+    },
+})
 const demoProfiles = [
     {
       id: '259389830744794',

@@ -1,8 +1,9 @@
 import Expo from 'expo'
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
+import NavigationBar from 'react-native-navbar'
 
 import Card from '../components/card'
 import SimpleScroller from '../components/simpleScroller'
@@ -183,16 +184,27 @@ export default class Home extends Component {
       </View>
     )
   }
-
+   
+  
   render() {
+    const titleConfig = {
+      title: 'Hello, world',
+    }
     return (
-      <SimpleScroller 
-      screens={[
-        <Profile navigation={this.props.navigation} user={this.state.user}/>,
-        this.cardStack(),
-        <Matches navigation={this.props.navigation} user={this.state.user}/>
-        ]} />
+        <SimpleScroller 
+          screens={[
+            <Profile navigation={this.props.navigation} user={this.state.user}/>,
+            this.cardStack(),
+            <Matches navigation={this.props.navigation} user={this.state.user}/>
+          ]} 
+        />
       //this.cardStack()
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})

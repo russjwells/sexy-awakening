@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {
     View,
+    KeyboardAvoidingView,
+    StyleSheet,
 } from 'react-native'
 
 import {GiftedChat} from 'react-native-gifted-chat'
@@ -43,11 +45,20 @@ export default class Chat extends Component {
     render () {
         const avatar = `https://graph.facebook.com/${this.state.profile.uid}/picture?height=80` 
         return(
-            <GiftedChat
-                messages={this.state.messages}
-                user={{_id:this.state.user.uid, avatar}}
-                onSend={this.onSend}
-            />
+            <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={80}>
+                <GiftedChat
+                    messages={this.state.messages}
+                    user={{_id:this.state.user.uid, avatar}}
+                    onSend={this.onSend}
+                />
+            </KeyboardAvoidingView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+})
