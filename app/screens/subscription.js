@@ -13,15 +13,18 @@ export default class Subscription extends Component {
     render() {
         return(
             <View style={styles.container}>
-            <View style={styles.navbar}>
+                <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
                         <View style={styles.navback}>
                             <Text>Back</Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text>Subscription</Text>
+                        <Text>Sexy Awakening Unlimited</Text>
                     </View>
+                </View>
+                <View style={styles.content}>
+                        <Text>Choose between these options:</Text>
                 </View>
             </View>
         )
@@ -34,9 +37,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     navbar:{
-        flex: 1,
         flexDirection: 'row',
-        height: 20,
+        height: 80,
+        paddingTop: 20,
     },
     navback:{
         flex: 1,
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
         flex: 3,
     },
     content: {
-        flex: 10,
+        flex: 1,
+        backgroundColor: 'green',
     },
 })

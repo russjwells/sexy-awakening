@@ -48,19 +48,10 @@ export default class Profile extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={styles.menuItem}>
-                        <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user})}>
-                            <View style={styles.menuTextWrap}>
-                                <Text style={styles.menuText}>
-                                    Status
-                                </Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={styles.menuItem}>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Settings', {user: this.props.user, ageRangeValues: this.state.ageRangeValues, distanceValue: this.state.distanceValue, showMen: this.state.showMen, showWomen:this.state.showWomen})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Connection Settings
+                                    Settings
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -69,7 +60,7 @@ export default class Profile extends Component {
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
                                 <Text style={styles.menuText}>
-                                    Membership Level
+                                    Sexy Awakening Unlimited
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -80,7 +71,7 @@ export default class Profile extends Component {
     }
 }
 
-//const {width, height} = Dimensions.get('window')
+const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -94,13 +85,13 @@ const styles = StyleSheet.create({
     },
     menu: {
         backgroundColor: 'black',
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
     },
     menuItem: {
         borderColor: 'red',
         alignItems: 'center',
-        width: 200,
+        width: width,
         height: 100,
         
     },

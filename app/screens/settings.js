@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         height: 20,
+        paddingTop: 20,
     },
     navback:{
         flex: 1,
