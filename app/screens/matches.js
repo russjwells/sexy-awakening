@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     },
     list: {
         flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: 'white',
     },
 })
 const demoProfiles = [

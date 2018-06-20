@@ -5,12 +5,25 @@ import {
     Text,
     Switch,
     TouchableHighlight,
+    TextInput,
 } from 'react-native'
+
+import CircleImage from '../components/circleImage'
 
 export default class EditProfile extends Component {
 
-    
+    state = {
+        user: this.props.navigation.state.params.user,
+        ageRangeValues: this.props.navigation.state.params.ageRangeValues,
+        distanceValue: this.props.navigation.state.params.distanceValue,
+        showMen: this.props.navigation.state.params.showMen,
+        showWomen: this.props.navigation.state.params.showWomen,
+    }
+
     render() {
+        const {first_name, work, id} = this.state.user
+        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
+        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container}>
                 <View style={styles.navbar}>
@@ -24,7 +37,23 @@ export default class EditProfile extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                        <Text>Editable profile things</Text>
+                    <View style={styles.profile}>
+                        <CircleImage facebookID={id} size={120}/>
+                        <Text style={{fontSize:20}}>{first_name}</Text>
+                        <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
+                    </View>
+                    <View style={styles.bio}>
+                        <TextInput
+                            editable={true}
+                            maxLength={255}
+                            multline={true}
+                            numberOfLines = {20}
+                            value={"oh your default bio"}
+                        />
+                    </View>
+                    <View style={styles.save}>
+                        <Text>Save</Text>
+                    </View>
                 </View>
             </View>
         )
@@ -49,6 +78,6 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        backgroundColor: 'green',
+        backgroundColor: 'white',
     },
 })
