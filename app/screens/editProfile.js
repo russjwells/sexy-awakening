@@ -6,6 +6,7 @@ import {
     Switch,
     TouchableHighlight,
     TextInput,
+    KeyboardAvoidingView,
 } from 'react-native'
 
 import CircleImage from '../components/circleImage'
@@ -25,7 +26,7 @@ export default class EditProfile extends Component {
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
                         <View style={styles.navback}>
@@ -48,14 +49,16 @@ export default class EditProfile extends Component {
                             maxLength={255}
                             multline={true}
                             numberOfLines = {20}
-                            value={"oh your default bio"}
+                            defaultValue={"What are you?"}
                         />
                     </View>
                     <View style={styles.save}>
-                        <Text>Save</Text>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
+                            <Text>SAVE</Text>
+                        </TouchableHighlight>
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -64,6 +67,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    profile: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     navbar:{
         flexDirection: 'row',

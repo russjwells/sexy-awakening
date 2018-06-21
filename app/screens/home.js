@@ -208,7 +208,7 @@ export default class Home extends Component {
             <Text></Text>
           </View>
           <View style={styles.navcenter}>
-            <Text>Sexy Awakening</Text>
+            <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
           </View>
           <View style={styles.navright}>
           <Text>Matches</Text>
@@ -235,16 +235,25 @@ const styles = StyleSheet.create({
   navbar:{
     flexDirection: 'row',
     height: 80,
-    paddingTop: 20,
+    paddingTop: 24,
     backgroundColor: 'white',
   },
   navleft:{
     flex: 1,
+    backgroundColor: 'skyblue',
   },
   navcenter:{
-    flex: 2,
+    flex: 5,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   navright:{
     flex: 1,
+    backgroundColor: 'skyblue',
+  },
+  navcenterText:{
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 })

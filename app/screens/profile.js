@@ -56,15 +56,11 @@ export default class Profile extends Component {
                             </View>
                         </TouchableHighlight>
                     </View>
-                    <View style={styles.menuItem}>
-                        <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
-                            <View style={styles.menuTextWrap}>
-                                <Text style={styles.menuText}>
-                                    Sexy Awakening Unlimited
-                                </Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
+                </View>
+                <View style={styles.subscription}>
+                    <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
+                        <Text style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
+                    </TouchableHighlight>
                 </View>
             </View>
         )
@@ -84,16 +80,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     menu: {
+        flex: 0,
         backgroundColor: 'black',
-        flexDirection: 'column',
+        flexDirection: 'row',
         flexWrap: 'wrap',
     },
-    menuItem: {
-        borderColor: 'red',
+    subscription: {
+        flex: 1,
+        backgroundColor: '#e54560',
         alignItems: 'center',
-        width: width,
-        height: 100,
-        
+        flexDirection: 'row',
+    },
+    subscriptionText: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    menuItem: {
+        alignItems: 'center',
+        width: width/2,
+        height: 100,  
     },
     menuIcon: {
         width: 20,
@@ -103,7 +109,6 @@ const styles = StyleSheet.create({
         color: 'black',
         marginLeft: 20,
         marginRight: 20,
-        
     },
     menuTextWrap: {
         flex: 1,
@@ -117,4 +122,5 @@ const styles = StyleSheet.create({
     menuButton: {
         flex: 1,
     },
+
 })
