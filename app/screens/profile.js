@@ -61,7 +61,7 @@ export default class Profile extends Component {
                     </View>
                 </View>
                 <View style={styles.subscription}>
-                    <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
+                    <TouchableHighlight style={styles.unlimitedButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
                         <Text style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
                     </TouchableHighlight>
                 </View>
@@ -122,5 +122,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
+    unlimitedButton: {
+        flex:1,
+    }
 
 })
