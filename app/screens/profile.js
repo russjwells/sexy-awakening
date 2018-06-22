@@ -11,6 +11,7 @@ import * as firebase from 'firebase'
 
 import CircleImage from '../components/circleImage'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import { Feather } from '@expo/vector-icons'
 
 export default class Profile extends Component {
     state = {
@@ -41,6 +42,7 @@ export default class Profile extends Component {
                     <View style={styles.menuItem}>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('EditProfile', {user: this.props.user})}>
                             <View style={styles.menuTextWrap}>
+                                <Feather name="edit" size={32} color="black" />
                                 <Text style={styles.menuText}>
                                     Edit Profile
                                 </Text>
@@ -50,6 +52,7 @@ export default class Profile extends Component {
                     <View style={styles.menuItem}>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Settings', {user: this.props.user, ageRangeValues: this.state.ageRangeValues, distanceValue: this.state.distanceValue, showMen: this.state.showMen, showWomen:this.state.showWomen})}>
                             <View style={styles.menuTextWrap}>
+                                <Feather name="crosshair" size={32} color="black" />
                                 <Text style={styles.menuText}>
                                     Settings
                                 </Text>
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
     },
     menu: {
         flex: 0,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
@@ -101,10 +104,6 @@ const styles = StyleSheet.create({
         width: width/2,
         height: 100,  
     },
-    menuIcon: {
-        width: 20,
-        height: 20,
-    },
     menuText: {
         color: 'black',
         marginLeft: 20,
@@ -114,13 +113,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         flexDirection: 'row',
         paddingTop: 20,
         paddingBottom: 20,
     },
     menuButton: {
         flex: 1,
+        backgroundColor: 'white',
     },
 
 })

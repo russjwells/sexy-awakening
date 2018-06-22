@@ -14,6 +14,8 @@ import filter from '../modules/filter'
 
 import _ from 'lodash'
 
+import { Feather } from '@expo/vector-icons'
+
 export default class Home extends Component {
   state = {
     profileIndex: 0,
@@ -205,13 +207,13 @@ export default class Home extends Component {
       <View style={styles.container}>
         <View style={styles.navbar}>
           <View style={styles.navleft}>
-            <Text></Text>
+            <Text><Feather name="menu" size={32} color="black" /></Text>
           </View>
           <View style={styles.navcenter}>
             <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
           </View>
           <View style={styles.navright}>
-          <Text>Matches</Text>
+            <Text><Feather name="users" size={32} color="black" /></Text>
           </View>
         </View>
         <SimpleScroller 
@@ -240,7 +242,10 @@ const styles = StyleSheet.create({
   },
   navleft:{
     flex: 1,
-    backgroundColor: 'skyblue',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
   },
   navcenter:{
     flex: 5,
@@ -250,7 +255,14 @@ const styles = StyleSheet.create({
   },
   navright:{
     flex: 1,
-    backgroundColor: 'skyblue',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+  },
+  navcenterRight:{
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   navcenterText:{
     textAlign: 'center',

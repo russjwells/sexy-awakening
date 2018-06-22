@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 
 import CircleImage from '../components/circleImage'
+import { Feather } from '@expo/vector-icons'
 
 export default class EditProfile extends Component {
 
@@ -30,7 +31,7 @@ export default class EditProfile extends Component {
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
                         <View style={styles.navback}>
-                            <Text>Back</Text>
+                            <Text><Feather name="arrow-left" size={32} color="black" /></Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>

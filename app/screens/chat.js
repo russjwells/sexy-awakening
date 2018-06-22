@@ -11,6 +11,8 @@ import {GiftedChat} from 'react-native-gifted-chat'
 
 import * as firebase from 'firebase'
 
+import { Feather } from '@expo/vector-icons'
+
 export default class Chat extends Component {
 
     state={
@@ -51,7 +53,7 @@ export default class Chat extends Component {
                 <View style={styles.chatnav}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
                         <View style={styles.navBack}>
-                            <Text>Back</Text>
+                            <Text><Feather name="arrow-left" size={32} color="black" /></Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navChatTitle}>
