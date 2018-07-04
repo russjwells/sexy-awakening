@@ -6,6 +6,7 @@ import Chat from './screens/chat'
 import Settings from './screens/settings'
 import EditProfile from './screens/editProfile'
 import Subscription from './screens/subscription'
+import DeepProfile from './screens/deepProfile'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDg4fI6UyL6hYvDHwELQ75pjwspQW8_kDA",

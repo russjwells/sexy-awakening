@@ -34,7 +34,9 @@ export default class Profile extends Component {
         return(
             <View style={styles.container} >
                 <View style={styles.profile}>
-                    <CircleImage facebookID={id} size={120}/>
+                    <TouchableHighlight style={styles.viewMyProfileLink} onPress={() => this.props.navigation.navigate('ViewMyProfile', {user: this.props.user})}>
+                        <CircleImage facebookID={id} size={120}/>
+                    </TouchableHighlight>
                     <Text style={{fontSize:20}}>{first_name}</Text>
                     <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                 </View>
@@ -62,7 +64,9 @@ export default class Profile extends Component {
                 </View>
                 <View style={styles.subscription}>
                     <TouchableHighlight style={styles.unlimitedButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
-                        <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
+                        <View style={styles.subsexpander}>
+                           <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
+                        </View>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -76,6 +80,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         justifyContent: 'flex-start',
+    },
+    subsexpander: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     profile: {
         flex: 1,

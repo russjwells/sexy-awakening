@@ -13,7 +13,7 @@ import CircleImage from '../components/circleImage'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Feather } from '@expo/vector-icons'
 
-export default class Profile extends Component {
+export default class DeepProfile extends Component {
     state = {
         ageRangeValues: this.props.user.ageRange,
         distanceValue: [this.props.user.distance],
@@ -44,7 +44,7 @@ export default class Profile extends Component {
                             <View style={styles.menuTextWrap}>
                                 <Feather name="edit" size={32} color="black" />
                                 <Text style={styles.menuText}>
-                                    Edit Profile
+                                    Deep Profile
                                 </Text>
                             </View>
                         </TouchableHighlight>

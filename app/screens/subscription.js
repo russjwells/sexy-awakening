@@ -24,6 +24,9 @@ export default class Subscription extends Component {
                     <View style={styles.navlocation}>
                         <Text style={styles.navtext}>SUBSCRIPTION</Text>
                     </View>
+                    <View style={styles.navright}>
+                        
+                    </View>
                 </View>
                 <View style={styles.content}>
                         <View style={styles.content}>
@@ -58,6 +61,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
+    },
+    navright:{
+        flex:1
     },
     navtext:{
         textAlign: 'center',
