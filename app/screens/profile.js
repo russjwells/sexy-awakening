@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     profile: {
-        flex: 1,
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
     },
