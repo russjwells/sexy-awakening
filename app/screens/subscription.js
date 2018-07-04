@@ -22,7 +22,7 @@ export default class Subscription extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text>Sexy Awakening Unlimited</Text>
+                        <Text style={styles.navtext}>SUBSCRIPTION</Text>
                     </View>
                 </View>
                 <View style={styles.content}>
@@ -49,9 +49,19 @@ const styles = StyleSheet.create({
     },
     navback:{
         flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     navlocation:{
-        flex: 3,
+        flex: 4,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    navtext:{
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     content: {
         flex: 1,

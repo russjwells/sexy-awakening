@@ -50,15 +50,15 @@ export default class Chat extends Component {
         const avatar = `https://graph.facebook.com/${this.state.profile.uid}/picture?height=80` 
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={80}>
-                <View style={styles.chatnav}>
+                <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
-                        <View style={styles.navBack}>
-                            <Text><Feather name="arrow-left" size={32} color="black" /></Text>
-                        </View>
+                            <Feather name="arrow-left" size={32} color="black" />
                     </TouchableHighlight>
-                    <View style={styles.navChatTitle}>
-                        <Text>Chat with {this.state.profile.first_name}</Text>
+                    <View style={styles.navlocation}>
+                        <Text style={styles.navtext}>Message {this.state.profile.first_name}</Text>
                     </View>
+                    <View style={styles.navinventory}>
+                        </View>
                 </View>
                 <GiftedChat
                     messages={this.state.messages}
@@ -75,15 +75,28 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    chatnav: {
+    navbar: {
         flexDirection: 'row',
         height: 80,
         paddingTop: 20,
     },
-    navBack: {
+    navback: {
         flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
-    navChatTitle: {
+    navlocation: {
         flex: 4,
-    }
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    navinventory: {
+        flex:1,
+    },
+    navtext:{
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
 })

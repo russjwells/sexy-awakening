@@ -35,7 +35,10 @@ export default class EditProfile extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text>Edit Profile</Text>
+                        <Text style={styles.navtext}>EDIT PROFILE</Text>
+                    </View>
+                    <View style={styles.navright}>
+                        
                     </View>
                 </View>
                 <View style={styles.content}>
@@ -81,12 +84,22 @@ const styles = StyleSheet.create({
     },
     navback:{
         flex: 1,
-    },
-    navlocation:{
-        flex: 3,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
+    },
+    navlocation:{
+        flex: 4,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    navright:{
+        flex:1
+    },
+    navtext:{
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     content: {
         flex: 1,
