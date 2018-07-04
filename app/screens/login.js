@@ -76,7 +76,10 @@ export default class Login extends Component {
         return(
             <View
                 style={styles.container}>
-                <Text style={styles.titleText}>Sexy Awakening</Text>
+                <View style={styles.titleArea}>
+                    <Text style={styles.titleText}>SEXY AWAKENING</Text>
+                    <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
+                </View>
                 <Text style={styles.introText}>Your clothes conceal much of your beauty, yet they hide not the un-beautiful. And though you seek in garments the freedom of privacy you may find in them a harness and a chain. Would that you could meet the sun and the wind with more of your skin and less of your raiment, For the breath of life is in the sunlight and the hand of life is in the wind.</Text>
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
@@ -94,20 +97,27 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: '#e54560'
+        backgroundColor: 'white'
         
     },
     titleText: {
-        fontSize: 40,
+        fontSize: 36,
         fontWeight: 'bold',
-        color: 'white',
-        marginTop: 60
+        color: 'black',
+        marginTop: 60,
+    },
+    subtitleText: {
+        fontSize: 16,
+        color: '#e54560',
+        lineHeight: 36,
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     introText: {
-        fontSize: 18,
+        fontSize: 16,
         margin: 50,
-        color: 'white',
-        lineHeight: 40,
+        color: 'black',
+        lineHeight: 20,
         textAlign: 'center'
     },
     loginArea: {

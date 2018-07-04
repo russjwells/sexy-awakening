@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
     },
     navlocation:{
         flex: 3,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     content: {
         flex: 1,

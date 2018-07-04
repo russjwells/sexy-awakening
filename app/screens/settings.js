@@ -116,9 +116,14 @@ const styles = StyleSheet.create({
     },
     navback:{
         flex: 1,
+        backgroundColor: 'skyblue',
     },
     navlocation:{
         flex: 3,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: 'darkblue',
     },
     content: {
         flex: 10,

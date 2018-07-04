@@ -66,6 +66,7 @@ export default class Matches extends Component {
     renderItem = ({item}) => {
         const {id, first_name, work} = item
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        const matchType = "unsure"
 
         return (
             <TouchableHighlight
@@ -76,6 +77,7 @@ export default class Matches extends Component {
                 <View style={{justifyContent:'center', marginLeft:10}}>
                     <Text style={{fontSize:18}}>{first_name}</Text>
                     <Text style={{fontSize:15, color:'darkgrey'}}>{bio}</Text>
+                    <Text style={{fontSize:15, color:'darkgrey'}}>{matchType}</Text>
                 </View>
             </View>
             </TouchableHighlight>

@@ -7,6 +7,8 @@ import {
     TouchableHighlight,
 } from 'react-native'
 
+import { Feather } from '@expo/vector-icons'
+
 export default class Subscription extends Component {
 
     
@@ -16,7 +18,7 @@ export default class Subscription extends Component {
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
                         <View style={styles.navback}>
-                            <Text>Back</Text>
+                            <Text><Feather name="arrow-left" size={32} color="black" /></Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
@@ -24,7 +26,11 @@ export default class Subscription extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                        <Text>Choose between these options:</Text>
+                        <View style={styles.content}>
+                            <Text>Sexy Awakening Unlimited</Text>
+                            <Text>Infinite Swiping</Text>
+                            <Text>Unlocked Location</Text>
+                        </View>
                 </View>
             </View>
         )
@@ -49,6 +55,6 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        backgroundColor: 'green',
+        backgroundColor: 'white',
     },
 })
