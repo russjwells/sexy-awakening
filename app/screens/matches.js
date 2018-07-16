@@ -9,11 +9,18 @@ import {
     StatusBar,
 } from 'react-native'
 
+import Image from 'react-native-remote-svg'
+
 import CircleImage from '../components/circleImage'
 
 import _ from 'lodash'
 
 import * as firebase from 'firebase'
+
+import sexSymbol from '../../assets/img/sex.svg'
+import romanceSymbol from '../../assets/img/romance.svg'
+import friendshipSymbol from '../../assets/img/friendship.svg'
+import passSymbol from '../../assets/img/pass.svg'
 
 export default class Matches extends Component {
 
@@ -62,7 +69,10 @@ export default class Matches extends Component {
             }))
         })
     }
-
+    filterList = (type) => {
+        console.log('filter: ',type)
+        alert(type)
+    }
     renderItem = ({item}) => {
         const {id, first_name, work} = item
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
@@ -92,6 +102,38 @@ export default class Matches extends Component {
 
     _keyExtractor = (item, index) => item.id;
 
+    renderHeader = () => {
+        return(
+            <View style={styles.relationshipFilter}>
+                <TouchableHighlight style={styles.filterButton}
+                    onPress={() => this.filterList('sex')}    
+                >
+                    <View style={[styles.filterButton, styles.sexFilter]}>
+                        <Image source={sexSymbol} style={{width:60, height:60}} />
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('romance')}>
+                    <View style={styles.filterButton}>
+                        <Image source={romanceSymbol} style={{width:60, height:60}} />
+                        <Text>Romance</Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('friendship')}>
+                    <View style={styles.filterButton}>
+                        <Image source={friendshipSymbol} style={{width:60, height:60}} />
+                        <Text>Friendship</Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('pass')}>
+                    <View style={styles.filterButton}>
+                        <Image source={passSymbol} style={{width:60, height:60}} />
+                        <Text>Pass</Text>
+                    </View>
+                </TouchableHighlight>
+            </View>
+        )
+    }
+
     render() {
         return (
                 <FlatList 
@@ -100,6 +142,7 @@ export default class Matches extends Component {
                     renderItem={this.renderItem}
                     ItemSeparatorComponent={this.renderSeparator}
                     keyExtractor={this._keyExtractor}
+                    ListHeaderComponent={() => this.renderHeader()}
                 />
         )
     }
@@ -113,6 +156,19 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'space-between',
         flexDirection: 'row',
+    },
+    relationshipFilter:{
+        flex:1,
+        flexDirection:'row',
+    },
+    filterButton:{
+        flex:1,
+        height:60,
+
+    },
+    sexFilter:{
+        flex:1,
+        backgroundColor:'red',
     },
     menuOption: {
         flex: 1,
