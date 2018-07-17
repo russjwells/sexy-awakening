@@ -62,11 +62,11 @@ export default class EditProfile extends Component {
                 </View>
                 <View style={styles.content}>
                     <View style={styles.profile}>
-                        <SquareImage facebookID={id} size={width}/>
+                        <SquareImage facebookID={id} size={width, width}/>
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
-                    <View style={styles.bio}>
+                    <View style={styles.editBio}>
                         <TextInput
                             editable={true}
                             maxLength={255}
@@ -77,8 +77,8 @@ export default class EditProfile extends Component {
                         />
                     </View>
                     <View style={styles.save}>
-                        <TouchableHighlight onPress={() => this.save(bio) }>
-                            <Text>SAVE</Text>
+                        <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio) }>
+                            <Text style={styles.saveText}>SAVE</Text>
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -86,14 +86,15 @@ export default class EditProfile extends Component {
         )
     }
 }
-
+const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
     },
     profile: {
-        flex: 1,
+        width: width,
+        height: height,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     navright:{
-        flex:1
+        flex: 1,
     },
     navtext:{
         textAlign: 'center',
@@ -124,5 +125,28 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    profile:{
+        flex:1,
+    },
+    editBio:{
+        flex:1,
+    },
+    save: {
+        height: 100,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: '#e54560',
+    },
+    saveButton: {
+        flex: 1,
+        height: 100,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    saveText: {
+        color: 'white',
     },
 })
