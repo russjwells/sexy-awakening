@@ -22,7 +22,7 @@ export default class Subscription extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text style={styles.navtext}>SUBSCRIPTION</Text>
+                        <Text style={styles.navtext}>YOUR SUBSCRIPTION</Text>
                     </View>
                     <View style={styles.navright}>
                         
@@ -30,9 +30,27 @@ export default class Subscription extends Component {
                 </View>
                 <View style={styles.content}>
                         <View style={styles.content}>
-                            <Text>Sexy Awakening Unlimited</Text>
-                            <Text>Infinite Swiping</Text>
-                            <Text>Unlocked Location</Text>
+                            <View style={styles.menuOption}>
+                                <Text>Sexy Awakening Unlimited</Text>
+                                <Text>$11/month</Text>
+                                <Text>Infinite Swiping</Text>
+                                <Text>Unlocked Location</Text>
+                            </View>
+                            <View style={styles.menuOption}>
+                                <Text>Sexy Awakening Gold</Text>
+                                <Text>$33/month</Text>
+                                <Text>All the benefits of unlimited.</Text>
+                                <Text>Show off with a golden profile. You rare pokemon.</Text>
+                            </View>
+                            <View style={styles.menuOption}>
+                                <Text>Sexy Awakening Supporter</Text>
+                                <Text>$34+/month, pay what you want.</Text>
+                                <Text>All the benefits of gold + be the first to try new features.</Text>
+                                <Text>Support the cause.</Text>
+                            </View>
+                            <View style={styles.menuConfirmButton}>
+                                <Text>CONTINUE</Text>
+                            </View>
                         </View>
                 </View>
             </View>
@@ -63,7 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     navright:{
-        flex:1
+        flex:1,
     },
     navtext:{
         textAlign: 'center',

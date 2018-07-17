@@ -1,9 +1,11 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native'
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
+
+import logo from '../../assets/img/sa_logo.png'
 
 
 export default class Login extends Component {
@@ -77,6 +79,7 @@ export default class Login extends Component {
             <View
                 style={styles.container}>
                 <View style={styles.titleArea}>
+                    <Image source={logo} />
                     <Text style={styles.titleText}>SEXY AWAKENING</Text>
                     <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
                 </View>
@@ -99,6 +102,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: 'white'
         
+    },
+    titleArea: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        paddingTop:40,
     },
     titleText: {
         fontSize: 36,
