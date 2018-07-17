@@ -74,6 +74,7 @@ export default class EditProfile extends Component {
                             numberOfLines = {20}
                             defaultValue={bio}
                             onChangeText={(value) => this.setState({bio: value})}
+                            width={width}
                         />
                     </View>
                     <View style={styles.save}>
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     profile: {
+        flex:8,
         width: width,
         height: height,
         alignItems: 'center',
@@ -126,13 +128,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    profile:{
-        flex:1,
-    },
     editBio:{
         flex:1,
+        backgroundColor:'#fff',
+        padding: 20,
     },
     save: {
+        flex: 1,
         height: 100,
         alignItems: 'center',
         flexDirection: 'row',

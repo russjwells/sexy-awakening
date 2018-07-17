@@ -76,7 +76,8 @@ export default class Matches extends Component {
     }
     renderItem = ({item}) => {
         const {id, first_name, work} = item
-        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        const bio = item.bio ? item.bio : null
         const matchType = "unsure"
 
         return (
