@@ -27,6 +27,7 @@ export default class Matches extends Component {
     state = {
         dataSource: demoProfiles,
         matches: [],
+        matchType: 'sex',
     }
 
     componentWillMount() {
@@ -105,29 +106,24 @@ export default class Matches extends Component {
     renderHeader = () => {
         return(
             <View style={styles.relationshipFilter}>
-                <TouchableHighlight style={styles.filterButton}
-                    onPress={() => this.filterList('sex')}    
-                >
+                <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('sex')}>
                     <View style={[styles.filterButton, styles.sexFilter]}>
-                        <Image source={sexSymbol} style={{width:60, height:60}} />
+                        <Image source={sexSymbol} style={{width:70, height:70}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('romance')}>
                     <View style={styles.filterButton}>
-                        <Image source={romanceSymbol} style={{width:60, height:60}} />
-                        <Text>Romance</Text>
+                        <Image source={romanceSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('friendship')}>
                     <View style={styles.filterButton}>
-                        <Image source={friendshipSymbol} style={{width:60, height:60}} />
-                        <Text>Friendship</Text>
+                        <Image source={friendshipSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('pass')}>
                     <View style={styles.filterButton}>
-                        <Image source={passSymbol} style={{width:60, height:60}} />
-                        <Text>Pass</Text>
+                        <Image source={passSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
             </View>
@@ -164,11 +160,15 @@ const styles = StyleSheet.create({
     filterButton:{
         flex:1,
         height:60,
-
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     sexFilter:{
         flex:1,
-        backgroundColor:'red',
+    },
+    selectedFilter:{
+        backgroundColor: 'red',
     },
     menuOption: {
         flex: 1,
