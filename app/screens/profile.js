@@ -19,6 +19,7 @@ export default class Profile extends Component {
         distanceValue: [this.props.user.distance],
         showMen: this.props.user.showMen,
         showWomen: this.props.user.showWomen,
+        bio: this.props.user.bio,
     }
 
     updateUser = (key, value) => {
@@ -30,7 +31,8 @@ export default class Profile extends Component {
     render () {
         const {first_name, work, id} = this.props.user
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
-        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        const bio = this.state.bio
         return(
             <View style={styles.container} >
                 <View style={styles.profile}>

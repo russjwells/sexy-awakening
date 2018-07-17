@@ -7,9 +7,12 @@ import {
     TouchableHighlight,
     TextInput,
     KeyboardAvoidingView,
+    Dimensions,
 } from 'react-native'
 
-import CircleImage from '../components/circleImage'
+import * as firebase from 'firebase'
+
+import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
 
 export default class EditProfile extends Component {
@@ -20,12 +23,28 @@ export default class EditProfile extends Component {
         distanceValue: this.props.navigation.state.params.distanceValue,
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
+        bio: this.props.navigation.state.params.user.bio,
     }
 
+    updateUser = (key, value) => {
+        const {uid} = this.state.user
+        firebase.database().ref('users').child(uid)
+        .update({[key]:value})
+    }
+
+    save = (bio) => {
+        //updateUser
+        this.updateUser('bio', bio)
+        //go home
+        this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})
+    }
+    
     render() {
+        const {width, height} = Dimensions.get('window')
         const {first_name, work, id} = this.state.user
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
-        const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+        let bio = this.state.bio
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
@@ -43,7 +62,7 @@ export default class EditProfile extends Component {
                 </View>
                 <View style={styles.content}>
                     <View style={styles.profile}>
-                        <CircleImage facebookID={id} size={120}/>
+                        <SquareImage facebookID={id} size={width}/>
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
@@ -53,11 +72,12 @@ export default class EditProfile extends Component {
                             maxLength={255}
                             multline={true}
                             numberOfLines = {20}
-                            defaultValue={"What are you?"}
+                            defaultValue={bio}
+                            onChangeText={(value) => this.setState({bio: value})}
                         />
                     </View>
                     <View style={styles.save}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
+                        <TouchableHighlight onPress={() => this.save(bio) }>
                             <Text>SAVE</Text>
                         </TouchableHighlight>
                     </View>
