@@ -22,6 +22,11 @@ import romanceSymbol from '../../assets/img/romance.svg'
 import friendshipSymbol from '../../assets/img/friendship.svg'
 import passSymbol from '../../assets/img/pass.svg'
 
+import sexSymbolRed from '../../assets/img/sex_red.svg'
+import romanceSymbolRed from '../../assets/img/romance_red.svg'
+import friendshipSymbolRed from '../../assets/img/friendship_red.svg'
+import passSymbolRed from '../../assets/img/pass_red.svg'
+
 export default class Matches extends Component {
 
     state = {
@@ -149,22 +154,22 @@ export default class Matches extends Component {
             <View style={styles.relationshipFilter}>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('sex')}>
                     <View style={[styles.filterButton, styles.sexFilter]}>
-                        <Image source={sexSymbol} style={{width:70, height:70}} />
+                        <Image source={this.state.matchType == 'sex' ? sexSymbolRed : sexSymbol} style={{width:70, height:70}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('romance')}>
                     <View style={styles.filterButton}>
-                        <Image source={romanceSymbol} style={{width:40, height:40}} />
+                        <Image source={this.state.matchType == 'romance' ? romanceSymbolRed : romanceSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('friendship')}>
                     <View style={styles.filterButton}>
-                        <Image source={friendshipSymbol} style={{width:40, height:40}} />
+                        <Image source={this.state.matchType == 'friendship' ? friendshipSymbolRed : friendshipSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.filterButton} onPress={() => this.filterList('pass')}>
                     <View style={styles.filterButton}>
-                        <Image source={passSymbol} style={{width:40, height:40}} />
+                        <Image source={this.state.matchType == 'pass' ? passSymbolRed : passSymbol} style={{width:40, height:40}} />
                     </View>
                 </TouchableHighlight>
             </View>
