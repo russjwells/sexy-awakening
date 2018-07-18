@@ -130,7 +130,6 @@ export default class Matches extends Component {
                 <View style={{justifyContent:'center', marginLeft:10}}>
                     <Text style={{fontSize:18}}>{first_name}</Text>
                     <Text style={{fontSize:15, color:'darkgrey'}}>{bio}</Text>
-                    <Text style={{fontSize:15, color:'darkgrey'}}>{matchType}</Text>
                 </View>
             </View>
             </TouchableHighlight>
