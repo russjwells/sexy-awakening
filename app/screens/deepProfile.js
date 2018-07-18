@@ -14,11 +14,9 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Feather } from '@expo/vector-icons'
 
 export default class DeepProfile extends Component {
-    state = {
-        ageRangeValues: this.props.user.ageRange,
-        distanceValue: [this.props.user.distance],
-        showMen: this.props.user.showMen,
-        showWomen: this.props.user.showWomen,
+    state={
+        user: this.props.navigation.state.params.user,
+        profile: this.props.navigation.state.params.profile,
     }
 
     updateUser = (key, value) => {
@@ -28,8 +26,7 @@ export default class DeepProfile extends Component {
     }
 
     render () {
-        const {first_name, work, id} = this.props.user
-        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
+        const {first_name, work, id} = this.state.profile
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container} >

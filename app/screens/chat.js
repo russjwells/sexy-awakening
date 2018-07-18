@@ -13,6 +13,8 @@ import * as firebase from 'firebase'
 
 import { Feather } from '@expo/vector-icons'
 
+import CircleImage from '../components/circleImage'
+
 export default class Chat extends Component {
 
     state={
@@ -55,7 +57,12 @@ export default class Chat extends Component {
                             <Feather name="arrow-left" size={32} color="black" />
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text style={styles.navtext}>Message {this.state.profile.first_name}</Text>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.navigation.state.params.profile})}>
+                            <View style={styles.chatnavlink}>
+                                <CircleImage style={styles.chatnavavatar} size={40} facebookID={this.state.profile.id}/>
+                                <Text style={styles.navtext}> {this.state.profile.first_name}</Text>
+                            </View>
+                        </TouchableHighlight>
                     </View>
                     <View style={styles.navinventory}>
                         </View>
@@ -91,6 +98,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
+    },
+    chatnavlink:{
+        flex:1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    chatnavavatar:{
+        paddingRight: 4,
     },
     navinventory: {
         flex:1,

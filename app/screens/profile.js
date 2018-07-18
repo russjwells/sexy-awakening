@@ -36,7 +36,7 @@ export default class Profile extends Component {
         return(
             <View style={styles.container} >
                 <View style={styles.profile}>
-                    <TouchableHighlight style={styles.viewMyProfileLink} onPress={() => this.props.navigation.navigate('ViewMyProfile', {user: this.props.user})}>
+                    <TouchableHighlight style={styles.viewMyProfileLink} onPress={() => this.props.navigation.navigate('YourProfile', {user: this.props.user})}>
                         <CircleImage facebookID={id} size={120}/>
                     </TouchableHighlight>
                     <Text style={{fontSize:20}}>{first_name}</Text>

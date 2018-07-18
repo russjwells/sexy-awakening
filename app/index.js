@@ -7,6 +7,8 @@ import Settings from './screens/settings'
 import EditProfile from './screens/editProfile'
 import Subscription from './screens/subscription'
 import DeepProfile from './screens/deepProfile'
+import YourProfile from './screens/yourProfile'
+import ViewProfile from './screens/viewProfile'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDg4fI6UyL6hYvDHwELQ75pjwspQW8_kDA",
@@ -26,7 +28,9 @@ const RouteConfigs = {
     Chat: {screen:Chat},
     Settings: {screen:Settings},
     EditProfile: {screen:EditProfile},
-    Subscription: {screen:Subscription}
+    Subscription: {screen:Subscription},
+    ViewProfile: {screen:ViewProfile},
+    YourProfile: {screen:YourProfile},
 
 }
 const StackNavigatorConfig = {
