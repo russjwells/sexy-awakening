@@ -6,6 +6,7 @@ import Chat from './screens/chat'
 import Settings from './screens/settings'
 import EditProfile from './screens/editProfile'
 import Subscription from './screens/subscription'
+import Subscription2 from './screens/subscription2'
 import DeepProfile from './screens/deepProfile'
 import YourProfile from './screens/yourProfile'
 import ViewProfile from './screens/viewProfile'
@@ -29,6 +30,7 @@ const RouteConfigs = {
     Settings: {screen:Settings},
     EditProfile: {screen:EditProfile},
     Subscription: {screen:Subscription},
+    Subscription2: {screen:Subscription2},
     ViewProfile: {screen:ViewProfile},
     YourProfile: {screen:YourProfile},
 
