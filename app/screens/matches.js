@@ -28,6 +28,10 @@ export default class Matches extends Component {
         dataSource: demoProfiles,
         matches: [],
         matchType: 'sex',
+        sex: [],
+        romance: [],
+        friendship: [],
+        pass: [],
     }
 
     componentWillMount() {
@@ -40,7 +44,22 @@ export default class Matches extends Component {
         return firebase.database().ref('users').child(uid).once('value')
             .then(snap => snap.val())
     }
-
+    getData = (matchType) => {
+        let matchData
+        if (matchType == "sex") {
+            matchData = this.state.sex
+        }
+        if (matchType == "romance") {
+            matchData = this.state.romance
+        }
+        if (matchType == "friendship") {
+            matchData = this.state.friendship
+        }
+        if (matchType == "pass") {
+            matchData = this.state.pass
+        }
+        return matchData
+    }
     getOverlap = (liked, likedBack) => {
         const likedTrue = _.pickBy(liked, value => value)
         const likedBackTrue = _.pickBy(likedBack, value => value)
@@ -55,10 +74,33 @@ export default class Matches extends Component {
             const allSex = this.getOverlap(relations.sex, relations.sexBack)
             const allRomance = this.getOverlap(relations.romance, relations.romanceBack)
             const allFriendship = this.getOverlap(relations.friendship, relations.friendshipBack)
-            
+
+            //sex data
+            const promisesSex = allSex.map(profileUid => {
+                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                return foundProfile ? foundProfile : this.getUser(profileUid)
+            })
+            Promise.all(promisesSex).then(data => this.setState({
+                sex: data,
+            }))
+            //romance data
+            const promisesRomance = allRomance.map(profileUid => {
+                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                return foundProfile ? foundProfile : this.getUser(profileUid)
+            })
+            Promise.all(promisesRomance).then(data => this.setState({
+                romance: data,
+            }))
+            //friendship data
+            const promisesFriendship = allFriendship.map(profileUid => {
+                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                return foundProfile ? foundProfile : this.getUser(profileUid)
+            })
+            Promise.all(promisesFriendship).then(data => this.setState({
+                friendship: data,
+            }))
 
             const allMatches = allSex.concat(allRomance.concat(allFriendship))
-            console.log('allMatches:', allMatches)
             const promises = allMatches.map(profileUid => {
                 const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
                 return foundProfile ? foundProfile : this.getUser(profileUid)
@@ -71,8 +113,7 @@ export default class Matches extends Component {
         })
     }
     filterList = (type) => {
-        console.log('filter: ',type)
-        alert(type)
+        this.setState({matchType: type})
     }
     renderItem = ({item}) => {
         const {id, first_name, work} = item
@@ -135,7 +176,7 @@ export default class Matches extends Component {
         return (
                 <FlatList 
                     style={styles.list}
-                    data={this.state.dataSource}
+                    data={this.getData(this.state.matchType)}
                     renderItem={this.renderItem}
                     ItemSeparatorComponent={this.renderSeparator}
                     keyExtractor={this._keyExtractor}
