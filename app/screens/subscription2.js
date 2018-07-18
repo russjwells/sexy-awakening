@@ -7,12 +7,26 @@ import {
     TouchableHighlight,
 } from 'react-native'
 
+import * as firebase from 'firebase'
+
 import { Feather } from '@expo/vector-icons'
 
 export default class Subscription2 extends Component {
 
     state = {
-        subscriptionType:'guest',
+        user: this.props.navigation.state.params.user,
+    }
+
+    purchase = (user, subscription) => {
+        //write to database
+        this.updateUser('subscription', subscription)
+        //go home
+        this.props.navigation.navigate('Home', {user: user})
+    }
+    updateUser = (key, value) => {
+        const {uid} = this.state.user
+        firebase.database().ref('users').child(uid)
+        .update({[key]:value})
     }
     render() {
         return(
@@ -32,7 +46,8 @@ export default class Subscription2 extends Component {
                 </View>
                 <View style={styles.content}>
                         <View style={styles.content}>
-                            <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription3', {user: this.props.user, subscriptionType: this.state.subscriptionType})}>
+                            <View><Text>Confirm your new {this.props.navigation.state.params.subscriptionType} subscription, {this.props.navigation.state.params.user.first_name}.</Text></View>
+                            <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
                                 <View style={styles.menuConfirmButton}>
                                     <Text>PURCHASE</Text>
                                 </View>

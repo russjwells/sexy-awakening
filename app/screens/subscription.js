@@ -12,7 +12,8 @@ import { Feather } from '@expo/vector-icons'
 export default class Subscription extends Component {
 
     state = {
-        subscriptionType:'guest',
+        user: this.props.navigation.state.params.user,
+        subscriptionType:this.props.navigation.state.params.user.subscription,
     }
     render() {
         return(
