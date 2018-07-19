@@ -65,7 +65,7 @@ export default class Profile extends Component {
                     </View>
                 </View>
                 <View style={styles.subscription}>
-                    <TouchableHighlight style={styles.unlimitedButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
+                    <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
                         <View style={styles.subsexpander}>
                            <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
                         </View>
@@ -81,15 +81,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        justifyContent: 'flex-start',
-    },
-    subsexpander: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        //justifyContent: 'flex-start',
     },
     profile: {
-        flex: 3,
+        flex: 5,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -100,10 +95,20 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     subscription: {
-        flex: 1,
+        flex: 2,
         backgroundColor: '#e54560',
         alignItems: 'center',
         flexDirection: 'row',
+    },
+    subscriptionButton: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    subsexpander: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     subscriptionText: {
         color: 'white',
@@ -133,8 +138,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    unlimitedButton: {
-        flex: 1,
-    }
-
 })

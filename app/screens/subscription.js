@@ -35,39 +35,38 @@ export default class Subscription extends Component {
                         <View style={styles.content}>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.setState({subscriptionType:'guest'})}>
                                 <View style={this.state.subscriptionType=='guest' ? styles.menuOptionSelected : styles.menuOption}>
-                                    <Text>Sexy Awakening Guest</Text>
-                                    <Text>f r e e </Text>
-                                    <Text>You're an honored guest here.</Text>
-                                    <Text>Everyone starts out with this option.</Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionTitleTextSelected : styles.menuOptionTitleText}>Sexy Awakening Guest</Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionPriceTextSelected : styles.menuOptionPriceText}>free </Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>You're an honored guest. Please enjoy expressing and meeting yourself.</Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Everyone starts out with this option.</Text>
                                 </View>
                             </TouchableHighlight>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.setState({subscriptionType:'unlimited'})}>
                                 <View style={this.state.subscriptionType=='unlimited' ? styles.menuOptionSelected : styles.menuOption}>
-                                    <Text>Sexy Awakening Unlimited</Text>
-                                    <Text>$11/month</Text>
-                                    <Text>Infinite Swiping</Text>
-                                    <Text>Unlocked Location</Text>
+                                    <Text style={this.state.subscriptionType=='unlimited' ? styles.menuOptionTitleTextSelected : styles.menuOptionTitleText}>Sexy Awakening Unlimited</Text>
+                                    <Text style={this.state.subscriptionType=='unlimited' ? styles.menuOptionPriceTextSelected : styles.menuOptionPriceText}>$11/month</Text>
+                                    <Text style={this.state.subscriptionType=='unlimited' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Infinite Swiping</Text>
                                 </View>
                             </TouchableHighlight>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.setState({subscriptionType:'gold'})}>
                                 <View style={this.state.subscriptionType=='gold' ? styles.menuOptionSelected : styles.menuOption}>
-                                    <Text>Sexy Awakening Gold</Text>
-                                    <Text>$33/month</Text>
-                                    <Text>All the benefits of unlimited.</Text>
-                                    <Text>Show off with a golden profile. You rare pokemon.</Text>
+                                    <Text style={this.state.subscriptionType=='gold' ? styles.menuOptionTitleTextSelected : styles.menuOptionTitleText}>Sexy Awakening Gold</Text>
+                                    <Text style={this.state.subscriptionType=='gold' ? styles.menuOptionPriceTextSelected : styles.menuOptionPriceText}>$33/month</Text>
+                                    <Text style={this.state.subscriptionType=='gold' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>All the benefits of unlimited.</Text>
+                                    <Text style={this.state.subscriptionType=='gold' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>A golden profile.</Text>
                                 </View>
                             </TouchableHighlight>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.setState({subscriptionType:'supporter'})}>
                                 <View style={this.state.subscriptionType=='supporter' ? styles.menuOptionSelected : styles.menuOption}>
-                                    <Text>Sexy Awakening Supporter</Text>
-                                    <Text>$34+/month, pay what you want.</Text>
-                                    <Text>All the benefits of gold + be the first to try new features.</Text>
-                                    <Text>Support the cause.</Text>
+                                    <Text style={this.state.subscriptionType=='supporter' ? styles.menuOptionTitleTextSelected : styles.menuOptionTitleText}>Sexy Awakening Supporter</Text>
+                                    <Text style={this.state.subscriptionType=='supporter' ? styles.menuOptionPriceTextSelected : styles.menuOptionPriceText}>$34+/month, pay what you want.</Text>
+                                    <Text style={this.state.subscriptionType=='supporter' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Gold option</Text>
+                                    <Text style={this.state.subscriptionType=='supporter' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Support the cause.</Text>
                                 </View>
                             </TouchableHighlight>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription2', {user: this.props.navigation.state.params.user, subscriptionType: this.state.subscriptionType})}>
                                 <View style={styles.menuConfirmButton}>
-                                    <Text>CONTINUE</Text>
+                                    <Text style={styles.menuConfirmText}>CONTINUE</Text>
                                 </View>
                             </TouchableHighlight>
                         </View>
@@ -78,6 +77,26 @@ export default class Subscription extends Component {
 }
 
 const styles = StyleSheet.create({
+    menuOptionTitleText:{
+        color:'black',
+        fontWeight: 'bold',
+    },
+    menuOptionTitleTextSelected:{
+        color:'white',
+        fontWeight: 'bold',
+    },
+    menuOptionDescriptionText:{
+        color:'black',
+    },
+    menuOptionDescriptionTextSelected:{
+        color:'white',
+    },
+    menuOptionPriceText:{
+        color:'black',
+    },
+    menuOptionPriceTextSelected:{
+        color:'white',
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -114,11 +133,13 @@ const styles = StyleSheet.create({
         flex:2,
     },
     menuOption: {
+        padding: 20,
         flex:2,
     },
     menuOptionSelected: {
+        padding: 20,
         flex:2,
-        backgroundColor: 'green',
+        backgroundColor: '#e54560',
     },
     menuConfirmButton: {
         flex:1
