@@ -37,8 +37,8 @@ export default class Subscription extends Component {
                                 <View style={this.state.subscriptionType=='guest' ? styles.menuOptionSelected : styles.menuOption}>
                                     <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionTitleTextSelected : styles.menuOptionTitleText}>Sexy Awakening Guest</Text>
                                     <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionPriceTextSelected : styles.menuOptionPriceText}>free </Text>
-                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>You're an honored guest. Please enjoy expressing and meeting yourself.</Text>
-                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Everyone starts out with this option.</Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>You're an honored guest here.</Text>
+                                    <Text style={this.state.subscriptionType=='guest' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Please enjoy exploring and transforming with us.</Text>
                                 </View>
                             </TouchableHighlight>
                             <TouchableHighlight style={styles.menuButton} onPress={() => this.setState({subscriptionType:'unlimited'})}>
