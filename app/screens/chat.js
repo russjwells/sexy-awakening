@@ -57,7 +57,7 @@ export default class Chat extends Component {
                             <Feather name="arrow-left" size={32} color="black" />
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.navigation.state.params.profile})}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.navigation.state.params.user, profile: this.props.navigation.state.params.profile})}>
                             <View style={styles.chatnavlink}>
                                 <CircleImage style={styles.chatnavavatar} size={40} facebookID={this.state.profile.id}/>
                                 <Text style={styles.navtext}> {this.state.profile.first_name}</Text>

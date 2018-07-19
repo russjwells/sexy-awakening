@@ -23,7 +23,7 @@ export default class ViewProfile extends Component {
         distanceValue: this.props.navigation.state.params.distanceValue,
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
-        bio: this.props.navigation.state.params.user.bio,
+        bio: this.props.navigation.state.params.profile.bio,
     }
 
     updateUser = (key, value) => {
@@ -41,8 +41,8 @@ export default class ViewProfile extends Component {
     
     render() {
         const {width, height} = Dimensions.get('window')
-        const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
+        const {first_name, work, id} = this.props.navigation.state.params.profile
+        //const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
         return(
