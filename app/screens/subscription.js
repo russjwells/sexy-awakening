@@ -64,7 +64,7 @@ export default class Subscription extends Component {
                                     <Text style={this.state.subscriptionType=='supporter' ? styles.menuOptionDescriptionTextSelected : styles.menuOptionDescriptionText}>Support the cause.</Text>
                                 </View>
                             </TouchableHighlight>
-                            <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Subscription2', {user: this.props.navigation.state.params.user, subscriptionType: this.state.subscriptionType})}>
+                            <TouchableHighlight style={styles.menuConfirmButton} onPress={() => this.props.navigation.navigate('Subscription2', {user: this.props.navigation.state.params.user, subscriptionType: this.state.subscriptionType})}>
                                 <View style={styles.menuConfirmButton}>
                                     <Text style={styles.menuConfirmText}>CONTINUE</Text>
                                 </View>
@@ -140,8 +140,18 @@ const styles = StyleSheet.create({
         padding: 20,
         flex:2,
         backgroundColor: '#e54560',
+        borderColor:'white',
+        borderWidth:4,
     },
     menuConfirmButton: {
-        flex:1
-    }
+        flex:1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor:'#e54560',
+    },
+    menuConfirmText: {
+        color:'white',
+        fontWeight: 'bold',
+    },
 })

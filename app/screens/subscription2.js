@@ -46,13 +46,15 @@ export default class Subscription2 extends Component {
                 </View>
                 <View style={styles.content}>
                         <View style={styles.content}>
-                            <View><Text>Confirm your new {this.props.navigation.state.params.subscriptionType} subscription, {this.props.navigation.state.params.user.first_name}.</Text></View>
-                            <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
-                                <View style={styles.menuConfirmButton}>
-                                    <Text>PURCHASE</Text>
-                                </View>
-                            </TouchableHighlight>
+                            <View>
+                                <Text>Confirm your new {this.props.navigation.state.params.subscriptionType} subscription, {this.props.navigation.state.params.user.first_name}.</Text>
+                            </View>
                         </View>
+                        <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
+                            <View style={styles.menuConfirmButton}>
+                                <Text>PURCHASE</Text>
+                            </View>
+                        </TouchableHighlight>
                 </View>
             </View>
         )
