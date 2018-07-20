@@ -4,6 +4,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
 import NavigationBar from 'react-native-navbar'
+import SideMenu from 'react-native-side-menu'
 
 import Card from '../components/card'
 import SimpleScroller from '../components/simpleScroller'
@@ -203,28 +204,32 @@ export default class Home extends Component {
     const titleConfig = {
       title: 'Hello, world',
     }
+
+    //const menu = <Menu navigator={navigator}/>
     return (
-      <View style={styles.container}>
-        <View style={styles.navbar}>
-          <View style={styles.navleft}>
-            <Text><Feather name="menu" size={32} color="black" /></Text>
+      <SideMenu menu={<View><Text>word</Text></View>}>
+        <View style={styles.container}>
+          <View style={styles.navbar}>
+            <View style={styles.navleft}>
+              <Text><Feather name="menu" size={32} color="black" /></Text>
+            </View>
+            <View style={styles.navcenter}>
+              <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
+            </View>
+            <View style={styles.navright}>
+              <Text><Feather name="users" size={32} color="black" /></Text>
+            </View>
           </View>
-          <View style={styles.navcenter}>
-            <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
-          </View>
-          <View style={styles.navright}>
-            <Text><Feather name="users" size={32} color="black" /></Text>
-          </View>
+          <SimpleScroller 
+            screens={[
+              <Profile navigation={this.props.navigation} user={this.state.user}/>,
+              this.cardStack(),
+              <Matches navigation={this.props.navigation} user={this.state.user}/>
+            ]}
+            onScroll={this.handleScroll} 
+          />
         </View>
-        <SimpleScroller 
-          screens={[
-            <Profile navigation={this.props.navigation} user={this.state.user}/>,
-            this.cardStack(),
-            <Matches navigation={this.props.navigation} user={this.state.user}/>
-          ]}
-          onScroll={this.handleScroll} 
-        />
-      </View>
+      </SideMenu>
       //this.cardStack()
     )
   }
