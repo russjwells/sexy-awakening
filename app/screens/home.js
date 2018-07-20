@@ -1,6 +1,6 @@
 import Expo from 'expo'
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
 import NavigationBar from 'react-native-navbar'
@@ -10,6 +10,7 @@ import Card from '../components/card'
 import SimpleScroller from '../components/simpleScroller'
 import Profile from './profile'
 import Matches from './matches'
+import Drawer from './drawer'
 
 import filter from '../modules/filter'
 
@@ -21,7 +22,8 @@ export default class Home extends Component {
   state = {
     profileIndex: 0,
     profiles: [],
-    user: this.props.navigation.state.params.user
+    user: this.props.navigation.state.params.user,
+    drawer: false,
   }
 
   componentWillMount() {
@@ -198,6 +200,11 @@ export default class Home extends Component {
       </View>
     )
   }
+
+  toggleDrawer = () => {
+    const bool = this.state.drawer ? false : true
+    this.setState({drawer:bool})
+  }
    
   
   render() {
@@ -207,11 +214,13 @@ export default class Home extends Component {
 
     //const menu = <Menu navigator={navigator}/>
     return (
-      <SideMenu menu={<View><Text>word</Text></View>}>
+      <SideMenu menu={<Drawer />} isOpen={this.state.drawer}>
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
-              <Text><Feather name="menu" size={32} color="black" /></Text>
+              <TouchableHighlight onPress={() => this.toggleDrawer()}>
+                <Text><Feather name="menu" size={32} color="black" /></Text>
+              </TouchableHighlight>
             </View>
             <View style={styles.navcenter}>
               <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
