@@ -204,6 +204,10 @@ export default class Home extends Component {
   toggleDrawer = () => {
     const bool = this.state.drawer ? false : true
     this.setState({drawer:bool})
+    console.log('drawer',this.state.drawer)
+  }
+  drawerChange = () => {
+    console.log('drawer changed',this.state.drawer)
   }
    
   
@@ -214,7 +218,7 @@ export default class Home extends Component {
 
     //const menu = <Menu navigator={navigator}/>
     return (
-      <SideMenu menu={<Drawer />} isOpen={this.state.drawer}>
+      <SideMenu menu={<Drawer />} isOpen={this.state.drawer} disableGestures={true} onChange={()=> this.drawerChange()}>
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
@@ -236,6 +240,7 @@ export default class Home extends Component {
               <Matches navigation={this.props.navigation} user={this.state.user}/>
             ]}
             onScroll={this.handleScroll} 
+            bounces={false}
           />
         </View>
       </SideMenu>
