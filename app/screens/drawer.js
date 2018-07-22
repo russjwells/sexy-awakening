@@ -15,7 +15,10 @@ export default class Drawer extends Component {
             <View style={styles.container}>
                 <View style={styles.top}>
                     <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
-                    <Text>Sexy Awakening Alpha</Text>
+                    
+                </View>
+                <View style={styles.version}>
+                    <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
                 </View>
                 <View style={styles.menu}>
                     <TouchableHighlight onPress={this.word('about')}>
@@ -48,4 +51,12 @@ const styles = StyleSheet.create({
         flex:3,
         backgroundColor: 'white'
     },
+    version:{
+        backgroundColor:'white',
+    },
+    versionText:{
+        textAlign:'center',
+        fontWeight:'bold',
+        color:'#e54560'
+    }
 })
