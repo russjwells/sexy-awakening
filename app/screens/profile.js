@@ -34,7 +34,7 @@ export default class Profile extends Component {
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         const bio = this.state.bio
         return(
-            <View style={styles.container} >
+            <View style={styles.container}>
                 <View style={styles.profile}>
                     <TouchableHighlight style={styles.viewMyProfileLink} onPress={() => this.props.navigation.navigate('YourProfile', {user: this.props.user})}>
                         <CircleImage facebookID={id} size={120}/>
@@ -64,18 +64,21 @@ export default class Profile extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <View style={styles.subscription}>
-                    <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
-                        <View style={styles.subsexpander}>
-                           <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
-                        </View>
-                    </TouchableHighlight>
-                </View>
+                {this.props.user.subscription=='guest' && (
+                    <View style={styles.subscription}>
+                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
+                            <View style={styles.subsexpander}>
+                            <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                )}
             </View>
         )
     }
 }
 
+const subscriptionlinkcontainer = <View></View>
 const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
@@ -84,12 +87,12 @@ const styles = StyleSheet.create({
         //justifyContent: 'flex-start',
     },
     profile: {
-        flex: 5,
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
     },
     menu: {
-        flex: 0,
+        flex: 1,
         backgroundColor: 'white',
         flexDirection: 'row',
         flexWrap: 'wrap',

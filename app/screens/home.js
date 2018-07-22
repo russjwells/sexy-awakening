@@ -230,7 +230,9 @@ export default class Home extends Component {
               <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
             </View>
             <View style={styles.navright}>
-              <Text><Feather name="users" size={32} color="black" /></Text>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('Subscription', {user: this.state.user})}>
+                <Text><Feather name="users" size={32} color="black" /></Text>
+              </TouchableHighlight>
             </View>
           </View>
           <SimpleScroller 
