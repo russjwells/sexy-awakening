@@ -21,10 +21,10 @@ export default class Drawer extends Component {
                     <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
                 </View>
                 <View style={styles.menu}>
-                    <TouchableHighlight onPress={this.word('about')}>
+                    <TouchableHighlight style={styles.menuItem} onPress={this.word('about')}>
                         <Text>About</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={this.word('subscription')}>
+                    <TouchableHighlight style={styles.menuItem} onPress={this.word('subscription')}>
                         <Text>Subscription</Text>
                     </TouchableHighlight>
                 </View>
@@ -49,7 +49,13 @@ const styles = StyleSheet.create({
     },
     menu:{
         flex:3,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+    },
+    menuItem:{
+        height:100,
+        alignItems: 'center',
+        
+
     },
     version:{
         backgroundColor:'white',
@@ -57,6 +63,6 @@ const styles = StyleSheet.create({
     versionText:{
         textAlign:'center',
         fontWeight:'bold',
-        color:'#e54560'
+        color:'#e54560',
     }
 })
