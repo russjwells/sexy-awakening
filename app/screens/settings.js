@@ -114,6 +114,13 @@ export default class Settings extends Component {
                             </View>
                         </TouchableHighlight>
                     </View>
+                    <View style={styles.subscription}>
+                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => firebase.auth().signOut()}>
+                            <View style={styles.subsexpander}>
+                                <Text style={styles.subscriptionText}>Log Out</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
                 </View>
             </View>
         )

@@ -75,46 +75,50 @@ export default class Matches extends Component {
     getMatches = (uid) => {
         firebase.database().ref('relationships').child(uid).on('value', snap => {
             const relations = snap.val()
-            //const allMatches = this.getOverlap(relations.liked, relations.likedBack)
-            const allSex = this.getOverlap(relations.sex, relations.sexBack)
-            const allRomance = this.getOverlap(relations.romance, relations.romanceBack)
-            const allFriendship = this.getOverlap(relations.friendship, relations.friendshipBack)
+            if (relations == null) {
+                console.log('user must be new')
+            } else {
+                //const allMatches = this.getOverlap(relations.liked, relations.likedBack)
+                const allSex = this.getOverlap(relations.sex, relations.sexBack)
+                const allRomance = this.getOverlap(relations.romance, relations.romanceBack)
+                const allFriendship = this.getOverlap(relations.friendship, relations.friendshipBack)
 
-            //sex data
-            const promisesSex = allSex.map(profileUid => {
-                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
-                return foundProfile ? foundProfile : this.getUser(profileUid)
-            })
-            Promise.all(promisesSex).then(data => this.setState({
-                sex: data,
-            }))
-            //romance data
-            const promisesRomance = allRomance.map(profileUid => {
-                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
-                return foundProfile ? foundProfile : this.getUser(profileUid)
-            })
-            Promise.all(promisesRomance).then(data => this.setState({
-                romance: data,
-            }))
-            //friendship data
-            const promisesFriendship = allFriendship.map(profileUid => {
-                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
-                return foundProfile ? foundProfile : this.getUser(profileUid)
-            })
-            Promise.all(promisesFriendship).then(data => this.setState({
-                friendship: data,
-            }))
+                //sex data
+                const promisesSex = allSex.map(profileUid => {
+                    const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                    return foundProfile ? foundProfile : this.getUser(profileUid)
+                })
+                Promise.all(promisesSex).then(data => this.setState({
+                    sex: data,
+                }))
+                //romance data
+                const promisesRomance = allRomance.map(profileUid => {
+                    const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                    return foundProfile ? foundProfile : this.getUser(profileUid)
+                })
+                Promise.all(promisesRomance).then(data => this.setState({
+                    romance: data,
+                }))
+                //friendship data
+                const promisesFriendship = allFriendship.map(profileUid => {
+                    const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                    return foundProfile ? foundProfile : this.getUser(profileUid)
+                })
+                Promise.all(promisesFriendship).then(data => this.setState({
+                    friendship: data,
+                }))
 
-            const allMatches = allSex.concat(allRomance.concat(allFriendship))
-            const promises = allMatches.map(profileUid => {
-                const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
-                return foundProfile ? foundProfile : this.getUser(profileUid)
-            })
-            Promise.all(promises).then(data => this.setState({
-                dataSource: data,
-                matches: data
-            
-            }))
+                const allMatches = allSex.concat(allRomance.concat(allFriendship))
+                const promises = allMatches.map(profileUid => {
+                    const foundProfile = _.find(this.state.matches, profile => profile.uid === profileUid)
+                    return foundProfile ? foundProfile : this.getUser(profileUid)
+                })
+                Promise.all(promises).then(data => this.setState({
+                    dataSource: data,
+                    matches: data
+                
+                }))
+            }
         })
     }
     filterList = (type) => {

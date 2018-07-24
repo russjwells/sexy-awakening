@@ -6,6 +6,7 @@ import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 
 import logo from '../../assets/img/sa_logo.png'
+import phoenix from '../../assets/img/sa_logo.png'
 
 
 export default class Login extends Component {
@@ -15,7 +16,7 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        firebase.auth().signOut()
+        //firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(auth => {
             if (auth) {
                 this.firebaseRef = firebase.database().ref('users')
@@ -52,9 +53,13 @@ export default class Login extends Component {
         const defaults = {
             uid,
             distance: 5,
-            ageRange: [18,24],
+            ageRange: [18,36],
+            showMen: true,
+            showWomen: true,
+            subscription: 'guest'
         }
         firebase.database().ref('users').child(uid).update({...userData, ...defaults})
+        //firebase.database().ref('relationships').child(uid).update({...userData, ...defaults})
     }
 
     login = async () => {
@@ -78,8 +83,10 @@ export default class Login extends Component {
         return(
             <View
                 style={styles.container}>
-                <View style={styles.titleArea}>
+                <View style={styles.logoArea}>
                     <Image source={logo} />
+                </View>
+                <View style={styles.titleArea}>
                     <Text style={styles.titleText}>SEXY AWAKENING</Text>
                     <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
                 </View>
