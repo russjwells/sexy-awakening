@@ -51,7 +51,7 @@ export default class Settings extends Component {
                 <View style={styles.content}>
                     <View style={styles.filters}>
                         <View style={styles.sectionTitle}>
-                            <Text style={styles.sectionTitleText}>Filters</Text>
+                            <Text style={styles.sectionTitleText}>Where</Text>
                         </View>
                         <View style={styles.label}>
                             <Text>Distance</Text>
@@ -67,6 +67,13 @@ export default class Settings extends Component {
                             />
                         </View>
                         <View style={styles.label}>
+                            <Text>Location</Text>
+                            <Text style={{color: 'darkgrey'}}>{this.state.distanceValue} km from here.</Text>
+                        </View>
+                        <View style={styles.sectionTitle}>
+                            <Text style={styles.sectionTitleText}>WHO</Text>
+                        </View>
+                        <View style={styles.label}>
                             <Text>Age Range</Text>
                             <Text style={{color: 'darkgrey'}}>{this.state.ageRangeValues.join('-')}</Text>
                         </View>
@@ -80,7 +87,7 @@ export default class Settings extends Component {
                             />
                         </View>
                         <View style={styles.switch}>
-                            <Text style={styles.label}>Show Men</Text>
+                            <Text style={styles.label}>Men</Text>
                             <Switch 
                                 value={showMen}
                                 onValueChange={val => {
@@ -90,7 +97,7 @@ export default class Settings extends Component {
                             />
                         </View>
                         <View style={styles.switch}>
-                            <Text style={styles.label}>Show Women</Text>
+                            <Text style={styles.label}>Women</Text>
                             <Switch 
                                 value={showWomen}
                                 onValueChange={val => {
@@ -99,6 +106,13 @@ export default class Settings extends Component {
                                 }}
                             />
                         </View>
+                    </View>
+                    <View style={styles.subscription}>
+                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.navigation.state.params.user})}>
+                            <View style={styles.subsexpander}>
+                                <Text style={styles.subscriptionText}>Subscription</Text>
+                            </View>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>
@@ -146,12 +160,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     sectionTitle: {
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         marginBottom: 10,
     },
     sectionTitleText: {
-        color: 'white',
-        paddingLeft: 20,
+        color: '#e54560',
+        padding: 20,
+        fontWeight:'bold'
     },
     profile: {
         flex: 1,
@@ -175,5 +190,27 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginLeft: 20,
         marginRight: 20,
-    }
+    },
+    subscription: {
+        flex: 0,
+        height:100,
+        backgroundColor: '#e54560',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    subscriptionButton: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    subsexpander: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    subscriptionText: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
 })
