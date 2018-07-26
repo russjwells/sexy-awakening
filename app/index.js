@@ -10,6 +10,7 @@ import Subscription2 from './screens/subscription2'
 import DeepProfile from './screens/deepProfile'
 import YourProfile from './screens/yourProfile'
 import ViewProfile from './screens/viewProfile'
+import About from './screens/about'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDg4fI6UyL6hYvDHwELQ75pjwspQW8_kDA",
@@ -33,6 +34,7 @@ const RouteConfigs = {
     Subscription2: {screen:Subscription2},
     ViewProfile: {screen:ViewProfile},
     YourProfile: {screen:YourProfile},
+    About: {screen:About}
 
 }
 const StackNavigatorConfig = {
