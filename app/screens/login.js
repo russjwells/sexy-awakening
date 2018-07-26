@@ -1,12 +1,15 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native'
+import { Text, View, StyleSheet, ActivityIndicator,} from 'react-native'
+import Image from 'react-native-remote-svg'
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 
 import logo from '../../assets/img/sa_logo.png'
 import phoenix from '../../assets/img/sa_logo.png'
+import phoenixSymbol from '../../assets/img/phoenix.svg'
+import phoenixSymbolRed from '../../assets/img/phoenix_red.svg'
 
 
 export default class Login extends Component {
@@ -84,13 +87,13 @@ export default class Login extends Component {
             <View
                 style={styles.container}>
                 <View style={styles.logoArea}>
-                    <Image source={logo} />
+                    
                 </View>
                 <View style={styles.titleArea}>
-                    <Text style={styles.titleText}>SEXY AWAKENING</Text>
+                    <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
+                    <Text style={styles.titleText}>Sexy Awakening</Text>
                     <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
                 </View>
-                <Text style={styles.introText}>Your clothes conceal much of your beauty, yet they hide not the un-beautiful. And though you seek in garments the freedom of privacy you may find in them a harness and a chain. Would that you could meet the sun and the wind with more of your skin and less of your raiment, For the breath of life is in the sunlight and the hand of life is in the wind.</Text>
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
                     <ActivityIndicator animating={this.state.showSpinner} /> :
@@ -106,26 +109,27 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around',
-        backgroundColor: 'white'
-        
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+    logoArea:{
+        flex:1,
     },
     titleArea: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
-        justifyContent: 'space-around',
-        paddingTop:40,
+        //justifyContent: 'space-around',
+        marginTop:10,
     },
     titleText: {
         fontSize: 36,
         fontWeight: 'bold',
-        color: 'black',
-        marginTop: 60,
+        color: '#e54560',
     },
     subtitleText: {
         fontSize: 16,
         color: '#e54560',
-        lineHeight: 36,
+        //lineHeight: 36,
         textAlign: 'center',
         fontWeight: 'bold',
     },
