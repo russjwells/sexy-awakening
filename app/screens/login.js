@@ -16,7 +16,7 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        //firebase.auth().signOut()
+        firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(auth => {
             if (auth) {
                 this.firebaseRef = firebase.database().ref('users')

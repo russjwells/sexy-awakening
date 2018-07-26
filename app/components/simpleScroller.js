@@ -4,9 +4,13 @@ import { View, StyleSheet, Animated, PanResponder, Dimensions } from 'react-nati
 const {width, height} = Dimensions.get('window')
 
 export default class SimpleScroller extends Component {
+
+    state = {
+        numScreens: this.props.screens.length,
+        currentScreen: 0,
+    }
     componentWillMount() {
         this.pan = new Animated.Value(0)
-
         this.scrollResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => false,
             onMoveShouldSetPanResponder: (e, {dx, dy}) => Math.abs(dx) > Math.abs(dy),
@@ -40,6 +44,9 @@ export default class SimpleScroller extends Component {
     } 
 
     onScroll = () => {
+        
+    }
+    scrollTo = (page) => {
 
     }
 

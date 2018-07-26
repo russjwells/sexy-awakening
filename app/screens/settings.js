@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
+    ScrollView,
     Text,
     Switch,
     TouchableHighlight,
@@ -28,6 +29,10 @@ export default class Settings extends Component {
         firebase.database().ref('users').child(uid)
         .update({[key]:value})
     }
+    logout = () => {
+        firebase.auth().signOut()
+        this.props.navigation.navigate('Login')
+    }
 
     render() {
         const {first_name, work, id} = this.state.user
@@ -49,7 +54,7 @@ export default class Settings extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <View style={styles.filters}>
+                    <ScrollView style={styles.filters}>
                         <View style={styles.sectionTitle}>
                             <Text style={styles.sectionTitleText}>Where</Text>
                         </View>
@@ -71,7 +76,7 @@ export default class Settings extends Component {
                             <Text style={{color: 'darkgrey'}}>{this.state.distanceValue} km from here.</Text>
                         </View>
                         <View style={styles.sectionTitle}>
-                            <Text style={styles.sectionTitleText}>WHO</Text>
+                            <Text style={styles.sectionTitleText}>Who</Text>
                         </View>
                         <View style={styles.label}>
                             <Text>Age Range</Text>
@@ -79,8 +84,8 @@ export default class Settings extends Component {
                         </View>
                         <View style={styles.slider}>
                             <MultiSlider 
-                                min={1}
-                                max={100}
+                                min={18}
+                                max={144}
                                 values={this.state.ageRangeValues}
                                 onValuesChange={val => this.setState({ageRangeValues: val})}
                                 onValuesChangeFinish={val => this.updateUser('ageRange', val)}
@@ -106,7 +111,7 @@ export default class Settings extends Component {
                                 }}
                             />
                         </View>
-                    </View>
+                    </ScrollView>
                     <View style={styles.subscription}>
                         <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.navigation.state.params.user})}>
                             <View style={styles.subsexpander}>
@@ -115,7 +120,7 @@ export default class Settings extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={styles.subscription}>
-                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => firebase.auth().signOut()}>
+                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.logout()}>
                             <View style={styles.subsexpander}>
                                 <Text style={styles.subscriptionText}>Log Out</Text>
                             </View>

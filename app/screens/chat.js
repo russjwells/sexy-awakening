@@ -8,11 +8,8 @@ import {
 } from 'react-native'
 
 import {GiftedChat} from 'react-native-gifted-chat'
-
 import * as firebase from 'firebase'
-
 import { Feather } from '@expo/vector-icons'
-
 import CircleImage from '../components/circleImage'
 
 export default class Chat extends Component {
@@ -25,7 +22,8 @@ export default class Chat extends Component {
 
     componentWillMount() {
         const {user, profile} = this.state
-        this.chatID = user.id > profile.uid ? user.uid + '-' + profile.uid : profile.uid + '-' + user.uid
+        this.chatID = user.uid > profile.uid ? user.uid + '-' + profile.uid : profile.uid + '-' + user.uid
+        console.log("chat_id:", this.chatID)
         this.watchChat()
     }
 

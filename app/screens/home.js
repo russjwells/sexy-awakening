@@ -24,6 +24,7 @@ export default class Home extends Component {
     profiles: [],
     user: this.props.navigation.state.params.user,
     drawer: false,
+    activeScreen:1,
   }
 
   componentWillMount() {

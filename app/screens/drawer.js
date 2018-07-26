@@ -15,20 +15,15 @@ export default class Drawer extends Component {
             <View style={styles.container}>
                 <View style={styles.top}>
                     <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
-                    
                 </View>
                 <View style={styles.version}>
                     <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
                 </View>
                 <View style={styles.menu}>
-                    <TouchableHighlight style={styles.menuItem} onPress={this.word('about')}>
+                    <TouchableHighlight style={styles.menuItem} onPress={() => this.word('about')}>
                         <Text>About</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight style={styles.menuItem} onPress={this.word('subscription')}>
-                        <Text>Subscription</Text>
-                    </TouchableHighlight>
                 </View>
-                
             </View>
         )
     }
@@ -49,13 +44,11 @@ const styles = StyleSheet.create({
     },
     menu:{
         flex:3,
-        backgroundColor: 'white',
+        backgroundColor: 'lightgray',
     },
     menuItem:{
         height:100,
         alignItems: 'center',
-        
-
     },
     version:{
         backgroundColor:'white',
