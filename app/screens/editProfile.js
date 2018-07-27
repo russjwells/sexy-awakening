@@ -14,6 +14,7 @@ import * as firebase from 'firebase'
 
 import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
+import ModalDropdown from 'react-native-modal-dropdown'
 
 export default class EditProfile extends Component {
 
@@ -24,6 +25,7 @@ export default class EditProfile extends Component {
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
         bio: this.props.navigation.state.params.user.bio,
+        gender: this.props.navigation.state.params.user.gender,
     }
 
     updateUser = (key, value) => {
@@ -32,9 +34,10 @@ export default class EditProfile extends Component {
         .update({[key]:value})
     }
 
-    save = (bio) => {
+    save = (bio, gender) => {
         //updateUser
         this.updateUser('bio', bio)
+        this.updateUser('gender', gender)
         //go home
         this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})
     }
@@ -45,6 +48,7 @@ export default class EditProfile extends Component {
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
+        let gender = this.state.gender
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
@@ -66,7 +70,11 @@ export default class EditProfile extends Component {
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
+                    <View style={styles.genderSelect}>
+                        <ModalDropdown options={['male', 'female', 'nonbinary']} onSelect={(idx, value)=>this.setState({gender: value})}/>
+                    </View>
                     <View style={styles.editBio}>
+                        <Text>Bio</Text>
                         <TextInput
                             editable={true}
                             maxLength={255}
@@ -78,7 +86,7 @@ export default class EditProfile extends Component {
                         />
                     </View>
                     <View style={styles.save}>
-                        <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio) }>
+                        <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio, gender) }>
                             <Text style={styles.saveText}>SAVE</Text>
                         </TouchableHighlight>
                     </View>

@@ -12,6 +12,7 @@
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-gifted-chat": "^0.4.3",
+    "react-native-modal-dropdown": "^0.6.2",
     "react-native-multi-slider-cloneable": "0.0.10",
     "react-native-multislider": "0.0.14",
     "react-native-navbar": "^2.1.0",
