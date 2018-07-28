@@ -19,6 +19,11 @@ import _ from 'lodash'
 import { Feather } from '@expo/vector-icons'
 
 export default class Home extends Component {
+
+  constructor(props){
+    super(props)
+    //this.child = React.createRef();
+  }
   state = {
     profileIndex: 0,
     profiles: [],
@@ -182,7 +187,13 @@ export default class Home extends Component {
     if (currentView==-3){
       currentView=-2
     }
+    this.setState({activeScreen:currentView})
     console.log('current view: ' + currentView)
+  }
+  scrollTo = (view) => {
+    //console.log('goto', view)
+    this.child.toScreen(view)
+    return view
   }
 
   cardStack = () => {
@@ -208,7 +219,7 @@ export default class Home extends Component {
     console.log('drawer',this.state.drawer)
   }
   drawerChange = () => {
-    console.log('drawer changed',this.state.drawer)
+    //console.log('drawer changed', this.state.drawer)
   }
    
   
@@ -231,7 +242,7 @@ export default class Home extends Component {
               <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
             </View>
             <View style={styles.navright}>
-              <TouchableHighlight onPress={() => alert('scrollin to matches')}>
+              <TouchableHighlight onPress={() => this.scrollTo(-2)}>
                 <Text><Feather name="users" size={32} color="black" /></Text>
               </TouchableHighlight>
             </View>
@@ -244,6 +255,8 @@ export default class Home extends Component {
             ]}
             onScroll={this.handleScroll} 
             bounces={false}
+            toScreen={this.scrollTo}
+            ref={instance => { this.child = instance; }}
           />
         </View>
       </SideMenu>
