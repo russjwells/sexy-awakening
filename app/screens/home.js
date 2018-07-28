@@ -44,6 +44,7 @@ export default class Home extends Component {
       })
       this.getProfiles(user.uid, user.distance)
     })
+    console.log('drawer state b4 mount:', this.state.drawer)
     
   }
 
@@ -216,10 +217,10 @@ export default class Home extends Component {
   toggleDrawer = () => {
     const bool = this.state.drawer ? false : true
     this.setState({drawer:bool})
-    console.log('drawer',this.state.drawer)
+    console.log('drawer just set:', this.state.drawer)
   }
   drawerChange = () => {
-    //console.log('drawer changed', this.state.drawer)
+    console.log('drawer changed, now:', this.state.drawer)
   }
    
   
@@ -230,7 +231,7 @@ export default class Home extends Component {
 
     //const menu = <Menu navigator={navigator}/>
     return (
-      <SideMenu menu={<Drawer />} isOpen={this.state.drawer} disableGestures={true} onChange={()=> this.drawerChange()}>
+      <SideMenu menu={<Drawer />} isOpen={this.state.drawer} disableGestures={true} onChange={() => this.drawerChange()}>
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
@@ -239,7 +240,9 @@ export default class Home extends Component {
               </TouchableHighlight>
             </View>
             <View style={styles.navcenter}>
+            <TouchableHighlight onPress={() => this.scrollTo(-1)}>
               <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
+            </TouchableHighlight>
             </View>
             <View style={styles.navright}>
               <TouchableHighlight onPress={() => this.scrollTo(-2)}>
