@@ -51,8 +51,11 @@ export default class EditProfile extends Component {
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
         let gender = this.state.gender
-        let age = this.state.age
+        
         let birthday = this.state.birthday
+
+        const profileBday = moment(birthday, 'MM/DD/YYYY')
+        const profileAge = moment().diff(profileBday, 'years')
         
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
@@ -72,7 +75,7 @@ export default class EditProfile extends Component {
                 <ScrollView style={styles.content}>
                     <View style={styles.profile}>
                         <SquareImage facebookID={id} size={width, width}/>
-                        <Text style={{fontSize:20}}>{first_name}</Text>
+                        <Text style={{fontSize:20}}>{first_name}, {profileAge}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
                     <View style={styles.genderSelect}>
@@ -86,25 +89,13 @@ export default class EditProfile extends Component {
                     <View style={styles.ageSelect}>
                         <View style={styles.label}>
                             <Text>Age</Text>
-                            <Text style={{color: 'darkgrey'}}>{this.state.age} years</Text>
-                        </View>
-                        <View style={styles.slider}>
-                            <MultiSlider 
-                                min={18}
-                                max={144}
-                                values={age}
-                                onValuesChange={val => this.setState({age: val})}
-                                onValuesChangeFinish={val => this.updateUser('age', val)}
-                            />
+                            <Text style={{color: 'darkgrey'}}>{profileAge}</Text>
                         </View>
                     </View>
                     <View style={styles.birthdaySelect}>
                         <View style={styles.label}>
                             <Text>Birthday</Text>
-                            <Text style={{color: 'darkgrey'}}>{this.state.birthday}</Text>
-                        </View>
-                        <View style={styles.slider}>
-                        <DatePicker
+                            <DatePicker
                             style={{width: 200}}
                             date={this.state.birthday}
                             mode="date"
@@ -127,7 +118,7 @@ export default class EditProfile extends Component {
                             // ... You can check the source to find the other keys.
                             }}
                             onDateChange={(date) => {this.setState({birthday: date})}}
-                        />
+                            />
                         </View>
                     </View>
                     <View style={styles.editBio}>
@@ -215,6 +206,7 @@ const styles = StyleSheet.create({
     },
     saveText: {
         color: 'white',
+        fontWeight: 'bold',
     },
     genderSelect: {
         flexDirection: 'row',
