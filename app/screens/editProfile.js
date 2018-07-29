@@ -18,6 +18,7 @@ import { Feather } from '@expo/vector-icons'
 import ModalDropdown from 'react-native-modal-dropdown'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import DatePicker from 'react-native-datepicker'
+import moment from 'moment'
 
 export default class EditProfile extends Component {
 
@@ -35,10 +36,11 @@ export default class EditProfile extends Component {
         .update({[key]:value})
     }
 
-    save = (bio, gender) => {
+    save = (bio, gender, birthday) => {
         //updateUser
         this.updateUser('bio', bio)
         this.updateUser('gender', gender)
+        this.updateUser('birthday', birthday)
         //go home
         this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})
     }
@@ -50,6 +52,8 @@ export default class EditProfile extends Component {
         let bio = this.state.bio
         let gender = this.state.gender
         let age = this.state.age
+        let birthday = this.state.birthday
+        
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
@@ -104,7 +108,7 @@ export default class EditProfile extends Component {
                             style={{width: 200}}
                             date={this.state.birthday}
                             mode="date"
-                            placeholder="select date"
+                            placeholder={this.state.birthday != null ? this.state.birthday : "select date"}
                             format="MM/DD/YYYY"
                             minDate="1800-05-01"
                             maxDate="2216-06-01"
@@ -139,7 +143,7 @@ export default class EditProfile extends Component {
                         />
                     </View>
                     <View style={styles.save}>
-                        <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio, gender) }>
+                        <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio, gender, birthday) }>
                             <Text style={styles.saveText}>SAVE</Text>
                         </TouchableHighlight>
                     </View>
