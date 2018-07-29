@@ -17,6 +17,7 @@ import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
 import ModalDropdown from 'react-native-modal-dropdown'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import DatePicker from 'react-native-datepicker'
 
 export default class EditProfile extends Component {
 
@@ -24,7 +25,8 @@ export default class EditProfile extends Component {
         user: this.props.navigation.state.params.user,
         bio: this.props.navigation.state.params.user.bio,
         gender: this.props.navigation.state.params.user.gender,
-        age: this.props.navigation.state.params.user.age
+        age: this.props.navigation.state.params.user.age,
+        birthday: this.props.navigation.state.params.user.birthday,
     }
 
     updateUser = (key, value) => {
@@ -90,6 +92,38 @@ export default class EditProfile extends Component {
                                 onValuesChange={val => this.setState({age: val})}
                                 onValuesChangeFinish={val => this.updateUser('age', val)}
                             />
+                        </View>
+                    </View>
+                    <View style={styles.birthdaySelect}>
+                        <View style={styles.label}>
+                            <Text>Birthday</Text>
+                            <Text style={{color: 'darkgrey'}}>{this.state.birthday}</Text>
+                        </View>
+                        <View style={styles.slider}>
+                        <DatePicker
+                            style={{width: 200}}
+                            date={this.state.birthday}
+                            mode="date"
+                            placeholder="select date"
+                            format="MM/DD/YYYY"
+                            minDate="1800-05-01"
+                            maxDate="2216-06-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys.
+                            }}
+                            onDateChange={(date) => {this.setState({birthday: date})}}
+                        />
                         </View>
                     </View>
                     <View style={styles.editBio}>
