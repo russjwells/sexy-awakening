@@ -188,8 +188,10 @@ export default class Home extends Component {
     if (currentView==-3){
       currentView=-2
     }
-    this.setState({activeScreen:currentView})
-    console.log('current view: ' + currentView)
+    if (currentView != this.state.activeScreen){
+      this.setState({activeScreen:currentView})
+      console.log('current view: ' + currentView)
+    }
   }
   scrollTo = (view) => {
     //console.log('goto', view)
@@ -218,13 +220,22 @@ export default class Home extends Component {
   toggleDrawer = () => {
     const bool = this.state.drawer ? false : true
     this.setState({drawer:bool})
-    console.log('drawer just set:', this.state.drawer)
+    console.log('drawer toggle:', this.state.drawer)
   }
   drawerChange = (isOpen) => {
-    console.log('drawer changed, now:', this.state.drawer)
-    if (isOpen==false) {
-      this.setState({drawer:false})
-    }
+    
+    //if (isOpen==false) {
+    this.setState({drawer:isOpen})
+    //}
+    //console.log('drawer changed, now:', this.state.drawer)
+    //alert(isOpen)
+    //console.log('drawer change', isOpen)
+  }
+
+  drawerAnimationChange = () => {
+    //if (this.state.drawer == true){
+    //  this.setState({drawer:false})
+    //}
   }
    
   
@@ -235,7 +246,14 @@ export default class Home extends Component {
 
     //const menu = <Menu navigator={navigator}/>
     return (
-      <SideMenu menu={<Drawer isVisible={this.state.drawer}/>} isOpen={this.state.drawer} disableGestures={true} onChange={() => this.drawerChange()}>
+      <SideMenu 
+        menu={<Drawer isVisible={this.state.drawer} navigation={this.props.navigation}/>} 
+        isOpen={this.state.drawer} 
+        disableGestures={true} 
+        onChange={isOpen => this.drawerChange(isOpen)}
+        onAnimaitonComplete={() => this.drawerAnimationChange()}
+        autoClosing={false}
+      >
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
