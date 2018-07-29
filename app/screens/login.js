@@ -78,13 +78,17 @@ export default class Login extends Component {
             const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
             const userData = await response.json()
             const {uid} = await this.authenticate(token)
-            const userExists = firebase.database.ref('users').child(uid).once('value')
-            if (null != userExists){
-                this.createUser(uid, userData)
-            } else {
-                console.log('user already exists', userExists)
-            }
-            
+
+            this.firebaseRef = firebase.database().ref('users')
+            this.firebaseRef.child(uid).on('value', snap => {
+                const user = snap.val()
+                if (user != null) {
+                    console.log('user exists')
+                }else{
+                    console.log('creating new account')
+                    this.createUser(uid, userData)
+                }
+            })
         }
     }
 
