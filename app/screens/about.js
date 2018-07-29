@@ -23,27 +23,26 @@ export default class About extends Component {
     
     render() {
         const {width, height} = Dimensions.get('window')
-        const {first_name, bio, id} = this.props.navigation.state.params.profile
+        const {first_name, bio, id} = this.props.navigation.state.params.user
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
-                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Chat', {user: this.props.navigation.state.params.user, profile: this.props.navigation.state.params.profile})}>
+                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user, profile: this.props.navigation.state.params.profile})}>
                         <View style={styles.navback}>
                             <Text><Feather name="arrow-left" size={32} color="black" /></Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text style={styles.navtext}>{first_name}</Text>
+                        <Text style={styles.navtext}>ABOUT</Text>
                     </View>
                     <View style={styles.navright}>
                         
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <View style={styles.profile}>
-                        <SquareImage facebookID={id} size={width, width}/>
-                        <Text style={{fontSize:20}}>{first_name}</Text>
-                        <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
+                    <View style={styles.about}>
+                        <Text style={{fontSize:20}}>Hi, {first_name} welcome to Sexy Awakening</Text>
+                        <Text style={{fontSize:15, color: 'darkgray'}}>We're here to guide you on your adventure into your self and heart.</Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>
