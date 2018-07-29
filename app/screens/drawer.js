@@ -9,21 +9,27 @@ export default class Drawer extends Component {
     word = (log) => {
         console.log(log)
     }
-
+    
     render(){
+        const vis = this.props.isVisible
         return (
             <View style={styles.container}>
-                <View style={styles.top}>
-                    <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
-                </View>
-                <View style={styles.version}>
-                    <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
-                </View>
-                <View style={styles.menu}>
-                    <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('About', {user: this.props.user})}>
-                        <Text>ABOUT</Text>
-                    </TouchableHighlight>
-                </View>
+            {vis && (
+                    <View style={styles.contents}>
+                        <View style={styles.top}>
+                            <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
+                        </View>
+                        <View style={styles.version}>
+                            <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
+                        </View>
+                        <View style={styles.menu}>
+                            <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('About', {user: this.props.user})}>
+                                <Text>ABOUT</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                    )
+            }
             </View>
         )
     }
@@ -32,7 +38,11 @@ export default class Drawer extends Component {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'lightgrey',
+        backgroundColor:'white',
+    },
+    contents:{
+        flex:1,
+        backgroundColor:'white',
         borderRightWidth:1,
     },
     top:{

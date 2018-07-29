@@ -235,7 +235,7 @@ export default class Home extends Component {
 
     //const menu = <Menu navigator={navigator}/>
     return (
-      <SideMenu menu={<Drawer />} isOpen={this.state.drawer} disableGestures={true} onChange={() => this.drawerChange()}>
+      <SideMenu menu={<Drawer isVisible={this.state.drawer}/>} isOpen={this.state.drawer} disableGestures={true} onChange={() => this.drawerChange()}>
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
