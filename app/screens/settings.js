@@ -22,6 +22,7 @@ export default class Settings extends Component {
         distanceValue: this.props.navigation.state.params.distanceValue,
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
+        showNonbinary: false,
     }
 
     updateUser = (key, value) => {
@@ -36,7 +37,7 @@ export default class Settings extends Component {
 
     render() {
         const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
+        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container}>
@@ -53,8 +54,8 @@ export default class Settings extends Component {
                         
                     </View>
                 </View>
-                <View style={styles.content}>
-                    <ScrollView style={styles.filters}>
+                <ScrollView style={styles.content}>
+                    <View style={styles.filters}>
                         <View style={styles.sectionTitle}>
                             <Text style={styles.sectionTitleText}>Where</Text>
                         </View>
@@ -111,7 +112,20 @@ export default class Settings extends Component {
                                 }}
                             />
                         </View>
-                    </ScrollView>
+                        <View style={styles.switch}>
+                            <Text style={styles.label}>Nonbinary</Text>
+                            <Switch 
+                                value={showNonbinary}
+                                onValueChange={val => {
+                                    this.setState({showNonbinary:val})
+                                    this.updateUser('showNonbinary', val)
+                                }}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.sectionTitle}>
+                            <Text style={styles.sectionTitleText}>Account</Text>
+                        </View>
                     <View style={styles.subscription}>
                         <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.navigation.state.params.user})}>
                             <View style={styles.subsexpander}>
@@ -126,7 +140,7 @@ export default class Settings extends Component {
                             </View>
                         </TouchableHighlight>
                     </View>
-                </View>
+                </ScrollView>
             </View>
         )
     }
@@ -138,7 +152,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     navbar:{
-        flex: 1,
+        flex: 0,
         flexDirection: 'row',
         height: 80,
         paddingTop: 20,
@@ -200,8 +214,10 @@ const styles = StyleSheet.create({
     switch: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: 20,
+        marginLeft: 10,
         marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10,
     },
     subscription: {
         flex: 0,

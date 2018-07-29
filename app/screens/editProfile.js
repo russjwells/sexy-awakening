@@ -7,6 +7,7 @@ import {
     TouchableHighlight,
     TextInput,
     KeyboardAvoidingView,
+    ScrollView,
     Dimensions,
 } from 'react-native'
 
@@ -64,13 +65,14 @@ export default class EditProfile extends Component {
                         
                     </View>
                 </View>
-                <View style={styles.content}>
+                <ScrollView style={styles.content}>
                     <View style={styles.profile}>
                         <SquareImage facebookID={id} size={width, width}/>
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
                     <View style={styles.genderSelect}>
+                        <Text>Gender</Text>
                         <ModalDropdown options={['male', 'female', 'nonbinary']} onSelect={(idx, value)=>this.setState({gender: value})}/>
                     </View>
                     <View style={styles.editBio}>
@@ -90,7 +92,7 @@ export default class EditProfile extends Component {
                             <Text style={styles.saveText}>SAVE</Text>
                         </TouchableHighlight>
                     </View>
-                </View>
+                </ScrollView>
             </KeyboardAvoidingView>
         )
     }
@@ -102,9 +104,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     profile: {
-        flex:8,
+        //flex:8,
         width: width,
-        height: height,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         backgroundColor: 'white',
+        //justifyContent: 'flex-start',
     },
     editBio:{
         flex:1,
@@ -159,4 +161,8 @@ const styles = StyleSheet.create({
     saveText: {
         color: 'white',
     },
+    genderSelect: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
 })
