@@ -48,10 +48,9 @@ export default class EditProfile extends Component {
     render() {
         const {width, height} = Dimensions.get('window')
         const {first_name, work, id} = this.state.user
-        //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
+
         let bio = this.state.bio
         let gender = this.state.gender
-        
         let birthday = this.state.birthday
 
         const profileBday = moment(birthday, 'MM/DD/YYYY')
