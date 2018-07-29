@@ -16,7 +16,7 @@ import filter from '../modules/filter'
 
 import _ from 'lodash'
 
-import { Feather } from '@expo/vector-icons'
+import { Feather, FontAwesome } from '@expo/vector-icons'
 
 export default class Home extends Component {
 
@@ -29,7 +29,7 @@ export default class Home extends Component {
     profiles: [],
     user: this.props.navigation.state.params.user,
     drawer: false,
-    activeScreen:1,
+    activeScreen:0,
   }
 
   componentWillMount() {
@@ -194,6 +194,7 @@ export default class Home extends Component {
   scrollTo = (view) => {
     //console.log('goto', view)
     this.child.toScreen(view)
+    this.setState({activeScreen:view})
     return view
   }
 
@@ -219,8 +220,11 @@ export default class Home extends Component {
     this.setState({drawer:bool})
     console.log('drawer just set:', this.state.drawer)
   }
-  drawerChange = () => {
+  drawerChange = (isOpen) => {
     console.log('drawer changed, now:', this.state.drawer)
+    if (isOpen==false) {
+      this.setState({drawer:false})
+    }
   }
    
   
@@ -235,9 +239,21 @@ export default class Home extends Component {
         <View style={styles.container}>
           <View style={styles.navbar}>
             <View style={styles.navleft}>
-              <TouchableHighlight onPress={() => this.toggleDrawer()}>
-                <Text><Feather name="menu" size={32} color="black" /></Text>
-              </TouchableHighlight>
+              {
+                this.state.activeScreen==0 && (
+                  <TouchableHighlight onPress={() => this.toggleDrawer()}>
+                     <Text><Feather name="menu" size={32} color="black" /></Text>
+                  </TouchableHighlight>
+                )
+              }
+              {
+                this.state.activeScreen!=0 && (
+                  <TouchableHighlight onPress={() => this.scrollTo(0)}>
+                     <Text><FontAwesome name="user-circle-o" size={32} color="black" /></Text>
+                  </TouchableHighlight>
+                )
+              }
+              
             </View>
             <View style={styles.navcenter}>
             <TouchableHighlight onPress={() => this.scrollTo(-1)}>
