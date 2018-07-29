@@ -71,7 +71,11 @@ export default class EditProfile extends Component {
                     </View>
                     <View style={styles.genderSelect}>
                         <Text>Gender</Text>
-                        <ModalDropdown options={['male', 'female', 'nonbinary']} onSelect={(idx, value)=>this.setState({gender: value})}/>
+                        <ModalDropdown 
+                        options={['male', 'female', 'nonbinary']} 
+                        onSelect={(idx, value)=>this.setState({gender: value})}
+                        defaultValue={this.state.gender}
+                        />
                     </View>
                     <View style={styles.ageSelect}>
                         <View style={styles.label}>
@@ -86,7 +90,6 @@ export default class EditProfile extends Component {
                                 onValuesChange={val => this.setState({age: val})}
                                 onValuesChangeFinish={val => this.updateUser('age', val)}
                             />
-                            <Text>{this.state.age}</Text>
                         </View>
                     </View>
                     <View style={styles.editBio}>
