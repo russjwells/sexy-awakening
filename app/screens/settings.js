@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e54560',
         alignItems: 'center',
         flexDirection: 'row',
+        marginTop:1,
     },
     subscriptionButton: {
         flex: 1,

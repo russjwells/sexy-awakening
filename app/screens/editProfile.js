@@ -16,17 +16,15 @@ import * as firebase from 'firebase'
 import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
 import ModalDropdown from 'react-native-modal-dropdown'
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 export default class EditProfile extends Component {
 
     state = {
         user: this.props.navigation.state.params.user,
-        ageRangeValues: this.props.navigation.state.params.ageRangeValues,
-        distanceValue: this.props.navigation.state.params.distanceValue,
-        showMen: this.props.navigation.state.params.showMen,
-        showWomen: this.props.navigation.state.params.showWomen,
         bio: this.props.navigation.state.params.user.bio,
         gender: this.props.navigation.state.params.user.gender,
+        age: this.props.navigation.state.params.user.age
     }
 
     updateUser = (key, value) => {
@@ -46,10 +44,10 @@ export default class EditProfile extends Component {
     render() {
         const {width, height} = Dimensions.get('window')
         const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
         let gender = this.state.gender
+        let age = this.state.age
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
@@ -74,6 +72,22 @@ export default class EditProfile extends Component {
                     <View style={styles.genderSelect}>
                         <Text>Gender</Text>
                         <ModalDropdown options={['male', 'female', 'nonbinary']} onSelect={(idx, value)=>this.setState({gender: value})}/>
+                    </View>
+                    <View style={styles.ageSelect}>
+                        <View style={styles.label}>
+                            <Text>Age</Text>
+                            <Text style={{color: 'darkgrey'}}>{this.state.age} years</Text>
+                        </View>
+                        <View style={styles.slider}>
+                            <MultiSlider 
+                                min={18}
+                                max={144}
+                                values={age}
+                                onValuesChange={val => this.setState({age: val})}
+                                onValuesChangeFinish={val => this.updateUser('age', val)}
+                            />
+                            <Text>{this.state.age}</Text>
+                        </View>
                     </View>
                     <View style={styles.editBio}>
                         <Text>Bio</Text>
@@ -163,6 +177,24 @@ const styles = StyleSheet.create({
     },
     genderSelect: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
-    }
+        justifyContent: 'space-between',
+        marginTop:10,
+        marginBottom:10,
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    label: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginLeft: 20,
+        marginRight: 20,
+    },
+    slider: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
 })
