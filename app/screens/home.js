@@ -291,7 +291,7 @@ export default class Home extends Component {
               <Matches navigation={this.props.navigation} user={this.state.user}/>
             ]}
             onScroll={this.handleScroll} 
-            bounces={false}
+            bounce={false}
             toScreen={this.scrollTo}
             ref={instance => { this.child = instance; }}
           />
