@@ -40,7 +40,6 @@ export default class Profile extends Component {
                         <CircleImage facebookID={id} size={120}/>
                     </TouchableHighlight>
                     <Text style={{fontSize:20}}>{first_name}</Text>
-                    <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                 </View>
                 <View style={styles.menu} >
                     <View style={styles.menuItem}>
