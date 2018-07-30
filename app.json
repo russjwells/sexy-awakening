@@ -2,7 +2,7 @@
   "expo": {
     "name": "sexy-awakening",
     "description": "Meet conscious romantic partners, lovers, and friends. Explore your self.",
-    "slug": "expo.io/@russjwells/sexy-awakening",
+    "slug": "sexy-awakening",
     "privacy": "unlisted",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
