@@ -30,6 +30,31 @@ export default class Subscription2 extends Component {
         firebase.database().ref('users').child(uid)
         .update({[key]:value})
     }
+
+    onMessage = (data) => {
+        console.log(data)
+    }
+    _onNavigationStateChange(webViewState){
+        //console.log(webViewState.url)
+        //alert(webViewState.url)
+        if (webViewState.url.includes('confirmation')){
+            console.log('this what we got: '+webViewState.url)
+
+            var regex = /[?&]([^=#]+)=([^&#]*)/g,
+            params = {},
+            match;
+            while (match = regex.exec(webViewState.url)) {
+                params[match[1]] = match[2];
+            }
+            console.log(params)
+            const {account, plan} = params
+            if (account == this.state.user.uid && plan==this.state.subscriptionType){
+                console.log('great success!!! Purchase successful')
+                this.updateUser('subscription', plan)
+                this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})
+            }
+        }
+      }
     render() {
         const {first_name, last_name, email, uid} = this.state.user
         const subscription = this.state.subscriptionType
@@ -56,13 +81,18 @@ export default class Subscription2 extends Component {
                             <WebView
                                 source={{uri: 'https://sexyawakening.recurly.com/subscribe/'+subscription+'/'+uid+'?first_name='+first_name+'&last_name='+last_name}}
                                 style={{marginTop: 2}}
+                                bounces={false}
+                                scalesPageToFit={true}
+                                onNavigationStateChange={this._onNavigationStateChange.bind(this)}
                             />
                         </View>
-                        <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
-                            <View style={styles.menuConfirmButton}>
-                                <Text>PURCHASE</Text>
-                            </View>
-                        </TouchableHighlight>
+                        {this.state.subscriptionType=='guest' && (
+                            <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
+                                <View style={styles.menuConfirmButton}>
+                                    <Text>PURCHASE</Text>
+                                </View>
+                            </TouchableHighlight>
+                        )}
                 </View>
             </View>
         )
