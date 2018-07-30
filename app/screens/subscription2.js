@@ -5,6 +5,7 @@ import {
     Text,
     Switch,
     TouchableHighlight,
+    WebView,
 } from 'react-native'
 
 import * as firebase from 'firebase'
@@ -15,6 +16,7 @@ export default class Subscription2 extends Component {
 
     state = {
         user: this.props.navigation.state.params.user,
+        subscriptionType: this.props.navigation.state.params.subscriptionType,
     }
 
     purchase = (user, subscription) => {
@@ -29,6 +31,8 @@ export default class Subscription2 extends Component {
         .update({[key]:value})
     }
     render() {
+        const {first_name, last_name, email, uid} = this.state.user
+        const subscription = this.state.subscriptionType
         return(
             <View style={styles.container}>
                 <View style={styles.navbar}>
@@ -38,7 +42,7 @@ export default class Subscription2 extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text style={styles.navtext}>{this.props.navigation.state.params.subscriptionType}</Text>
+                        <Text style={styles.navtext}>Payment</Text>
                     </View>
                     <View style={styles.navright}>
                         
@@ -47,8 +51,12 @@ export default class Subscription2 extends Component {
                 <View style={styles.content}>
                         <View style={styles.content}>
                             <View>
-                                <Text>Confirm your new {this.props.navigation.state.params.subscriptionType} subscription, {this.props.navigation.state.params.user.first_name}.</Text>
+                                <Text>Confirm your new {subscription} subscription, {first_name}.</Text>
                             </View>
+                            <WebView
+                                source={{uri: 'https://sexyawakening.recurly.com/subscribe/'+subscription+'/'+uid+'?first_name='+first_name+'&last_name='+last_name}}
+                                style={{marginTop: 2}}
+                            />
                         </View>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.purchase(this.props.navigation.state.params.user, this.props.navigation.state.params.subscriptionType)}>
                             <View style={styles.menuConfirmButton}>
@@ -95,7 +103,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     menuButton: {
-        flex:2,
+        flex:0,
+        height:10
     },
     menuOption: {
         flex:2,
