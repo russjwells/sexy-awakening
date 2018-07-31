@@ -127,13 +127,6 @@ export default class Settings extends Component {
                             <Text style={styles.sectionTitleText}>Account</Text>
                         </View>
                     <View style={styles.subscription}>
-                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.navigation.state.params.user})}>
-                            <View style={styles.subsexpander}>
-                                <Text style={styles.subscriptionText}>Subscription</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={styles.subscription}>
                         <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.logout()}>
                             <View style={styles.subsexpander}>
                                 <Text style={styles.subscriptionText}>Log Out</Text>

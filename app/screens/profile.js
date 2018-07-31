@@ -63,15 +63,6 @@ export default class Profile extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                {this.props.user.subscription=='guest' && (
-                    <View style={styles.subscription}>
-                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.props.navigation.navigate('Subscription', {user: this.props.user})}>
-                            <View style={styles.subsexpander}>
-                            <Text adjustsFontSizeToFit={true} style={styles.subscriptionText}>GET SEXY AWAKENING UNLIMITED</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-                )}
             </View>
         )
     }
