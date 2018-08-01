@@ -1,6 +1,6 @@
 import Expo from 'expo'
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight, Image } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
 import NavigationBar from 'react-native-navbar'
@@ -15,6 +15,9 @@ import Drawer from './drawer'
 import filter from '../modules/filter'
 
 import _ from 'lodash'
+
+import phoenixSymbol from '../../assets/img/phoenix.png'
+import phoenixSymbolRed from '../../assets/img/phoenix_red.png'
 
 import { Feather, FontAwesome } from '@expo/vector-icons'
 
@@ -93,24 +96,16 @@ export default class Home extends Component {
     const swipedRomance = await this.getSwipedRomance(uid)
     const swipedFriendship = await this.getSwipedFriendship(uid)
     const swipedPass = await this.getSwipedPass(uid)
-    console.log('swipedSex', swipedSex)
-    console.log('swipedRomance', swipedRomance)
-    console.log('swipedFriendship', swipedFriendship)
-    console.log('swipedPass', swipedPass)
-    //const allllofem = Array.concat(swipedSex, swipedRomance, swipedFriendship, swipedPass)
     const swipedProfiles = _.merge(swipedSex, swipedRomance, swipedFriendship, swipedPass)
-    //const swipedProfiles = [{...swipedSex}, {...swipedRomance}, {...swipedFriendship}, {...swipedPass}]
-    console.log('swipedProfiles', swipedProfiles)
-    //console.log('allofem', allllofem)
     
     const geoQuery = geoFireRef.query({
       center: userLocation,
       radius: distance, //km
     })
     geoQuery.on('key_entered', async (uid, location, distance) => {
-      console.log(uid + ' at ' + location + ' is ' + distance + 'km from the center')
+      //console.log(uid + ' at ' + location + ' is ' + distance + 'km from the center')
       const user = await this.getUser(uid)
-      console.log('querying for ' + user.val().first_name)
+      //console.log('querying for ' + user.val().first_name)
       const profiles = [...this.state.profiles, user.val()]
       //console.log('profiles', profiles)
       const filtered = filter(profiles, this.state.user, swipedProfiles)
@@ -213,6 +208,9 @@ export default class Home extends Component {
             />
           )
         })}
+        {this.state.profiles==null && (
+          <Text>Out of matches right now! Invite your friends!</Text>
+        )}
       </View>
     )
   }
@@ -271,17 +269,42 @@ export default class Home extends Component {
                   </TouchableHighlight>
                 )
               }
-              
             </View>
             <View style={styles.navcenter}>
-            <TouchableHighlight onPress={() => this.scrollTo(-1)}>
-              <Text style={styles.navcenterText}>SEXY AWAKENING</Text>
-            </TouchableHighlight>
+              {
+                this.state.activeScreen==-1 && (
+                  <TouchableHighlight onPress={() => this.scrollTo(-1)}>
+                    <View style={styles.navcentertouchable}>
+                      <Image source={phoenixSymbolRed} style={{width:40, height:40}} />
+                    </View>
+                  </TouchableHighlight>
+                )
+              }
+              {
+                this.state.activeScreen!=-1 && (
+                  <TouchableHighlight onPress={() => this.scrollTo(-1)}>
+                  <View style={styles.navcentertouchable}>
+                      <Image source={phoenixSymbol} style={{width:34, height:34}} />
+                    </View>
+                  </TouchableHighlight>
+                )
+              }
             </View>
             <View style={styles.navright}>
-              <TouchableHighlight onPress={() => this.scrollTo(-2)}>
-                <Text><Feather name="users" size={32} color="black" /></Text>
-              </TouchableHighlight>
+              {
+                this.state.activeScreen==-2 && (
+                  <TouchableHighlight onPress={() => this.scrollTo(-2)}>
+                    <Text><Feather name="users" size={32} color="#e54560" /></Text>
+                  </TouchableHighlight>
+                )
+              }
+              {
+                this.state.activeScreen!=-2 && (
+                  <TouchableHighlight onPress={() => this.scrollTo(-2)}>
+                    <Text><Feather name="users" size={32} color="black" /></Text>
+                  </TouchableHighlight>
+                )
+              }
             </View>
           </View>
           <SimpleScroller 
@@ -325,6 +348,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  navcentertouchable:{
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
   navright:{
     flex: 1,
     alignItems: 'center',
@@ -339,5 +368,11 @@ const styles = StyleSheet.create({
   navcenterText:{
     textAlign: 'center',
     fontWeight: 'bold',
+    color: 'black'
+  },
+  navcenterTextHighlighted:{
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color:'#e54560'
   },
 })
