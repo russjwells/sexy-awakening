@@ -45,9 +45,10 @@ export default class About extends Component {
                         <Text style={{fontSize:20, margin:20}}>We're so glad you're here, {first_name}.</Text>
                         <Text style={{fontSize:20, margin:20, fontWeight:'bold'}}>Welcome to Sexy Awakening</Text>
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>This is a transformational space. </Text>
-                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We agree to honor each other with reverence and compassion in order to become more authentic, present, alive, awake, and evolved.</Text>
-                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We're here to guide your adventure into self knowledge. To open up your world, your heart, and your soul.</Text>
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Sexy Awakening is creating a culture of consent, sex positivity, and healthy boundaries in which all beings feel may safe to explore, express, and be received.</Text>
+                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We agree to honor each other and our selves with reverence and compassion in each moment as we grow more authentic, present, alive, awake, and evolved.</Text>
+                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We're here to guide your adventure into self knowledge by providing space for you to open up the deepest parts of your world, your heart, and your soul.</Text>
+                        
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Thank you for coming. Enjoy your self!</Text>
                     </ScrollView>
                 </View>

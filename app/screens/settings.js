@@ -125,7 +125,7 @@ export default class Settings extends Component {
                             />
                         </View>
                         <View style={styles.switch}>
-                            <Text style={styles.label}>Transexual</Text>
+                            <Text style={styles.label}>Trans</Text>
                             <Switch 
                                 value={showTransexual}
                                 onValueChange={val => {
