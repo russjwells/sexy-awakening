@@ -27,7 +27,7 @@ export default class ViewProfile extends Component {
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
-                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Chat', {user: this.props.navigation.state.params.user, profile: this.props.navigation.state.params.profile})}>
+                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.goBack()}>
                         <View style={styles.navback}>
                             <Text><Feather name="arrow-left" size={32} color="black" /></Text>
                         </View>

@@ -134,7 +134,11 @@ export default class Matches extends Component {
                 onPress={() => this.props.navigation.navigate('Chat', {user: this.props.user, profile: item})}
             >
             <View style={{flexDirection:'row', backgroundColor:'white', padding:10}} >
-                <CircleImage size={80} facebookID={id}/>
+                <TouchableHighlight
+                    onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: item})}
+                >
+                    <CircleImage size={80} facebookID={id}/>
+                </TouchableHighlight>
                 <View style={{justifyContent:'center', marginLeft:10}}>
                     <Text style={{fontSize:18}}>{first_name}</Text>
                     <Text style={{fontSize:15, color:'darkgrey'}}>{bio}</Text>
@@ -179,6 +183,14 @@ export default class Matches extends Component {
         )
     }
 
+    renderEmpty = () => {
+        return(
+            <View style={styles.emptyList}>
+                <Text>No one here, yet!</Text>
+            </View>
+        )
+    }
+
     render() {
         return (
                 <FlatList 
@@ -188,6 +200,7 @@ export default class Matches extends Component {
                     ItemSeparatorComponent={this.renderSeparator}
                     keyExtractor={this._keyExtractor}
                     ListHeaderComponent={() => this.renderHeader()}
+                    ListEmptyComponent={() => this.renderEmpty()}
                 />
         )
     }
@@ -229,6 +242,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
+    emptyList: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height:100,
+
+    }
 })
 const demoProfiles = [
     {

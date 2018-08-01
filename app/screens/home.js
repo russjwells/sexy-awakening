@@ -185,7 +185,7 @@ export default class Home extends Component {
     }
     if (currentView != this.state.activeScreen){
       this.setState({activeScreen:currentView})
-      console.log('current view: ' + currentView)
+      //console.log('current view: ' + currentView)
     }
   }
   scrollTo = (view) => {
