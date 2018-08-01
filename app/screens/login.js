@@ -90,6 +90,10 @@ export default class Login extends Component {
                     this.createUser(uid, userData)
                 }
             })
+        } else {
+            if(type === 'cancel'){
+                this.setState({showSpinner: false})
+            }
         }
     }
 
