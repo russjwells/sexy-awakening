@@ -11,6 +11,8 @@ import {
     Dimensions,
 } from 'react-native'
 
+import { Textarea } from 'native-base'
+
 import * as firebase from 'firebase'
 
 import SquareImage from '../components/squareImage'
@@ -122,14 +124,11 @@ export default class EditProfile extends Component {
                     </View>
                     <View style={styles.editBio}>
                         <Text>Bio</Text>
-                        <TextInput
-                            editable={true}
-                            maxLength={255}
-                            multline={true}
-                            numberOfLines = {20}
+                        <Textarea 
+                            rowSpan={5} 
+                            bordered  
                             defaultValue={bio}
                             onChangeText={(value) => this.setState({bio: value})}
-                            width={width}
                         />
                     </View>
                     <View style={styles.save}>
