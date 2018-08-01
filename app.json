@@ -19,7 +19,8 @@
       "bundleIdentifier": "com.DigitalHyperspace.SexyAwakening"
     },
     "android": {
-      "package": "com.DigitalHyperspace.SexyAwakening"
+      "package": "com.DigitalHyperspace.SexyAwakening",
+      "versionCode": 2
     }
   }
 }
