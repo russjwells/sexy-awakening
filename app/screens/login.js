@@ -1,15 +1,15 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, View, StyleSheet, ActivityIndicator,} from 'react-native'
-import Image from 'react-native-remote-svg'
+import { Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native'
+
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 
 import logo from '../../assets/img/sa_logo.png'
 import phoenix from '../../assets/img/sa_logo.png'
-import phoenixSymbol from '../../assets/img/phoenix.svg'
-import phoenixSymbolRed from '../../assets/img/phoenix_red.svg'
+import phoenixSymbol from '../../assets/img/phoenix.png'
+import phoenixSymbolRed from '../../assets/img/phoenix_red.png'
 
 
 export default class Login extends Component {

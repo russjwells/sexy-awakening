@@ -6,12 +6,15 @@ import {
     Switch,
     TouchableHighlight,
     Dimensions,
+    Image,
 } from 'react-native'
 import * as firebase from 'firebase'
 
 import CircleImage from '../components/circleImage'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Feather } from '@expo/vector-icons'
+
+import chemistrySymbol from '../../assets/img/chemistry.png'
 
 export default class Profile extends Component {
     state = {
@@ -55,7 +58,7 @@ export default class Profile extends Component {
                     <View style={styles.menuItem}>
                         <TouchableHighlight style={styles.menuButton} onPress={() => this.props.navigation.navigate('Settings', {user: this.props.user, ageRangeValues: this.state.ageRangeValues, distanceValue: this.state.distanceValue, showMen: this.state.showMen, showWomen:this.state.showWomen})}>
                             <View style={styles.menuTextWrap}>
-                                <Feather name="crosshair" size={32} color="black" />
+                                <Image source={chemistrySymbol} style={{width:40, height:40}} />
                                 <Text style={styles.menuText}>
                                     Settings
                                 </Text>

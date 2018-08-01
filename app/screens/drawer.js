@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
-import Image from 'react-native-remote-svg'
-import phoenixSymbol from '../../assets/img/phoenix.svg'
-import phoenixSymbolRed from '../../assets/img/phoenix_red.svg'
+import { View, StyleSheet, Text, TouchableHighlight, Image } from 'react-native';
+import phoenixSymbol from '../../assets/img/phoenix.png'
+import phoenixSymbolRed from '../../assets/img/phoenix_red.png'
 
 export default class Drawer extends Component {
 
@@ -20,7 +19,7 @@ export default class Drawer extends Component {
                             <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
                         </View>
                         <View style={styles.version}>
-                            <Text style={styles.versionText}>Sexy Awakening 1.0 Alpha</Text>
+                            <Text style={styles.versionText}>Sexy Awakening Beta</Text>
                         </View>
                         <View style={styles.menu}>
                             <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('About', {user: this.props.navigation.state.params.user})}>

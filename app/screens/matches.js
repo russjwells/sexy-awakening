@@ -7,9 +7,8 @@ import {
     TouchableHighlight,
     StyleSheet,
     StatusBar,
+    Image,
 } from 'react-native'
-
-import Image from 'react-native-remote-svg'
 
 import CircleImage from '../components/circleImage'
 
@@ -17,15 +16,15 @@ import _ from 'lodash'
 
 import * as firebase from 'firebase'
 
-import sexSymbol from '../../assets/img/sex.svg'
-import romanceSymbol from '../../assets/img/romance.svg'
-import friendshipSymbol from '../../assets/img/friendship.svg'
-import passSymbol from '../../assets/img/pass.svg'
+import sexSymbol from '../../assets/img/sex.png'
+import romanceSymbol from '../../assets/img/romance.png'
+import friendshipSymbol from '../../assets/img/friendship.png'
+import passSymbol from '../../assets/img/pass.png'
 
-import sexSymbolRed from '../../assets/img/sex_red.svg'
-import romanceSymbolRed from '../../assets/img/romance_red.svg'
-import friendshipSymbolRed from '../../assets/img/friendship_red.svg'
-import passSymbolRed from '../../assets/img/pass_red.svg'
+import sexSymbolRed from '../../assets/img/sex_red.png'
+import romanceSymbolRed from '../../assets/img/romance_red.png'
+import friendshipSymbolRed from '../../assets/img/friendship_red.png'
+import passSymbolRed from '../../assets/img/pass_red.png'
 
 export default class Matches extends Component {
 
