@@ -87,12 +87,6 @@ export default class EditProfile extends Component {
                         defaultValue={this.state.gender}
                         />
                     </View>
-                    <View style={styles.ageSelect}>
-                        <View style={styles.label}>
-                            <Text>Age</Text>
-                            <Text style={{color: 'darkgrey'}}>{profileAge}</Text>
-                        </View>
-                    </View>
                     <View style={styles.birthdaySelect}>
                         <View style={styles.label}>
                             <Text>Birthday</Text>

@@ -23,6 +23,8 @@ export default class Settings extends Component {
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
         showNonbinary: false,
+        showTransexual: false,
+        showGroups: false,
     }
 
     updateUser = (key, value) => {
@@ -37,7 +39,7 @@ export default class Settings extends Component {
 
     render() {
         const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary} = this.state
+        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary, showTransexual, showGroups} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container}>
@@ -119,6 +121,26 @@ export default class Settings extends Component {
                                 onValueChange={val => {
                                     this.setState({showNonbinary:val})
                                     this.updateUser('showNonbinary', val)
+                                }}
+                            />
+                        </View>
+                        <View style={styles.switch}>
+                            <Text style={styles.label}>Transexual</Text>
+                            <Switch 
+                                value={showTransexual}
+                                onValueChange={val => {
+                                    this.setState({showTransexual:val})
+                                    this.updateUser('showTransexual', val)
+                                }}
+                            />
+                        </View>
+                        <View style={styles.switch}>
+                            <Text style={styles.label}>Groups</Text>
+                            <Switch 
+                                value={showGroups}
+                                onValueChange={val => {
+                                    this.setState({showGroups:val})
+                                    this.updateUser('showGroups', val)
                                 }}
                             />
                         </View>
