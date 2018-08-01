@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image, PanResponder, Animated, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, Image, PanResponder, Animated, Dimensions, TouchableHighlight } from 'react-native';
 import moment from 'moment'
 
 const {width, height} = Dimensions.get('window')
@@ -97,9 +97,18 @@ export default class Card extends Component {
           style={{flex: 1}}
           source={{uri: fbImage}}
         />
-        <View style={{margin: 20}}>
-          <Text style={{fontSize: 20}}>{first_name}, {profileAge}</Text>
-          {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
+        <View style={{margin: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View>
+            <Text style={{fontSize: 20}}>{first_name}, {profileAge}</Text>
+            {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
+          </View>
+          <View>
+            <TouchableHighlight
+                onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: this.props.profile})}
+            >
+                  <Text>Info</Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </Animated.View>
     )

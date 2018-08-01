@@ -205,6 +205,8 @@ export default class Home extends Component {
               key = {profile.id}
               profile = {profile}
               onSwipeOff ={this.nextCard}
+              navigation={this.props.navigation}
+              user={this.state.user}
             />
           )
         })}
