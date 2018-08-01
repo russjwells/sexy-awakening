@@ -68,7 +68,7 @@ export default class Settings extends Component {
                         <View style={styles.slider}>
                             <MultiSlider 
                                 min={1}
-                                max={30}
+                                max={200}
                                 values={this.state.distanceValue}
                                 onValuesChange={val => this.setState({distanceValue: val})}
                                 onValuesChangeFinish={val => this.updateUser('distance', val[0])}
