@@ -49,9 +49,9 @@ export default class Chat extends Component {
     render () {
         const avatar = `https://graph.facebook.com/${this.state.profile.uid}/picture?height=80` 
         return(
-            <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={80}>
+            <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={40}>
                 <View style={styles.navbar}>
-                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
+                    <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.goBack()}>
                             <Feather name="arrow-left" size={32} color="black" />
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
