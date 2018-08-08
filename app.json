@@ -16,7 +16,12 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.DigitalHyperspace.SexyAwakening"
+      "bundleIdentifier": "com.DigitalHyperspace.SexyAwakening",
+      "infoPlist": {
+        "NSLocationUsageDescription": "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
+        "NSLocationWhenInUseUsageDescription": "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription" : "Sexy Awakening uses your location to show you people near you and to display how far away your matches are."
+      }
     },
     "android": {
       "package": "com.DigitalHyperspace.SexyAwakening",
