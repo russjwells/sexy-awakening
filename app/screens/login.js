@@ -1,7 +1,7 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native'
+import { Text, View, StyleSheet, ActivityIndicator, Image, StatusBar } from 'react-native'
 
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
@@ -101,6 +101,7 @@ export default class Login extends Component {
         return(
             <View
                 style={styles.container}>
+                <StatusBar barStyle='dark-content' />
                 <View style={styles.logoArea}>
                     
                 </View>

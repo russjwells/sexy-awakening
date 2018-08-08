@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {
-    View, TouchableHighlight, Text, StyleSheet
+    View, TouchableHighlight, Text, StyleSheet,
 } from 'react-native'
 
 import Icon from '@expo/vector-icons/FontAwesome'

@@ -1,6 +1,6 @@
 import Expo from 'expo'
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight, Image, StatusBar } from 'react-native';
 import * as firebase from 'firebase'
 import GeoFire from 'geofire'
 import NavigationBar from 'react-native-navbar'
@@ -255,6 +255,7 @@ export default class Home extends Component {
         autoClosing={false}
       >
         <View style={styles.container}>
+          <StatusBar barStyle='dark-content' />
           <View style={styles.navbar}>
             <View style={styles.navleft}>
               {
