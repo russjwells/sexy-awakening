@@ -35,8 +35,8 @@ const RouteConfigs = {
     ViewProfile: {screen:ViewProfile},
     YourProfile: {screen:YourProfile},
     About: {screen:About}
-
 }
+
 const StackNavigatorConfig = {
     headerMode: 'none'
 }

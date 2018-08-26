@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, ActivityIndicator, Image, StatusBar } from 'rea
 
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
+import Button from '../components/button'
 
 import logo from '../../assets/img/sa_logo.png'
 import phoenix from '../../assets/img/sa_logo.png'
@@ -46,7 +47,7 @@ export default class Login extends Component {
         this.props.navigation.dispatch(resetAction);
     }
 
-    authenticate = (token) => {
+    fbauthenticate = (token) => {
         const provider = firebase.auth.FacebookAuthProvider
         const credential = provider.credential(token)
         return firebase.auth().signInWithCredential(credential)
@@ -66,7 +67,7 @@ export default class Login extends Component {
         //firebase.database().ref('relationships').child(uid).update({...userData, ...defaults})
     }
 
-    login = async () => {
+    fblogin = async () => {
         this.setState({showSpinner: true})
         const saAPP_ID = '224960994730731'
         const APP_ID = '1773849149576744'
@@ -78,7 +79,7 @@ export default class Login extends Component {
             const fields = ['id', 'first_name', 'last_name', 'gender', 'birthday', 'work']
             const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
             const userData = await response.json()
-            const {uid} = await this.authenticate(token)
+            const {uid} = await this.fbauthenticate(token)
 
             this.firebaseRef = firebase.database().ref('users')
             this.firebaseRef.child(uid).on('value', snap => {
@@ -113,13 +114,18 @@ export default class Login extends Component {
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
                     <ActivityIndicator animating={this.state.showSpinner} /> :
-                    <FacebookButton onPress={this.login}/>
+                    <View>
+                        <Button prompt={'Login'} onPress={this.login}/>
+                        <Button prompt={'Create Account'} onPress={this.login}/>
+                        <FacebookButton onPress={this.fblogin}/>
+                    </View>
                 }
                 </View>
             </View>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
