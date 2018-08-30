@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     button: {
         height: 40,
         width: 220,
-        backgroundColor: '#000',
-        borderRadius: 50
+        backgroundColor: '#e54560',
+        borderRadius: 50,
+        margin: 5,
     },
     buttonContainer: {
         flex: 1,

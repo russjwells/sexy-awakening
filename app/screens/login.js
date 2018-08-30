@@ -1,7 +1,7 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, View, StyleSheet, ActivityIndicator, Image, StatusBar } from 'react-native'
+import { Text, KeyboardAvoidingView, View, StyleSheet, ActivityIndicator, Image, StatusBar } from 'react-native'
 
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
@@ -12,11 +12,28 @@ import phoenix from '../../assets/img/sa_logo.png'
 import phoenixSymbol from '../../assets/img/phoenix.png'
 import phoenixSymbolRed from '../../assets/img/phoenix_red.png'
 
+import { Container, Header, Content, DatePicker, Form, Item, Input } from 'native-base';
+
+import { auth } from '../firebase';
+
+const byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+  });
+
+const INITIAL_STATE = {
+    showSpinner: false,
+    email: '',
+    password: '',
+    error: null,
+  };
 
 export default class Login extends Component {
 
     state = {
-        showSpinner: true,
+        showSpinner: false,
+        email: '',
+        password: '',
+        error: null,
     }
 
     componentDidMount() {
@@ -47,11 +64,7 @@ export default class Login extends Component {
         this.props.navigation.dispatch(resetAction);
     }
 
-    fbauthenticate = (token) => {
-        const provider = firebase.auth.FacebookAuthProvider
-        const credential = provider.credential(token)
-        return firebase.auth().signInWithCredential(credential)
-    }
+
 
     createUser = (uid, userData) => {
         const defaults = {
@@ -65,6 +78,19 @@ export default class Login extends Component {
         }
         firebase.database().ref('users').child(uid).update({...userData, ...defaults})
         //firebase.database().ref('relationships').child(uid).update({...userData, ...defaults})
+    }
+
+    login = async (email, password) => {
+        this.setState({showSpinner: true})
+        auth.doSignInWithEmailAndPassword(email, password)
+            .then(user => {
+                this.state.setState({...INITIAL_STATE})
+                this.goHome(user)
+            })
+            .catch(err => {
+                this.setState({error: err});
+                console.log(err)
+            });
     }
 
     fblogin = async () => {
@@ -98,7 +124,19 @@ export default class Login extends Component {
         }
     }
 
+    fbauthenticate = (token) => {
+        const provider = firebase.auth.FacebookAuthProvider
+        const credential = provider.credential(token)
+        return firebase.auth().signInWithCredential(credential)
+    }
+
     render(){
+        const {
+            email,
+            password,
+            error,
+          } = this.state;
+
         return(
             <View
                 style={styles.container}>
@@ -110,13 +148,35 @@ export default class Login extends Component {
                     <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
                     <Text style={styles.titleText}>Sexy Awakening</Text>
                     <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
+                    <Text>username: {this.state.email}, password: {this.state.password}</Text>
                 </View>
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
                     <ActivityIndicator animating={this.state.showSpinner} /> :
                     <View>
-                        <Button prompt={'Login'} onPress={this.login}/>
-                        <Button prompt={'Create Account'} onPress={this.login}/>
+                        <Form onSubmit={this.onSubmit}>
+                            <Item>
+                                <Input 
+                                    //value={email} 
+                                    onChangeText={(text) => this.setState({email: text})}
+                                    placeholder="Email" 
+                                    type="text"
+                                    defaultValue="sexyawakening@gmail.com"
+                                />
+                            </Item>
+                            <Item>
+                                <Input 
+                                    //value={password} 
+                                    onChangeText={(pass) => this.setState({password: pass})}
+                                    placeholder="Password" 
+                                    type="password"
+                                    defaultValue="trees808"
+                                />
+                            </Item>
+                            <Button prompt={'Login'} onPress={() => this.login(this.state.email, this.state.password)}/>
+                        </Form>
+                        
+                        <Button prompt={'Create Account'} onPress={() => this.props.navigation.navigate('SignUp')}/>
                         <FacebookButton onPress={this.fblogin}/>
                     </View>
                 }
@@ -125,7 +185,6 @@ export default class Login extends Component {
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

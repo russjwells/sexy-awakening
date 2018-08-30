@@ -2,6 +2,7 @@ import {StackNavigator} from 'react-navigation'
 import * as firebase from 'firebase'
 import Home from './screens/home'
 import Login from './screens/login'
+import SignUp from './screens/signup'
 import Chat from './screens/chat'
 import Settings from './screens/settings'
 import EditProfile from './screens/editProfile'
@@ -22,10 +23,11 @@ const sexyawakeningFirebaseConfig = {
   databaseURL: "https://sexy-awakening.firebaseio.com",
 }
 
-firebase.initializeApp(sexyawakeningFirebaseConfig)
+//firebase.initializeApp(sexyawakeningFirebaseConfig)
 
 const RouteConfigs = {
     Login: {screen:Login},
+    SignUp: {screen:SignUp},
     Home: {screen:Home},
     Chat: {screen:Chat},
     Settings: {screen:Settings},

@@ -6,6 +6,7 @@ import {
     Text,
     Switch,
     TouchableHighlight,
+    KeyboardAvoidingView,
 } from 'react-native'
 
 import * as firebase from 'firebase'
@@ -16,7 +17,7 @@ import { Feather } from '@expo/vector-icons'
 import { Container, Header, Content, DatePicker, Form, Item, Input } from 'native-base';
 import ModalDropdown from 'react-native-modal-dropdown'
 
-export default class SignUp extends Component {
+export default class SignIn extends Component {
 
     state = {
         //user: this.props.navigation.state.params.user,
@@ -35,7 +36,7 @@ export default class SignUp extends Component {
 
     render() {
         return(
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior="padding" style={styles.container} enabled keyboardVerticalOffset="80">
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.goBack()}>
                         <View style={styles.navback}>
@@ -43,79 +44,50 @@ export default class SignUp extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={styles.navlocation}>
-                        <Text style={styles.navtext}>Sign Up</Text>
+                        <Text style={styles.navtext}>Sign In</Text>
                     </View>
                     <View style={styles.navright}>
                         
                     </View>
                 </View>
                 <ScrollView style={styles.content}>
-                <Form>
-                    <Item>
-                        <Input placeholder="Email" />
-                    </Item>
-                    <Item>
-                        <Input placeholder="Password" />
-                    </Item>
-                    <Item>
-                        <Input placeholder="Password Again" />
-                    </Item>
-                    <Item>
-                        <Input placeholder="First Name" />
-                    </Item>
-                    <Item>
-                        <Input placeholder="Last Name" />
-                    </Item>
-                    <Item>
-                        <View>
-                            <Text>Birthday: </Text>
-                            <DatePicker
-                            style={{width: 200}}
-                            date={this.state.birthday}
-                            mode="date"
-                            placeholder={this.state.birthday != null ? this.state.birthday : "select birthday"}
-                            format="MM/DD/YYYY"
-                            minDate="1800-05-01"
-                            maxDate="2216-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            customStyles={{
-                            dateIcon: {
-                                position: 'absolute',
-                                left: 0,
-                                top: 4,
-                                marginLeft: 0
-                            },
-                            dateInput: {
-                                marginLeft: 36
-                            }
-                            // ... You can check the source to find the other keys.
-                            }}
-                            onDateChange={(date) => {this.setState({birthday: date})}}
+                
+                    <Form onSubmit={this.onSubmit}>
+                        <Item>
+                            <Input 
+                                value={email} 
+                                onChange={event => this.setState(byPropKey('email', event.target.value))}
+                                placeholder="Email" 
+                                type="text"
                             />
-                        </View>
-                    </Item>
-                    <Item>
-                    <Text>Gender</Text>
-                        <ModalDropdown 
-                        options={['male', 'female', 'nonbinary']} 
-                        onSelect={(idx, value)=>this.setState({gender: value})}
-                        defaultValue={this.state.gender}
-                        />
-                    </Item>
-                </Form>
+                        </Item>
+                        <Item>
+                            <Input 
+                                value={password} 
+                                onChange={event => this.setState(byPropKey('password', event.target.value))}
+                                placeholder="Password" 
+                                type="password"
+                            />
+                        </Item>
+                    </Form>
+                
+                
                 <View style={styles.subscription}>
                         <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.logout()}>
                             <View style={styles.subsexpander}>
-                                <Text style={styles.subscriptionText}>Create Account</Text>
+                                <Text style={styles.subscriptionText}>Log In</Text>
                             </View>
                         </TouchableHighlight>
                     </View>
                 </ScrollView>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
+
+const byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+  });
 
 const styles = StyleSheet.create({
     container: {

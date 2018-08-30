@@ -36,17 +36,18 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
+    alert(this.state.user.toString())
     const {uid} = this.state.user
     this.updateUserLocation(uid)
-    firebase.database().ref('users').child(uid).on('value', snap => {
-      const user = snap.val()
-      this.setState({
-        user,
-        profiles:[],
-        profileIndex:0,
-      })
-      this.getProfiles(user.uid, user.distance)
-    })
+    //firebase.database().ref('users').child(uid).on('value', snap => {
+    //  const user = snap.val()
+    //  this.setState({
+    //    user,
+    //    profiles:[],
+    //    profileIndex:0,
+    //  })
+    //  this.getProfiles(user.uid, user.distance)
+    //})
     console.log('drawer state b4 mount:', this.state.drawer)
     
   }
