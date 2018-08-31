@@ -13,8 +13,9 @@ import { auth, db } from '../firebase';
 
 import CircleImage from '../components/circleImage'
 import { Feather } from '@expo/vector-icons'
-import { Container, Header, Content, DatePicker, Form, Item, Input } from 'native-base';
+import { Container, Header, Content, Form, Item, Input } from 'native-base';
 import ModalDropdown from 'react-native-modal-dropdown'
+import DatePicker from 'react-native-datepicker'
 import moment from 'moment'
 
 const byPropKey = (propertyName, value) => () => ({
@@ -109,6 +110,7 @@ export default class SignUp extends Component {
           let birthday = this.state.birthday
 
         const profileBday = moment(birthday, 'MM/DD/YYYY')
+        const profileAge = moment().diff(profileBday, 'years')
 
         return(
             <View style={styles.container}>

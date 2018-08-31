@@ -169,7 +169,7 @@ export default class Login extends Component {
                                     onChangeText={(pass) => this.setState({password: pass})}
                                     placeholder="Password" 
                                     type="password"
-                                    defaultValue="trees808"
+                                    defaultValue=""
                                 />
                             </Item>
                             <Button prompt={'Login'} type="submit" onPress={() => this.login(this.state.email, this.state.password)}/>
