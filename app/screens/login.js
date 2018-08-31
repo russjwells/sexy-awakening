@@ -64,8 +64,6 @@ export default class Login extends Component {
         this.props.navigation.dispatch(resetAction);
     }
 
-
-
     createUser = (uid, userData) => {
         const defaults = {
             uid,
@@ -90,6 +88,7 @@ export default class Login extends Component {
             .catch(err => {
                 this.setState({error: err});
                 console.log(err)
+                this.setState({showSpinner: false})
             });
     }
 
@@ -173,7 +172,7 @@ export default class Login extends Component {
                                     defaultValue="trees808"
                                 />
                             </Item>
-                            <Button prompt={'Login'} onPress={() => this.login(this.state.email, this.state.password)}/>
+                            <Button prompt={'Login'} type="submit" onPress={() => this.login(this.state.email, this.state.password)}/>
                         </Form>
                         
                         <Button prompt={'Create Account'} onPress={() => this.props.navigation.navigate('SignUp')}/>

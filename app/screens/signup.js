@@ -9,18 +9,81 @@ import {
 } from 'react-native'
 
 import * as firebase from 'firebase'
+import { auth, db } from '../firebase';
 
 import CircleImage from '../components/circleImage'
-import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Feather } from '@expo/vector-icons'
 import { Container, Header, Content, DatePicker, Form, Item, Input } from 'native-base';
 import ModalDropdown from 'react-native-modal-dropdown'
+import moment from 'moment'
+
+const byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+  });
+
+const INITIAL_STATE = {
+    email: '',
+    passwordOne: '',
+    passwordTwo: '',
+    first_name: '',
+    last_name: '',
+    birthday: null,
+    gender: null,
+    error: null,
+  };
 
 export default class SignUp extends Component {
 
     state = {
-        //user: this.props.navigation.state.params.user,
-        birthday: null,
+        user: null,
+        email: '',
+        passwordOne: '',
+        passwordTwo: '',
+        first_name: '',
+        last_name: '',
+        birthday: '',
+        gender: '',
+        error: null,
+    }
+
+    componentDidMount = () => {
+        firebase.auth().onAuthStateChanged(authUser => {
+            if (authUser) {
+                this.setState({user: authUser})
+            } else {
+                this.setState({user: null})
+            }
+        })
+    }
+
+    createAccount = async () => {
+        const {
+            email,
+            passwordOne,
+            first_name,
+            last_name,
+            birthday,
+            gender
+          } = this.state;
+
+        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(authUser => {
+            //alert("authUser: "+ authUser.toString())
+            db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
+            .then(authUser => {
+                this.setState({ ...INITIAL_STATE });
+                this.goHome(authUser)
+                //history.push(routes.HOME);
+            })
+            .catch(error => {
+                this.setState(byPropKey('error', error));
+                console.log("!!!!"+error.message)
+            });
+        })
+        .catch(error => {
+          this.setState(byPropKey('error', error));
+        });
+
     }
 
     updateUser = (key, value) => {
@@ -34,6 +97,19 @@ export default class SignUp extends Component {
     }
 
     render() {
+        const {
+            email,
+            passwordOne,
+            first_name,
+            last_name,
+            gender,
+            error,
+          } = this.state;
+
+          let birthday = this.state.birthday
+
+        const profileBday = moment(birthday, 'MM/DD/YYYY')
+
         return(
             <View style={styles.container}>
                 <View style={styles.navbar}>
@@ -49,22 +125,32 @@ export default class SignUp extends Component {
                         
                     </View>
                 </View>
-                <ScrollView style={styles.content}>
+                <ScrollView contentContainerStyle={styles.content}>
                 <Form>
                     <Item>
-                        <Input placeholder="Email" />
+                        <Input 
+                        placeholder="Email" 
+                        onChangeText={(text) => this.setState({email: text})}
+                        />
                     </Item>
                     <Item>
-                        <Input placeholder="Password" />
+                        <Input placeholder="Password"
+                        onChangeText={(pass) => this.setState({passwordOne: pass})}
+                         />
                     </Item>
                     <Item>
-                        <Input placeholder="Password Again" />
+                        <Input placeholder="Password Again" 
+                        onChangeText={(pass) => this.setState({passwordTwo: pass})}
+                        />
                     </Item>
                     <Item>
-                        <Input placeholder="First Name" />
+                        <Input placeholder="First Name" 
+                        onChangeText={(name) => this.setState({first_name: name})}
+                        />
                     </Item>
                     <Item>
-                        <Input placeholder="Last Name" />
+                        <Input placeholder="Last Name" 
+                        onChangeText={(name) => this.setState({last_name: name})}/>
                     </Item>
                     <Item>
                         <View>
@@ -91,21 +177,30 @@ export default class SignUp extends Component {
                             }
                             // ... You can check the source to find the other keys.
                             }}
-                            onDateChange={(date) => {this.setState({birthday: date})}}
+                            onDateChange={(date) => {
+                                this.setState({birthday: date})
+                                alert(date)
+                            }}
                             />
                         </View>
                     </Item>
                     <Item>
-                    <Text>Gender</Text>
-                        <ModalDropdown 
-                        options={['male', 'female', 'nonbinary']} 
-                        onSelect={(idx, value)=>this.setState({gender: value})}
-                        defaultValue={this.state.gender}
-                        />
+                        <View>
+                            <Text>Gender</Text>
+                            <ModalDropdown 
+                            options={['male', 'female', 'nonbinary']} 
+                            onSelect={(idx, value)=>this.setState({gender: value})}
+                            defaultValue={this.state.gender}
+                            />
+                        </View> 
                     </Item>
+                    <Item>
+                    { !!error && <Item><Text>{error.message}</Text></Item> }
+                    </Item>
+                    
                 </Form>
-                <View style={styles.subscription}>
-                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.logout()}>
+                <View style={styles.actionButtonArea}>
+                        <TouchableHighlight style={styles.actionButton} onPress={() => this.createAccount()}>
                             <View style={styles.subsexpander}>
                                 <Text style={styles.subscriptionText}>Create Account</Text>
                             </View>
@@ -148,7 +243,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     content: {
-        flex: 10,
+        flex: 1,
+        justifyContent: 'space-between',
     },
     filters:{
         flex: 1,
@@ -190,7 +286,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
-    subscription: {
+    actionButtonArea: {
         flex: 0,
         height:100,
         backgroundColor: '#e54560',
@@ -198,7 +294,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop:1,
     },
-    subscriptionButton: {
+    actionButton: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',

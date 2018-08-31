@@ -112,7 +112,10 @@ export default class EditProfile extends Component {
                             }
                             // ... You can check the source to find the other keys.
                             }}
-                            onDateChange={(date) => {this.setState({birthday: date})}}
+                            onDateChange={(date) => {
+                                this.setState({birthday: date})
+                                alert(date)
+                            }}
                             />
                         </View>
                     </View>

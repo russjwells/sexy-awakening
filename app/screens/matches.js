@@ -40,7 +40,7 @@ export default class Matches extends Component {
 
     componentWillMount() {
         //this.setState({dataSource:demoProfiles}) old
-        //this.getMatches(this.props.user.uid) //temp off
+        this.getMatches(this.props.user.uid) //temp off
         //console.log('uid-cwm', this.props.user.uid) old
     }
 
