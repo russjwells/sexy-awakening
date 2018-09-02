@@ -54,38 +54,42 @@ export default class EditProfile extends Component {
         //var PicturePath = pic.uri
         var picURI = `data:image/jpg;base64,${pic.base64}`
         this.setState({newPic: picURI})
-        var data = new FormData();
-        data.append('picture', {
-        uri: picURI,
-        name: 'selfie.jpg',
-        type: 'image/jpeg'
-        });
-
+       // var data = new FormData();
+       // data.append('picture', {
+       // uri: picURI,
+       // name: 'selfie.jpg',
+      //  type: 'image/jpeg'
+       // });
+        const base64prepend = 'data:image/jpeg;base64,'
+        const data = base64prepend + pic.base64
+        const jsonData = `{"base64String":"${pic.base64}"}`
         // Create the config object for the POST
         // You typically have an OAuth2 token that you use for authentication
         const config = {
             method: 'POST',
             headers: {
-            Accept: 'image/jpeg',
-            //'Content-Type': 'multipart/form-data;',
-            ContentEncoding: 'base64',
-            ContentType: 'image/jpeg',
-            Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
+                //Accept: 'base64',
+                'Content-Type': 'application/json',
+            //    ContentEncoding: 'base64',
+                //ContentType: 'image/jpeg',
+                //Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
             },
-            body: pic.base64
+            body: jsonData
         };
+
+        const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta/upload-file';
   
-        fetch('https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta/upload-file', config)
+        fetch(url, config)
             .then(responseData => {
-            // Log the response form the server
-            // Here we get what we sent to Postman back
-            console.log("where did the file go? "+responseData.file_url);
-            alert('new pic: '+ responseData.file_url);
-            //alert(responseData.file_url);
+                // Log the response form the server
+                console.log("where did the file go? "+responseData.file_url);
+                console.log(responseData)
+                alert('new pic: '+ responseData.file_url);
+                //alert(responseData.file_url);
             })
             .catch(err => {
-            console.log('ohh '+err);
-            alert('error: '+err.message)
+                console.log('ohh '+err);
+                alert('error: '+err.message)
             });
 
 
