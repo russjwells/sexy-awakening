@@ -137,8 +137,9 @@ export default class Login extends Component {
           } = this.state;
 
         return(
-            <View
-                style={styles.container}>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior="padding">
                 <StatusBar barStyle='dark-content' />
                 <View style={styles.logoArea}>
                     
@@ -147,7 +148,6 @@ export default class Login extends Component {
                     <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
                     <Text style={styles.titleText}>Sexy Awakening</Text>
                     <Text style={styles.subtitleText}>SWIPE WITH INTENTION</Text>
-                    <Text>username: {this.state.email}, password: {this.state.password}</Text>
                 </View>
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
@@ -160,7 +160,7 @@ export default class Login extends Component {
                                     onChangeText={(text) => this.setState({email: text})}
                                     placeholder="Email" 
                                     type="text"
-                                    defaultValue="sexyawakening@gmail.com"
+                                    //defaultValue="sexyawakening@gmail.com"
                                 />
                             </Item>
                             <Item>
@@ -169,18 +169,20 @@ export default class Login extends Component {
                                     onChangeText={(pass) => this.setState({password: pass})}
                                     placeholder="Password" 
                                     type="password"
-                                    defaultValue=""
+                                    //defaultValue=""
                                 />
                             </Item>
                             <Button prompt={'Login'} type="submit" onPress={() => this.login(this.state.email, this.state.password)}/>
                         </Form>
                         
                         <Button prompt={'Create Account'} onPress={() => this.props.navigation.navigate('SignUp')}/>
-                        <FacebookButton onPress={this.fblogin}/>
+                        {
+                            //<FacebookButton onPress={this.fblogin}/>
+                        }
                     </View>
                 }
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

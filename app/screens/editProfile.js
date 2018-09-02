@@ -9,8 +9,9 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     Dimensions,
+    Image
 } from 'react-native'
-
+import { ImagePicker } from 'expo'
 import { Textarea } from 'native-base'
 
 import * as firebase from 'firebase'
@@ -30,12 +31,64 @@ export default class EditProfile extends Component {
         gender: this.props.navigation.state.params.user.gender,
         age: this.props.navigation.state.params.user.age,
         birthday: this.props.navigation.state.params.user.birthday,
+        newPic: null,
     }
 
     updateUser = (key, value) => {
         const {uid} = this.state.user
         firebase.database().ref('users').child(uid)
         .update({[key]:value})
+    }
+
+    newpic = async () => {
+        let pic = await Expo.ImagePicker.launchImageLibraryAsync(
+            {
+                allowsEditing: true,
+                aspect: [1, 1],
+                base64: true,
+              }
+        )
+        console.log('le picker'+pic.uri)
+        //const b64 = 'data:image/jpeg;base64,'+pic.base64
+        //console.log(b64);
+        //var PicturePath = pic.uri
+        var picURI = `data:image/jpg;base64,${pic.base64}`
+        this.setState({newPic: picURI})
+        var data = new FormData();
+        data.append('picture', {
+        uri: picURI,
+        name: 'selfie.jpg',
+        type: 'image/jpeg'
+        });
+
+        // Create the config object for the POST
+        // You typically have an OAuth2 token that you use for authentication
+        const config = {
+            method: 'POST',
+            headers: {
+            Accept: 'image/jpeg',
+            //'Content-Type': 'multipart/form-data;',
+            ContentEncoding: 'base64',
+            ContentType: 'image/jpeg',
+            Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
+            },
+            body: pic.base64
+        };
+  
+        fetch('https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta/upload-file', config)
+            .then(responseData => {
+            // Log the response form the server
+            // Here we get what we sent to Postman back
+            console.log("where did the file go? "+responseData.file_url);
+            alert('new pic: '+ responseData.file_url);
+            //alert(responseData.file_url);
+            })
+            .catch(err => {
+            console.log('ohh '+err);
+            alert('error: '+err.message)
+            });
+
+
     }
 
     save = (bio, gender, birthday) => {
@@ -75,7 +128,17 @@ export default class EditProfile extends Component {
                 </View>
                 <ScrollView style={styles.content}>
                     <View style={styles.profile}>
-                        <SquareImage facebookID={id} size={width, width}/>
+                        <TouchableHighlight onPress={() => this.newpic()}>
+                        {
+                            (this.state.newPic 
+                                ? <Image
+                                    source={{uri: this.state.newPic}}
+                                    style={{ width: width, height: width }}
+                                  
+                                  />
+                                : <SquareImage facebookID={id} size={width, width}/>)
+                        }    
+                        </TouchableHighlight>
                         <Text style={{fontSize:20}}>{first_name}, {profileAge}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
