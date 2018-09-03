@@ -74,7 +74,7 @@ export default class EditProfile extends Component {
                 // Log the response form the server
                 console.log("where did the file go? "+responseData._bodyText);
                 console.log(responseData)
-                alert('new pic: '+ responseData._bodyText);
+                //alert('new pic: '+ responseData._bodyText);
                 //alert(responseData.file_url);
                 const jsonPayload = responseData._bodyText;
                 const obj = JSON.parse(jsonPayload)
