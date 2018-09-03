@@ -31,6 +31,7 @@ export default class EditProfile extends Component {
         gender: this.props.navigation.state.params.user.gender,
         age: this.props.navigation.state.params.user.age,
         birthday: this.props.navigation.state.params.user.birthday,
+        picture: null,
         newPic: null,
     }
 
@@ -49,43 +50,38 @@ export default class EditProfile extends Component {
               }
         )
         console.log('le picker'+pic.uri)
-        //const b64 = 'data:image/jpeg;base64,'+pic.base64
-        //console.log(b64);
-        //var PicturePath = pic.uri
+        
         var picURI = `data:image/jpg;base64,${pic.base64}`
         this.setState({newPic: picURI})
-       // var data = new FormData();
-       // data.append('picture', {
-       // uri: picURI,
-       // name: 'selfie.jpg',
-      //  type: 'image/jpeg'
-       // });
+   
         const base64prepend = 'data:image/jpeg;base64,'
         const data = base64prepend + pic.base64
-        const jsonData = `{"base64String":"${pic.base64}"}`
+        const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
+
         // Create the config object for the POST
-        // You typically have an OAuth2 token that you use for authentication
         const config = {
             method: 'POST',
             headers: {
-                //Accept: 'base64',
                 'Content-Type': 'application/json',
-            //    ContentEncoding: 'base64',
-                //ContentType: 'image/jpeg',
-                //Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
             },
             body: jsonData
         };
 
-        const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta/upload-file';
+        const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-2/upload-file';
   
         fetch(url, config)
             .then(responseData => {
                 // Log the response form the server
-                console.log("where did the file go? "+responseData.file_url);
+                console.log("where did the file go? "+responseData._bodyText);
                 console.log(responseData)
-                alert('new pic: '+ responseData.file_url);
+                alert('new pic: '+ responseData._bodyText);
                 //alert(responseData.file_url);
+                const jsonPayload = responseData._bodyText;
+                const obj = JSON.parse(jsonPayload)
+                const fileurl = obj.url
+                console.log('file url ' +fileurl)
+                this.setState({picture: fileurl})
+                this.updateUser('picture', this.state.picture)
             })
             .catch(err => {
                 console.log('ohh '+err);
