@@ -15,7 +15,7 @@ import { ImagePicker } from 'expo'
 import { Textarea } from 'native-base'
 
 import * as firebase from 'firebase'
-
+import ProfilePicture from '../components/profilePicture'
 import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
 import ModalDropdown from 'react-native-modal-dropdown'
@@ -31,8 +31,8 @@ export default class EditProfile extends Component {
         gender: this.props.navigation.state.params.user.gender,
         age: this.props.navigation.state.params.user.age,
         birthday: this.props.navigation.state.params.user.birthday,
-        picture: null,
-        newPic: null,
+        picture: this.props.navigation.state.params.user.picture,
+        //newPic: null,
     }
 
     updateUser = (key, value) => {
@@ -131,11 +131,7 @@ export default class EditProfile extends Component {
                         <TouchableHighlight onPress={() => this.newpic()}>
                         {
                             (this.state.newPic 
-                                ? <Image
-                                    source={{uri: this.state.newPic}}
-                                    style={{ width: width, height: width }}
-                                  
-                                  />
+                                ? <ProfilePicture uid={this.state.user.uid} size={width, width}/>
                                 : <SquareImage facebookID={id} size={width, width}/>)
                         }    
                         </TouchableHighlight>
