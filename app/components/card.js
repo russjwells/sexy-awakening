@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image, PanResponder, Animated, Dimensions, TouchableHighlight } from 'react-native';
 import moment from 'moment'
+import SquareAvatar from '../components/squareAvatar'
 
 const {width, height} = Dimensions.get('window')
 

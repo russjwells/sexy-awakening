@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Image} from 'react-native'
 import axios from 'axios'
+import seedBlk from '../../assets/img/seedoflife_black.png'
 
 export default class SquareAvatar extends Component {
     state = {
@@ -26,11 +27,20 @@ export default class SquareAvatar extends Component {
     render() {
         const {size, uid} = this.props
         //console.log('uid '+uid)
-        return(
-            <Image 
-            source={{uri: this.state.picture}}
-            style={{width: size, height: size}}
-            />
-        )
+        if (this.state.picture!=null){
+            return(
+                <Image 
+                source={{uri: this.state.picture}}
+                style={{width: size, height: size}}
+                />
+            )
+        }else{
+            return(
+                <Image 
+                    source={seedBlk}
+                    style={{width: size, height: size}}
+                />
+            )
+        }
     }
 }

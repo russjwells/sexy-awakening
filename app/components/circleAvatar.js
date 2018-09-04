@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Image} from 'react-native'
 import axios from 'axios'
+import seedBlk from '../../assets/img/seedoflife_black.png'
 
 export default class CircleAvatar extends Component {
     state = {
@@ -26,11 +27,20 @@ export default class CircleAvatar extends Component {
     render() {
         const {size, uid} = this.props
         //console.log('uid '+uid)
+        if (this.state.picture!=null){
         return(
             <Image 
             source={{uri: this.state.picture}}
             style={{width: size, height: size, borderRadius: size / 2}}
             />
         )
+        }else{
+            return(
+                <Image 
+                source={seedBlk}
+                style={{width: size, height: size, borderRadius: size / 2}}
+                />
+            )
+        }
     }
 }

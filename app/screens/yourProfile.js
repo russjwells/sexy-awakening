@@ -12,7 +12,7 @@ import {
 
 import * as firebase from 'firebase'
 
-import SquareImage from '../components/squareImage'
+import SquareAvatar from '../components/squareAvatar'
 import { Feather } from '@expo/vector-icons'
 
 export default class YourProfile extends Component {
@@ -41,7 +41,7 @@ export default class YourProfile extends Component {
     
     render() {
         const {width, height} = Dimensions.get('window')
-        const {first_name, work, id} = this.state.user
+        const {first_name, picture, uid} = this.state.user
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
@@ -62,7 +62,11 @@ export default class YourProfile extends Component {
                 </View>
                 <View style={styles.content}>
                     <View style={styles.profile}>
-                        <SquareImage facebookID={id} size={width, width}/>
+                        <SquareAvatar 
+                            uid={uid} 
+                            pic={picture} 
+                            size={width, width}
+                        />
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     navbar:{
         flexDirection: 'row',
