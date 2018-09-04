@@ -16,7 +16,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Feather } from '@expo/vector-icons'
 
 import chemistrySymbol from '../../assets/img/chemistry.png'
-import ProfilePicture from '../components/profilePicture';
+import CircleAvatar from '../components/circleAvatar';
 
 export default class Profile extends Component {
     state = {
@@ -34,7 +34,7 @@ export default class Profile extends Component {
     }
 
     render () {
-        const {first_name, work, id, uid} = this.props.user
+        const {first_name, work, id, uid, picture} = this.props.user
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         const bio = this.state.bio
@@ -43,7 +43,7 @@ export default class Profile extends Component {
                 <View style={styles.profile}>
                     <TouchableHighlight style={styles.viewMyProfileLink} onPress={() => this.props.navigation.navigate('YourProfile', {user: this.props.user})}>
                     <View>
-                        <ProfilePicture uid={uid} size={120} />
+                        <CircleAvatar uid={uid} pic={picture} size={120} />
                     </View>    
                     </TouchableHighlight>
                     <Text style={{fontSize:20}}>{first_name}</Text>

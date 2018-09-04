@@ -15,7 +15,7 @@ import { ImagePicker } from 'expo'
 import { Textarea } from 'native-base'
 
 import * as firebase from 'firebase'
-import ProfilePicture from '../components/profilePicture'
+import SquareAvatar from '../components/squareAvatar'
 import SquareImage from '../components/squareImage'
 import { Feather } from '@expo/vector-icons'
 import ModalDropdown from 'react-native-modal-dropdown'
@@ -129,11 +129,11 @@ export default class EditProfile extends Component {
                 <ScrollView style={styles.content}>
                     <View style={styles.profile}>
                         <TouchableHighlight onPress={() => this.newpic()}>
-                        {
-                            (this.state.newPic 
-                                ? <ProfilePicture uid={this.state.user.uid} size={width, width}/>
-                                : <SquareImage facebookID={id} size={width, width}/>)
-                        }    
+                             <SquareAvatar 
+                                uid={this.state.user.uid} 
+                                pic={this.state.user.picture} 
+                                size={width, width}
+                             />
                         </TouchableHighlight>
                         <Text style={{fontSize:20}}>{first_name}, {profileAge}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>

@@ -38,7 +38,7 @@ export default class ProfilePicture extends Component {
     render() {
         const {size, uid, } = this.props
         const imageSize = PixelRatio.getPixelSizeForLayoutSize(size)
-        const fbImage = `https://graph.facebook.com/${null}/picture?height=${imageSize}`
+        //const fbImage = `https://graph.facebook.com/${null}/picture?height=${imageSize}`
         console.log('uid '+uid)
         return(
             <Image 
