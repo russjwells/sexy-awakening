@@ -73,9 +73,10 @@ export default class Card extends Component {
   }
 
   render() {
-    const {birthday, first_name, work, id} = this.props.profile
+    const {birthday, first_name, work, id, uid, picture} = this.props.profile
+    console.log("pic and uid: "+picture + ", "+uid)
     const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
-    const fbImage = `https://graph.facebook.com/${id}/picture?height=500`
+    //const fbImage = `https://graph.facebook.com/${id}/picture?height=500`
     const profileBday = moment(birthday, 'MM/DD/YYYY')
     const profileAge = moment().diff(profileBday, 'years')
 
@@ -94,9 +95,10 @@ export default class Card extends Component {
       <Animated.View 
       {...this.cardPanResponder.panHandlers}
       style={[styles.card, animatedStyle]}>
-        <Image
-          style={{flex: 1}}
-          source={{uri: fbImage}}
+        <SquareAvatar 
+            uid={uid} 
+            pic={picture} 
+            size={500, 500}
         />
         <View style={{margin: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
