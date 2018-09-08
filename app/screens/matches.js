@@ -10,7 +10,7 @@ import {
     Image,
 } from 'react-native'
 
-import CircleImage from '../components/circleImage'
+import CircleAvatar from '../components/circleAvatar'
 
 import _ from 'lodash'
 
@@ -124,7 +124,7 @@ export default class Matches extends Component {
         this.setState({matchType: type})
     }
     renderItem = ({item}) => {
-        const {id, first_name, work} = item
+        const {uid, picture, first_name, work} = item
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         const bio = item.bio ? item.bio : null
         const matchType = "unsure"
@@ -137,7 +137,11 @@ export default class Matches extends Component {
                 <TouchableHighlight
                     onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: item})}
                 >
-                    <CircleImage size={80} facebookID={id}/>
+                    <CircleAvatar 
+                            uid={uid} 
+                            pic={picture} 
+                            size={80, 80}
+                        />
                 </TouchableHighlight>
                 <View style={{justifyContent:'center', marginLeft:10}}>
                     <Text style={{fontSize:18}}>{first_name}</Text>

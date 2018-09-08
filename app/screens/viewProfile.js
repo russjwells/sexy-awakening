@@ -13,6 +13,7 @@ import {
 import * as firebase from 'firebase'
 
 import SquareImage from '../components/squareImage'
+import SquareAvatar from '../components/squareAvatar'
 import { Feather } from '@expo/vector-icons'
 
 export default class ViewProfile extends Component {
@@ -23,7 +24,7 @@ export default class ViewProfile extends Component {
     
     render() {
         const {width, height} = Dimensions.get('window')
-        const {first_name, bio, id} = this.props.navigation.state.params.profile
+        const {first_name, bio, id, uid, picture} = this.props.navigation.state.params.profile
         return(
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
@@ -41,7 +42,11 @@ export default class ViewProfile extends Component {
                 </View>
                 <View style={styles.content}>
                     <View style={styles.profile}>
-                        <SquareImage facebookID={id} size={width, width}/>
+                        <SquareAvatar 
+                            uid={uid} 
+                            pic={picture} 
+                            size={width, width}
+                        />
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>

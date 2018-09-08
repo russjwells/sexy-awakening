@@ -11,6 +11,7 @@ import {GiftedChat} from 'react-native-gifted-chat'
 import * as firebase from 'firebase'
 import { Feather } from '@expo/vector-icons'
 import CircleImage from '../components/circleImage'
+import CircleAvatar from '../components/circleAvatar'
 
 export default class Chat extends Component {
 
@@ -57,8 +58,12 @@ export default class Chat extends Component {
                     <View style={styles.navlocation}>
                         <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.navigation.state.params.user, profile: this.props.navigation.state.params.profile})}>
                             <View style={styles.chatnavlink}>
-                                <CircleImage style={styles.chatnavavatar} size={40} facebookID={this.state.profile.id}/>
-                                <Text style={styles.navtext}> {this.state.profile.first_name}</Text>
+                            <CircleAvatar 
+                                uid={this.state.profile.uid} 
+                                pic={this.state.profile.picture} 
+                                size={40, 40}
+                            />
+                            <Text style={styles.navtext}> {this.state.profile.first_name}</Text>
                             </View>
                         </TouchableHighlight>
                     </View>

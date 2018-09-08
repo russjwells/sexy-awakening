@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image, PanResponder, Animated, Dimensions, TouchableHighlight } from 'react-native';
 import moment from 'moment'
+import axios from 'axios'
+import seedBlk from '../../assets/img/seedoflife_black.png'
 import SquareAvatar from '../components/squareAvatar'
 
 const {width, height} = Dimensions.get('window')
 
 export default class Card extends Component {
+
+  state = {
+    picture: null
+  }
   componentWillMount() {
     this.pan = new Animated.ValueXY();
     this.cardPanResponder = PanResponder.create({
@@ -70,13 +76,23 @@ export default class Card extends Component {
       },
     }),
     console.log('card pan responder created');
+    this.getPic()
   }
+
+  getPic = async () => {
+    const url = `https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-3/photo?uid=${this.props.profile.uid}&pic=${this.props.profile.picture}`;
+    const res = await axios.get(url)
+    console.log(res)
+    console.log(res.data)
+    const img = `data:image/jpg;base64,${res.data}`
+    this.setState({picture: img})
+}
 
   render() {
     const {birthday, first_name, work, id, uid, picture} = this.props.profile
     console.log("pic and uid: "+picture + ", "+uid)
     const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
-    //const fbImage = `https://graph.facebook.com/${id}/picture?height=500`
+    const profileImage = this.state.picture
     const profileBday = moment(birthday, 'MM/DD/YYYY')
     const profileAge = moment().diff(profileBday, 'years')
 
@@ -95,11 +111,18 @@ export default class Card extends Component {
       <Animated.View 
       {...this.cardPanResponder.panHandlers}
       style={[styles.card, animatedStyle]}>
-        <SquareAvatar 
-            uid={uid} 
-            pic={picture} 
-            size={500, 500}
-        />
+        {
+          this.state.picture ? 
+          <Image
+            style={{flex: 1}}
+            source={{uri: this.state.picture}}
+          /> :
+          <Image
+            style={{flex: 1}}
+            source={seedBlk}
+          />
+        }
+        
         <View style={{margin: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
             <Text style={{fontSize: 20}}>{first_name}, {profileAge}</Text>
