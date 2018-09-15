@@ -29,7 +29,7 @@ const INITIAL_STATE = {
     first_name: '',
     last_name: '',
     birthday: null,
-    gender: null,
+    gender: 'nonbinary',
     error: null,
   };
 
@@ -43,7 +43,7 @@ export default class SignUp extends Component {
         first_name: '',
         last_name: '',
         birthday: '',
-        gender: '',
+        gender: 'nonbinary',
         error: null,
     }
 
@@ -138,11 +138,13 @@ export default class SignUp extends Component {
                     <Item>
                         <Input placeholder="Password"
                         onChangeText={(pass) => this.setState({passwordOne: pass})}
+                        secureTextEntry={true}
                          />
                     </Item>
                     <Item>
                         <Input placeholder="Password Again" 
                         onChangeText={(pass) => this.setState({passwordTwo: pass})}
+                        secureTextEntry={true}
                         />
                     </Item>
                     <Item>
@@ -155,7 +157,7 @@ export default class SignUp extends Component {
                         onChangeText={(name) => this.setState({last_name: name})}/>
                     </Item>
                     <Item>
-                        <View>
+                        <View style={styles.rowSelect}>
                             <Text>Birthday: </Text>
                             <DatePicker
                             style={{width: 200}}
@@ -187,8 +189,8 @@ export default class SignUp extends Component {
                         </View>
                     </Item>
                     <Item>
-                        <View>
-                            <Text>Gender</Text>
+                        <View style={styles.rowSelect}>
+                            <Text>Gender:</Text>
                             <ModalDropdown 
                             options={['male', 'female', 'nonbinary']} 
                             onSelect={(idx, value)=>this.setState({gender: value})}
@@ -311,4 +313,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
     },
+    rowSelect: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 10,
+        paddingLeft:5,
+    }
 })

@@ -1,8 +1,8 @@
 import Expo from 'expo'
 import firebase from 'firebase'
 import React, {Component} from 'react'
-import { Text, KeyboardAvoidingView, View, StyleSheet, ActivityIndicator, Image, StatusBar } from 'react-native'
-
+import { Text, Linking, KeyboardAvoidingView, View, StyleSheet, ActivityIndicator, Image, StatusBar, Dimensions } from 'react-native'
+import Modal from "react-native-modal";
 import { NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 import Button from '../components/button'
@@ -130,6 +130,7 @@ export default class Login extends Component {
     }
 
     render(){
+        const {width, height} = Dimensions.get('window')
         const {
             email,
             password,
@@ -152,7 +153,7 @@ export default class Login extends Component {
                 <View style={styles.loginArea}>
                 {this.state.showSpinner ? 
                     <ActivityIndicator animating={this.state.showSpinner} /> :
-                    <View>
+                    <View style={styles.loginForm}>
                         <Form onSubmit={this.onSubmit}>
                             <Item>
                                 <Input 
@@ -169,24 +170,32 @@ export default class Login extends Component {
                                     onChangeText={(pass) => this.setState({password: pass})}
                                     placeholder="Password" 
                                     type="password"
+                                    secureTextEntry={true}
                                     //defaultValue=""
                                 />
                             </Item>
                             <Button prompt={'Login'} type="submit" onPress={() => this.login(this.state.email, this.state.password)}/>
                         </Form>
-                        
                         <Button prompt={'Create Account'} onPress={() => this.props.navigation.navigate('SignUp')}/>
+                        <Text style={styles.tosText}>
+                        By logging in or creating an account you agree to our <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://www.sexyawakening.com/terms-of-service/')}>terms of service</Text> and <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://www.sexyawakening.com/privacy-policy/')}>privacy policy</Text>.
+                        </Text>
                         {
                             //<FacebookButton onPress={this.fblogin}/>
                         }
                     </View>
                 }
                 </View>
+                <Modal isVisible={false}>
+                    <View style={{ flex: 1 }}>
+                        <Text>I am the modal content!</Text>
+                    </View>
+                </Modal>
             </KeyboardAvoidingView>
         )
     }
 }
-
+const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -222,7 +231,18 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         textAlign: 'center'
     },
+    loginForm: {
+        flex: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //width: 100,
+    },
     loginArea: {
-        marginBottom: 60,
-    }
+        marginBottom: 20,
+    },
+    tosText: {
+        fontSize: 8,
+        fontWeight: 'normal',
+        color: '#ccc',
+    },
 })
