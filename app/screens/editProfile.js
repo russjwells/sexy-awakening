@@ -173,7 +173,7 @@ export default class EditProfile extends Component {
                             }}
                             onDateChange={(date) => {
                                 this.setState({birthday: date})
-                                alert(date)
+                                //alert(date)
                             }}
                             />
                         </View>

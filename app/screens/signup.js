@@ -183,7 +183,7 @@ export default class SignUp extends Component {
                             }}
                             onDateChange={(date) => {
                                 this.setState({birthday: date})
-                                alert(date)
+                                //alert(date)
                             }}
                             />
                         </View>
