@@ -28,9 +28,10 @@ const INITIAL_STATE = {
     passwordTwo: '',
     first_name: '',
     last_name: '',
-    birthday: null,
+    birthday: '',
     gender: 'nonbinary',
     error: null,
+    message: null,
   };
 
 export default class SignUp extends Component {
@@ -45,6 +46,7 @@ export default class SignUp extends Component {
         birthday: '',
         gender: 'nonbinary',
         error: null,
+        message: null,
     }
 
     componentDidMount = () => {
@@ -58,32 +60,42 @@ export default class SignUp extends Component {
     }
 
     createAccount = async () => {
-        const {
-            email,
-            passwordOne,
-            first_name,
-            last_name,
-            birthday,
-            gender
-          } = this.state;
-
-        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-        .then(authUser => {
-            //alert("authUser: "+ authUser.toString())
-            db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
+        const profileBday = moment(this.state.birthday, 'MM/DD/YYYY')
+        const profileAge = moment().diff(profileBday, 'years')
+        console.log('profile age: '+ profileAge)
+        if (profileAge >= 18){
+            console.log('Age Passed')
+            const {
+                email,
+                passwordOne,
+                first_name,
+                last_name,
+                birthday,
+                gender,
+            } = this.state;
+            auth.doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
-                this.setState({ ...INITIAL_STATE });
-                this.goHome(authUser)
-                //history.push(routes.HOME);
+                //alert("authUser: "+ authUser.toString())
+                db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
+                .then(authUser => {
+                    //console.log('authhy '+authUser)
+                    this.setState({ ...INITIAL_STATE });
+                    this.setState(byPropKey('message', null))
+                    this.goHome(authUser)
+                    //history.push(routes.HOME);
+                })
+                .catch(error => {
+                    this.setState(byPropKey('error', error));
+                    console.log("!!!!"+error.message)
+                });
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
-                console.log("!!!!"+error.message)
             });
-        })
-        .catch(error => {
-          this.setState(byPropKey('error', error));
-        });
+        }else{
+            console.log('Age Restriction')
+            this.setState(byPropKey('message', 'You must be 18 to create an account.'))
+        }
 
     }
 
@@ -199,7 +211,7 @@ export default class SignUp extends Component {
                         </View> 
                     </Item>
                     <Item>
-                    { !!error && <Item><Text>{error.message}</Text></Item> }
+                    { !!this.state.message && <Item><Text>{this.state.message}</Text></Item> }
                     </Item>
                     
                 </Form>
