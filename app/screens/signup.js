@@ -29,7 +29,7 @@ const INITIAL_STATE = {
     first_name: '',
     last_name: '',
     birthday: '',
-    gender: 'nonbinary',
+    gender: 'female',
     error: null,
     message: null,
   };
@@ -44,7 +44,7 @@ export default class SignUp extends Component {
         first_name: '',
         last_name: '',
         birthday: '',
-        gender: 'nonbinary',
+        gender: 'female',
         error: null,
         message: null,
     }
@@ -152,12 +152,6 @@ export default class SignUp extends Component {
                         onChangeText={(pass) => this.setState({passwordOne: pass})}
                         secureTextEntry={true}
                          />
-                    </Item>
-                    <Item>
-                        <Input placeholder="Password Again" 
-                        onChangeText={(pass) => this.setState({passwordTwo: pass})}
-                        secureTextEntry={true}
-                        />
                     </Item>
                     <Item>
                         <Input placeholder="First Name" 
