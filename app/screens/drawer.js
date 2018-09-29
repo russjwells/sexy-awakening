@@ -19,7 +19,7 @@ export default class Drawer extends Component {
                             <Image source={phoenixSymbolRed} style={{width:100, height:100}} />
                         </View>
                         <View style={styles.version}>
-                            <Text style={styles.versionText}>Sexy Awakening Beta</Text>
+                            <Text style={styles.versionText}>Sexy Awakening</Text>
                         </View>
                         <View style={styles.menu}>
                             <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('About', {user: this.props.navigation.state.params.user})}>
