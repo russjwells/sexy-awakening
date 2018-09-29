@@ -23,7 +23,10 @@ export default class Drawer extends Component {
                         </View>
                         <View style={styles.menu}>
                             <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('About', {user: this.props.navigation.state.params.user})}>
-                                <Text>About Sexy Awakening</Text>
+                                <Text>About</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={styles.menuItem} onPress={() => this.props.navigation.navigate('Account', {user: this.props.navigation.state.params.user})}>
+                                <Text>Account</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
