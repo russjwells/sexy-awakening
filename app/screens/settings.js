@@ -20,10 +20,13 @@ export default class Settings extends Component {
         user: this.props.navigation.state.params.user,
         ageRangeValues: this.props.navigation.state.params.ageRangeValues,
         distanceValue: this.props.navigation.state.params.distanceValue,
+        immediacyValue: this.props.navigation.state.params.immediacyValue,
+        approachable: this.props.navigation.state.params.approachable,
         showMen: this.props.navigation.state.params.showMen,
         showWomen: this.props.navigation.state.params.showWomen,
         showNonbinary: false,
-        showTransexual: false,
+        showTransmen: false,
+        showTranswomen: false,
         showGroups: false,
     }
 
@@ -39,7 +42,7 @@ export default class Settings extends Component {
 
     render() {
         const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary, showTransexual, showGroups} = this.state
+        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary, showTransmen, showTranswomen, showGroups, approachable} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container}>
@@ -125,12 +128,22 @@ export default class Settings extends Component {
                             />
                         </View>
                         <View style={styles.switch}>
-                            <Text style={styles.label}>Trans</Text>
+                            <Text style={styles.label}>Transmen</Text>
                             <Switch 
-                                value={showTransexual}
+                                value={showTransmen}
                                 onValueChange={val => {
-                                    this.setState({showTransexual:val})
-                                    this.updateUser('showTransexual', val)
+                                    this.setState({showTransmen:val})
+                                    this.updateUser('showTransmen', val)
+                                }}
+                            />
+                        </View>
+                        <View style={styles.switch}>
+                            <Text style={styles.label}>Transwomen</Text>
+                            <Switch 
+                                value={showTranswomen}
+                                onValueChange={val => {
+                                    this.setState({showTranswomen:val})
+                                    this.updateUser('showTranswomen', val)
                                 }}
                             />
                         </View>
@@ -146,15 +159,31 @@ export default class Settings extends Component {
                         </View>
                     </View>
                     <View style={styles.sectionTitle}>
-                            <Text style={styles.sectionTitleText}>Account</Text>
+                            <Text style={styles.sectionTitleText}>What</Text>
                         </View>
-                    <View style={styles.subscription}>
-                        <TouchableHighlight style={styles.subscriptionButton} onPress={() => this.logout()}>
-                            <View style={styles.subsexpander}>
-                                <Text style={styles.subscriptionText}>Log Out</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
+                        <View style={styles.label}>
+                            <Text>Immediacy</Text>
+                            <Text style={{color: 'darkgrey'}}>{this.state.immediacyValue} %</Text>
+                        </View>
+                        <View style={styles.slider}>
+                            <MultiSlider 
+                                min={0}
+                                max={100}
+                                values={this.state.immediacyValue}
+                                onValuesChange={val => this.setState({immediacyValue: val})}
+                                onValuesChangeFinish={val => this.updateUser('immediacy', val[0])}
+                            />
+                        </View>
+                        <View style={styles.switch}>
+                            <Text style={styles.label}>Approachable</Text>
+                            <Switch 
+                                value={approachable}
+                                onValueChange={val => {
+                                    this.setState({approachable:val})
+                                    this.updateUser('approachable', val)
+                                }}
+                            />
+                        </View>
                 </ScrollView>
             </View>
         )
