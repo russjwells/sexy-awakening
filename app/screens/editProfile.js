@@ -135,13 +135,17 @@ export default class EditProfile extends Component {
                                 size={width, width}
                              />
                         </TouchableHighlight>
-                        <Text style={{fontSize:20}}>{first_name}, {profileAge}</Text>
-                        <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
+                    </View>
+                    <View style={styles.nameagephotoSelect}>
+                            <Text style={{fontSize:20}}>{first_name}, {profileAge} </Text>
+                            <TouchableHighlight onPress={() => this.newpic()}>
+                                <Feather name="camera" size={28} color="black" />
+                            </TouchableHighlight>
                     </View>
                     <View style={styles.genderSelect}>
                         <Text>Gender</Text>
                         <ModalDropdown 
-                        options={['male', 'female', 'nonbinary']} 
+                        options={['male', 'female', 'nonbinary', 'transmale', 'transfemale']} 
                         onSelect={(idx, value)=>this.setState({gender: value})}
                         defaultValue={this.state.gender}
                         />
@@ -261,6 +265,15 @@ const styles = StyleSheet.create({
     saveText: {
         color: 'white',
         fontWeight: 'bold',
+    },
+    nameagephotoSelect: {
+        flex: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop:10,
+        marginBottom:10,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     genderSelect: {
         flexDirection: 'row',
