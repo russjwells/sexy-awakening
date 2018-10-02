@@ -79,8 +79,9 @@ export default class Login extends Component {
     }
 
     login = async (email, password) => {
+        var sanitizedEmail = email.replace(/(^\s+|\s+$)/g,'');
         this.setState({showSpinner: true})
-        auth.doSignInWithEmailAndPassword(email, password)
+        auth.doSignInWithEmailAndPassword(sanitizedEmail, password)
             .then(user => {
                 this.state.setState({...INITIAL_STATE})
                 this.goHome(user)

@@ -73,7 +73,8 @@ export default class SignUp extends Component {
                 birthday,
                 gender,
             } = this.state;
-            auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+            var sanitizedEmail = email.replace(/(^\s+|\s+$)/g,'');
+            auth.doCreateUserWithEmailAndPassword(sanitizedEmail, passwordOne)
             .then(authUser => {
                 //alert("authUser: "+ authUser.toString())
                 db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
