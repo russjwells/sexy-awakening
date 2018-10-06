@@ -11,7 +11,7 @@ import {
     Dimensions,
     Image
 } from 'react-native'
-import { ImagePicker } from 'expo'
+import { ImagePicker, Permissions } from 'expo'
 import { Textarea } from 'native-base'
 
 import * as firebase from 'firebase'
@@ -42,51 +42,54 @@ export default class EditProfile extends Component {
     }
 
     newpic = async () => {
-        let pic = await Expo.ImagePicker.launchImageLibraryAsync(
-            {
-                allowsEditing: true,
-                aspect: [1, 1],
-                base64: true,
-              }
-        )
-        console.log('le picker'+pic.uri)
-        
-        var picURI = `data:image/jpg;base64,${pic.base64}`
-        this.setState({newPic: picURI})
-   
-        const base64prepend = 'data:image/jpeg;base64,'
-        const data = base64prepend + pic.base64
-        const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status === 'granted') {
+            let pic = await Expo.ImagePicker.launchImageLibraryAsync(
+                {
+                    allowsEditing: true,
+                    aspect: [1, 1],
+                    base64: true,
+                }
+            )
+            console.log('le picker'+pic.uri)
+            
+            var picURI = `data:image/jpg;base64,${pic.base64}`
+            this.setState({newPic: picURI})
+    
+            const base64prepend = 'data:image/jpeg;base64,'
+            const data = base64prepend + pic.base64
+            const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
 
-        // Create the config object for the POST
-        const config = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonData
-        };
+            // Create the config object for the POST
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonData
+            };
 
-        const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-2/upload-file';
-  
-        fetch(url, config)
-            .then(responseData => {
-                // Log the response form the server
-                console.log("where did the file go? "+responseData._bodyText);
-                console.log(responseData)
-                //alert('new pic: '+ responseData._bodyText);
-                //alert(responseData.file_url);
-                const jsonPayload = responseData._bodyText;
-                const obj = JSON.parse(jsonPayload)
-                const fileurl = obj.url
-                console.log('file url ' +fileurl)
-                this.setState({picture: fileurl})
-                this.updateUser('picture', this.state.picture)
-            })
-            .catch(err => {
-                console.log('ohh '+err);
-                alert('error: '+err.message)
-            });
+            const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-2/upload-file';
+    
+            fetch(url, config)
+                .then(responseData => {
+                    // Log the response form the server
+                    console.log("where did the file go? "+responseData._bodyText);
+                    console.log(responseData)
+                    //alert('new pic: '+ responseData._bodyText);
+                    //alert(responseData.file_url);
+                    const jsonPayload = responseData._bodyText;
+                    const obj = JSON.parse(jsonPayload)
+                    const fileurl = obj.url
+                    console.log('file url ' +fileurl)
+                    this.setState({picture: fileurl})
+                    this.updateUser('picture', this.state.picture)
+                })
+                .catch(err => {
+                    console.log('ohh '+err);
+                    alert('error: '+err.message)
+                });
+        }
 
 
     }

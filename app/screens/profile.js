@@ -22,8 +22,18 @@ export default class Profile extends Component {
     state = {
         ageRangeValues: this.props.user.ageRange,
         distanceValue: [this.props.user.distance],
+        immediacyValue: this.props.user.immediacyValue,
+        sexuality: this.props.user.sexuality,
+        romance: this.props.user.romance,
+        friendship: this.props.user.friendship,
+        approachable: this.props.user.approachable,
+        visible: this.props.user.visible,
         showMen: this.props.user.showMen,
         showWomen: this.props.user.showWomen,
+        showNonbinary: this.props.user.showNonbinary,
+        showTransmen: this.props.user.showTransmen,
+        showTranswomen: this.props.user.showTranswomen,
+        showGroups: this.props.user.showGroups,
         bio: this.props.user.bio,
     }
 
