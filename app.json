@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "sexy-awakening",
+    "name": "Sexy Awakening",
     "description": "",
     "slug": "sexy-awakening",
     "privacy": "unlisted",
     "sdkVersion": "25.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "0.7.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +23,7 @@
       "infoPlist": {
         "NSLocationUsageDescription": "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
         "NSLocationWhenInUseUsageDescription": "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription" : "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Sexy Awakening uses your location to show you people near you and to display how far away your matches are.",
         "NSCameraUsageDescription": "This app uses the camera to take pictures for your online presence.",
         "NSPhotoLibraryUsageDescription": "This app uses the Photo Library to upload pictures for your online presence."
       }
