@@ -87,6 +87,7 @@ export default class EditProfile extends Component {
                 })
                 .catch(err => {
                     console.log('ohh '+err);
+                    this.setState({newPic: null})
                     //alert('error: '+err.message)
                 });
         }
