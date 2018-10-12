@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image, PanResponder, Animated, Dimensions, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, Image, ImageBackground, PanResponder, Animated, Dimensions, TouchableHighlight } from 'react-native';
 import moment from 'moment'
 import axios from 'axios'
 import seedBlk from '../../assets/img/seedoflife_black.png'
@@ -86,6 +86,7 @@ export default class Card extends Component {
   getPic = async () => {
     console.log("getting card pic: "+ this.props.profile.picture + " for " + this.props.profile.first_name + ", card " + this.props.i)
     const url = `https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-3/photo?uid=${this.props.profile.uid}&pic=${this.props.profile.picture}`;
+    console.log(url)
     const res = await axios.get(url)
     //console.log(res)
     //console.log(res.data)
@@ -118,32 +119,45 @@ export default class Card extends Component {
       style={[styles.card, animatedStyle]}>
         {
           this.state.picture ? 
-          <Image
-            style={{flex: 1, height: undefined, width: undefined}}
+          <ImageBackground
+            style={{flex: 1, height: undefined, width: undefined, justifyContent: 'flex-end'}}
             source={{uri: profileImage}}
             resizeMode="cover"
-          /> :
-          <Image
-            style={{flex: 1, height: undefined, width: undefined}}
-            source={seedBlk}
-            resizeMode="cover"
-          />
-        }
-        <TouchableHighlight
+          >
+            <TouchableHighlight
                 onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: this.props.profile})}
             >
-        <View style={{margin: 14, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View>
-            <Text style={{fontSize: 20}}>{first_name}, {profileAge}</Text>
-            {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
-          </View>
-          <View>
-            
-                  <Text>Info</Text>
-            
-          </View>
-        </View>
-        </TouchableHighlight>
+              <View style={{margin: 14, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View>
+                  <Text style={{fontSize: 20, color:'white', fontWeight: 'bold'}}>{first_name}, {profileAge}</Text>
+                  {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
+                </View>
+                <View>
+                  <Feather name="eye" size={36} color="white" />
+                </View>
+              </View>
+            </TouchableHighlight>
+          </ImageBackground> :
+          <ImageBackground
+            style={{flex: 1, height: undefined, width: undefined, justifyContent: 'flex-end'}}
+            source={seedBlk}
+            resizeMode="cover"
+          >
+            <TouchableHighlight
+                onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: this.props.profile})}
+            >
+              <View style={{margin: 14, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View>
+                  <Text style={{fontSize: 20, color:'black', fontWeight: 'bold'}}>{first_name}, {profileAge}</Text>
+                  {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
+                </View>
+                <View>
+                  <Feather name="eye" size={36} color="black" />
+                </View>
+              </View>
+            </TouchableHighlight>
+          </ImageBackground>
+        }
       </Animated.View>
     )
   }

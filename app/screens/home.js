@@ -169,6 +169,19 @@ export default class Home extends Component {
       console.log("passsssss")
     }
     this.relate(userUid, profileUid, swipedDirection)
+    //stack hack
+    const {uid} = this.state.user
+    this.updateUserLocation(uid)
+    firebase.database().ref('users').child(uid).on('value', snap => {
+      const user = snap.val()
+      this.setState({
+        user,
+        profiles:[],
+        profileIndex:0,
+      })
+      this.getProfiles(user.uid, user.distance)
+    })
+    //end stack hack
   }
 
   handleScroll = (currentView) => {
@@ -195,7 +208,8 @@ export default class Home extends Component {
     const {profileIndex} = this.state
     return(
       <View style={{flex: 1}}>
-        {this.state.profiles.slice(profileIndex, profileIndex + 3).reverse().map((profile, i) => {
+        {this.state.profiles.slice(profileIndex, profileIndex + 1).reverse().map((profile, i) => {
+          //profile index is usually 3 #stackhack
           return (
             <Card 
               key = {profile.id}
