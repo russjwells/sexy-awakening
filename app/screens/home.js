@@ -203,9 +203,10 @@ export default class Home extends Component {
               onSwipeOff ={this.nextCard}
               navigation={this.props.navigation}
               user={this.state.user}
+              i = {i}
             />
           )
-          alert("card drawn: " + profile.first_name)
+          //alert("card drawn: " + profile.first_name)
         })}
         {this.state.profiles==null && (
           <Text>Out of matches right now! Invite your friends!</Text>

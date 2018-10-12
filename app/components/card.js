@@ -4,16 +4,17 @@ import moment from 'moment'
 import axios from 'axios'
 import seedBlk from '../../assets/img/seedoflife_black.png'
 import SquareAvatar from '../components/squareAvatar'
+import { Feather } from '@expo/vector-icons'
 
 const {width, height} = Dimensions.get('window')
 
 export default class Card extends Component {
 
   state = {
-    picture: null
+    picture: null,
+    profile: this.props.profile
   }
   componentWillMount() {
-    
     this.pan = new Animated.ValueXY();
     this.cardPanResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -83,6 +84,7 @@ export default class Card extends Component {
   }
 
   getPic = async () => {
+    console.log("getting card pic: "+ this.props.profile.picture + " for " + this.props.profile.first_name + ", card " + this.props.i)
     const url = `https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-3/photo?uid=${this.props.profile.uid}&pic=${this.props.profile.picture}`;
     const res = await axios.get(url)
     //console.log(res)
@@ -118,7 +120,7 @@ export default class Card extends Component {
           this.state.picture ? 
           <Image
             style={{flex: 1, height: undefined, width: undefined}}
-            source={{uri: this.state.picture}}
+            source={{uri: profileImage}}
             resizeMode="cover"
           /> :
           <Image
@@ -127,20 +129,21 @@ export default class Card extends Component {
             resizeMode="cover"
           />
         }
-        
+        <TouchableHighlight
+                onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: this.props.profile})}
+            >
         <View style={{margin: 14, flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
             <Text style={{fontSize: 20}}>{first_name}, {profileAge}</Text>
             {bio ? <Text style={{fontSize: 15, color:'darkgrey'}}>{bio}</Text> : <View />}
           </View>
           <View>
-            <TouchableHighlight
-                onPress={() => this.props.navigation.navigate('ViewProfile', {user: this.props.user, profile: this.props.profile})}
-            >
+            
                   <Text>Info</Text>
-            </TouchableHighlight>
+            
           </View>
         </View>
+        </TouchableHighlight>
       </Animated.View>
     )
   }
