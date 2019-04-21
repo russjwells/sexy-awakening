@@ -48,7 +48,7 @@ export default class Home extends Component {
       })
       this.getProfiles(user.uid, user.distance)
     })
-    console.log('drawer state b4 mount:', this.state.drawer)
+    //console.log('drawer state b4 mount:', this.state.drawer)
     
   }
 
@@ -169,11 +169,19 @@ export default class Home extends Component {
       console.log("passsssss")
     }
     this.relate(userUid, profileUid, swipedDirection)
-    //if (swipedDirection) {
-    //  this.relate(userUid, profileUid, true)
-    //} else {
-    //  this.relate(userUid, profileUid, false)
-    //}
+    //stack hack
+    const {uid} = this.state.user
+    this.updateUserLocation(uid)
+    firebase.database().ref('users').child(uid).on('value', snap => {
+      const user = snap.val()
+      this.setState({
+        user,
+        profiles:[],
+        profileIndex:0,
+      })
+      this.getProfiles(user.uid, user.distance)
+    })
+    //end stack hack
   }
 
   handleScroll = (currentView) => {
@@ -200,7 +208,8 @@ export default class Home extends Component {
     const {profileIndex} = this.state
     return(
       <View style={{flex: 1}}>
-        {this.state.profiles.slice(profileIndex, profileIndex + 3).reverse().map((profile, i) => {
+        {this.state.profiles.slice(profileIndex, profileIndex + 1).reverse().map((profile, i) => {
+          //profile index is usually 3 #stackhack
           return (
             <Card 
               key = {profile.id}
@@ -208,8 +217,10 @@ export default class Home extends Component {
               onSwipeOff ={this.nextCard}
               navigation={this.props.navigation}
               user={this.state.user}
+              i = {i}
             />
           )
+          //alert("card drawn: " + profile.first_name)
         })}
         {this.state.profiles==null && (
           <Text>Out of matches right now! Invite your friends!</Text>
@@ -238,14 +249,8 @@ export default class Home extends Component {
     //  this.setState({drawer:false})
     //}
   }
-   
   
   render() {
-    const titleConfig = {
-      title: 'Hello, world',
-    }
-
-    //const menu = <Menu navigator={navigator}/>
     return (
       <SideMenu 
         menu={<Drawer isVisible={this.state.drawer} navigation={this.props.navigation}/>} 

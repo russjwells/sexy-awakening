@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "sexy-awakening",
+    "name": "Sexy Awakening",
     "description": "",
     "slug": "sexy-awakening",
     "privacy": "unlisted",
@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "0.7.8",
+    "version": "0.8.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -30,7 +30,7 @@
     },
     "android": {
       "package": "com.DigitalHyperspace.SexyAwakening",
-      "versionCode": 3
+      "versionCode": 5
     }
   }
 }

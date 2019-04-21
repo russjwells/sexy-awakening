@@ -17,8 +17,8 @@ export default class SquareAvatar extends Component {
     getPic = async () => {
         const url = `https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-3/photo?uid=${this.props.uid}&pic=${this.props.pic}`;
         const res = await axios.get(url)
-        console.log(res)
-        console.log(res.data)
+        //console.log(res)
+        //console.log(res.data)
         const img = `data:image/jpg;base64,${res.data}`
         this.setState({picture: img})
     }

@@ -19,8 +19,8 @@ export default class Settings extends Component {
     state = {
         user: this.props.navigation.state.params.user,
         ageRangeValues: this.props.navigation.state.params.ageRangeValues,
-        distanceValue: this.props.navigation.state.params.user.distanceValue,
-        immediacyValue: this.props.navigation.state.params.user.immediacyValue,
+        distanceValue: this.props.navigation.state.params.distanceValue,
+        immediacy: this.props.navigation.state.params.user.immediacy,
         sexuality: this.props.navigation.state.params.user.sexuality,
         romance: this.props.navigation.state.params.user.romance,
         friendship: this.props.navigation.state.params.user.friendship,
@@ -46,7 +46,7 @@ export default class Settings extends Component {
 
     render() {
         const {first_name, work, id} = this.state.user
-        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary, showTransmen, showTranswomen, showGroups, approachable, visible, sexuality, romance, friendship} = this.state
+        const {ageRangeValues, distanceValue, showMen, showWomen, showNonbinary, showTransmen, showTranswomen, showGroups, approachable, visible, immediacy, sexuality, romance, friendship} = this.state
         const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         return(
             <View style={styles.container}>
@@ -76,7 +76,7 @@ export default class Settings extends Component {
                             <MultiSlider 
                                 min={1}
                                 max={200}
-                                values={[this.state.distanceValue]}
+                                values={this.state.distanceValue}
                                 onValuesChange={val => this.setState({distanceValue: val})}
                                 onValuesChangeFinish={val => this.updateUser('distance', val[0])}
                             />
@@ -167,14 +167,14 @@ export default class Settings extends Component {
                     </View>
                     <View style={styles.label}>
                         <Text>Immediacy</Text>
-                        <Text style={{color: 'darkgrey'}}>{this.state.immediacyValue} %</Text>
+                        <Text style={{color: 'darkgrey'}}>{this.state.immediacy} %</Text>
                     </View>
                     <View style={styles.slider}>
                         <MultiSlider 
                             min={0}
                             max={100}
-                            values={[this.state.immediacyValue]}
-                            onValuesChange={val => this.setState({immediacyValue: val})}
+                            values={[this.state.immediacy]}
+                            onValuesChange={val => this.setState({immediacy: val})}
                             onValuesChangeFinish={val => this.updateUser('immediacy', val[0])}
                         />
                     </View>

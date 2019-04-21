@@ -32,7 +32,7 @@ export default class EditProfile extends Component {
         age: this.props.navigation.state.params.user.age,
         birthday: this.props.navigation.state.params.user.birthday,
         picture: this.props.navigation.state.params.user.picture,
-        //newPic: null,
+        newPic: null,
     }
 
     updateUser = (key, value) => {
@@ -74,8 +74,8 @@ export default class EditProfile extends Component {
             fetch(url, config)
                 .then(responseData => {
                     // Log the response form the server
-                    console.log("where did the file go? "+responseData._bodyText);
-                    console.log(responseData)
+                    //console.log("where did the file go? "+responseData._bodyText);
+                    //console.log(responseData)
                     //alert('new pic: '+ responseData._bodyText);
                     //alert(responseData.file_url);
                     const jsonPayload = responseData._bodyText;
@@ -87,7 +87,8 @@ export default class EditProfile extends Component {
                 })
                 .catch(err => {
                     console.log('ohh '+err);
-                    alert('error: '+err.message)
+                    this.setState({newPic: null})
+                    //alert('error: '+err.message)
                 });
         }
 
@@ -131,6 +132,12 @@ export default class EditProfile extends Component {
                 </View>
                 <ScrollView style={styles.content}>
                     <View style={styles.profile}>
+                    {
+                        this.state.newPic ?
+                        <Image
+                            style={{flex: 0, height: width, width: width}}
+                            source={{uri: `data:image/jpg;base64,${this.state.newPic}`}}
+                        /> :
                         <TouchableHighlight onPress={() => this.newpic()}>
                              <SquareAvatar 
                                 uid={this.state.user.uid} 
@@ -138,6 +145,7 @@ export default class EditProfile extends Component {
                                 size={width, width}
                              />
                         </TouchableHighlight>
+                    }
                     </View>
                     <View style={styles.nameagephotoSelect}>
                             <Text style={{fontSize:20}}>{first_name}, {profileAge} </Text>
