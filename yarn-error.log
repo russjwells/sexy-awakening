@@ -1,20 +1,17 @@
 Arguments: 
-  /usr/bin/node /mnt/c/Program Files (x86)/Yarn/bin/yarn.js
+  /Users/russ/.nvm/versions/node/v11.6.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/mnt/c/Program Files/Microsoft SQL Server/110/Tools/Binn:/mnt/c/Program Files (x86)/Microsoft SDKs/TypeScript/1.0:/mnt/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/mnt/c/Program Files (x86)/Extensis/Suitcase Fusion 5:/mnt/c/Program Files (x86)/GtkSharp/2.12/bin:/mnt/c/Windows/System32/OpenSSH:/mnt/d/Program Files (x86)/QuickTime/QTSystem:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/nodejs:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files (x86)/Yarn/bin:/mnt/d/Program Files (x86)/Microsoft VS Code/bin:/mnt/c/Users/russj_000/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/russj_000/AppData/Local/atom/bin:/mnt/c/Users/russj_000/AppData/Roaming/npm/react-native:/mnt/c/Users/russj_000/AppData/Local/Microsoft/WindowsApps:/mnt/d/Users/russj_000/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/d/Program Files/Genymobile/Genymotion/tools:/mnt/c/Users/russj_000/AppData/Roaming/npm:/mnt/c/Users/russj_000/AppData/Local/hyper/app-2.1.2/resources/bin:/mnt/c/Users/russj_000/AppData/Local/Yarn/bin
+  /Users/russ/.nvm/versions/node/v11.6.0/bin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/Users/russ/Library/Android/sdk/tools:/Users/russ/Library/Android/sdk/platform-tools
 
 Yarn version: 
-  1.15.2
+  1.5.1
 
 Node version: 
-  10.14.0
+  11.6.0
 
 Platform: 
-  linux x64
-
-Trace: 
-  Error: ENOENT: no such file or directory, lstat '/mnt/d/dev/sexy-awakening/node_modules'
+  darwin x64
 
 npm manifest: 
   {
@@ -25,7 +22,7 @@ npm manifest:
       "@types/react": "^16.0.41",
       "axios": "^0.18.0",
       "expo": "^32.0.0",
-      "firebase": "^4.12.0",
+      "firebase": "^5.10.1",
       "geofire": "^4.1.2",
       "lodash": "^4.17.5",
       "moment": "^2.21.0",
@@ -93,7 +90,7 @@ Lockfile:
     dependencies:
       "@firebase/database-types" "0.2.0"
       "@firebase/logger" "0.1.0"
-      "@firebase/util" "0.1.10"
+      "@firebase/util" "0.1.10"git 
       faye-websocket "0.11.1"
       tslib "^1.9.0"
   
@@ -4826,3 +4823,16 @@ Lockfile:
       which-module "^2.0.0"
       y18n "^3.2.1"
       yargs-parser "^7.0.0"
+
+Trace: 
+  SyntaxError: Invalid value type 38:0 in /Users/russ/Development/sexy-awakening/yarn.lock
+      at Parser.unexpected (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:61980:11)
+      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62108:16)
+      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62065:26)
+      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62065:26)
+      at parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62182:17)
+      at module.exports.exports.default (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:61746:96)
+      at Function.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:2361:63)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13
