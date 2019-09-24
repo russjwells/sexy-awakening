@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/russ/.nvm/versions/node/v11.6.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install
+  /Users/russ/.nvm/versions/node/v11.6.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js
 
 PATH: 
   /Users/russ/.nvm/versions/node/v11.6.0/bin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/Users/russ/Library/Android/sdk/tools:/Users/russ/Library/Android/sdk/platform-tools

@@ -10,6 +10,7 @@ import {
 
 import * as firebase from 'firebase'
 import { auth, db } from '../firebase';
+import { NavigationActions } from 'react-navigation';
 
 import CircleImage from '../components/circleImage'
 import { Feather } from '@expo/vector-icons'
@@ -84,10 +85,11 @@ export default class SignUp extends Component {
                     this.setState(byPropKey('message', null))
                     this.goHome(authUser)
                     //history.push(routes.HOME);
+
                 })
                 .catch(error => {
                     this.setState(byPropKey('error', error));
-                    console.log("!!!!"+error.message)
+                    console.log("!!!! creating user failed"+error.message)
                 });
             })
             .catch(error => {
@@ -98,6 +100,17 @@ export default class SignUp extends Component {
             this.setState(byPropKey('message', 'You must be 18 to create an account.'))
         }
 
+    }
+
+    goHome(user) {
+        console.log('signup gohome' + user)
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Home', params:{user}}),
+            ],
+          });
+        this.props.navigation.dispatch(resetAction);
     }
 
     updateUser = (key, value) => {

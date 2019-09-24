@@ -55,6 +55,7 @@ export default class Login extends Component {
     }
 
     goHome(user) {
+        console.log('login gohome' + user)
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
