@@ -1,17 +1,30 @@
 Arguments: 
-  /Users/russ/.nvm/versions/node/v11.6.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js
+  /Users/russ/.nvm/versions/node/v11.0.0/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js install
 
 PATH: 
-  /Users/russ/.nvm/versions/node/v11.6.0/bin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/Users/russ/Library/Android/sdk/tools:/Users/russ/Library/Android/sdk/platform-tools
+  /Users/russ/.nvm/versions/node/v11.0.0/bin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/Users/russ/Library/Android/sdk/tools:/Users/russ/Library/Android/sdk/platform-tools
 
 Yarn version: 
-  1.5.1
+  1.16.0
 
 Node version: 
-  11.6.0
+  11.0.0
 
 Platform: 
   darwin x64
+
+Trace: 
+  SyntaxError: Invalid value type 38:0 in /Users/russ/Development/sexy-awakening/yarn.lock
+      at Parser.unexpected (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63501:11)
+      at Parser.parse (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63629:16)
+      at Parser.parse (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63606:26)
+      at Parser.parse (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63606:26)
+      at parse (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63703:17)
+      at module.exports.exports.default (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:63272:96)
+      at Function.<anonymous> (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:3035:63)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:304:30)
+      at /usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:315:13
 
 npm manifest: 
   {
@@ -21,14 +34,14 @@ npm manifest:
       "@ptomasroos/react-native-multi-slider": "0.0.12",
       "@types/react": "^16.0.41",
       "axios": "^0.18.0",
-      "expo": "^32.0.0",
+      "expo": "33.0.0",
       "firebase": "^5.10.1",
       "geofire": "^4.1.2",
       "lodash": "^4.17.5",
       "moment": "^2.21.0",
       "native-base": "^2.7.2",
-      "react": "16.5.0",
-      "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+      "react": "16.8.3",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
       "react-native-datepicker": "^1.7.2",
       "react-native-gifted-chat": "^0.4.3",
       "react-native-modal": "^6.5.0",
@@ -39,7 +52,7 @@ npm manifest:
       "react-native-remote-svg": "^1.2.0",
       "react-native-side-menu": "^1.1.3",
       "react-native-vector-icons": "^4.6.0",
-      "react-navigation": "^1.5.8"
+      "react-navigation": "3.11.0"
     }
   }
 
@@ -4823,16 +4836,3 @@ Lockfile:
       which-module "^2.0.0"
       y18n "^3.2.1"
       yargs-parser "^7.0.0"
-
-Trace: 
-  SyntaxError: Invalid value type 38:0 in /Users/russ/Development/sexy-awakening/yarn.lock
-      at Parser.unexpected (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:61980:11)
-      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62108:16)
-      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62065:26)
-      at Parser.parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62065:26)
-      at parse (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62182:17)
-      at module.exports.exports.default (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:61746:96)
-      at Function.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:2361:63)
-      at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
-      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13

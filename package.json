@@ -5,14 +5,14 @@
     "@ptomasroos/react-native-multi-slider": "0.0.12",
     "@types/react": "^16.0.41",
     "axios": "^0.18.0",
-    "expo": "^32.0.0",
+    "expo": "33.0.0",
     "firebase": "^5.10.1",
     "geofire": "^4.1.2",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
     "native-base": "^2.7.2",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-datepicker": "^1.7.2",
     "react-native-gifted-chat": "^0.4.3",
     "react-native-modal": "^6.5.0",
@@ -23,6 +23,6 @@
     "react-native-remote-svg": "^1.2.0",
     "react-native-side-menu": "^1.1.3",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "1.5.8"
+    "react-navigation": "3.11.0"
   }
 }

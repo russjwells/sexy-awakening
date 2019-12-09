@@ -4,7 +4,7 @@
     "description": "Weclome to Sexy Awakening: The best place to meet new friends, lovers, and romantic interests online. Swipe with intenton!",
     "slug": "sexy-awakening",
     "privacy": "unlisted",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
