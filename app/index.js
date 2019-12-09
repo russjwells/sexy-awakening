@@ -1,4 +1,6 @@
-import {StackNavigator} from 'react-navigation'
+//import {StackNavigator} from 'react-navigation'
+//import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import * as firebase from 'firebase'
 import Home from './screens/home'
 import Login from './screens/login'
@@ -26,6 +28,8 @@ const sexyawakeningFirebaseConfig = {
 
 //firebase.initializeApp(sexyawakeningFirebaseConfig)
 
+
+
 const RouteConfigs = {
     Login: {screen:Login},
     SignUp: {screen:SignUp},
@@ -45,4 +49,6 @@ const StackNavigatorConfig = {
     headerMode: 'none'
 }
 
-export default StackNavigator(RouteConfigs, StackNavigatorConfig)
+const AppNavigator = createStackNavigator(RouteConfigs, StackNavigatorConfig);
+
+export default createAppContainer(AppNavigator)
