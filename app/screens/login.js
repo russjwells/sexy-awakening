@@ -3,7 +3,7 @@ import firebase from 'firebase'
 import React, {Component} from 'react'
 import { Text, Linking, KeyboardAvoidingView, View, StyleSheet, ActivityIndicator, Image, StatusBar, Dimensions } from 'react-native'
 import Modal from "react-native-modal";
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import FacebookButton from '../components/facebookButton'
 import Button from '../components/button'
 
@@ -56,7 +56,7 @@ export default class Login extends Component {
 
     goHome(user) {
         console.log('login gohome' + user)
-        const resetAction = NavigationActions.reset({
+        const resetAction = StackActions.reset({
             index: 0,
             actions: [
                 NavigationActions.navigate({ routeName: 'Home', params:{user}}),
