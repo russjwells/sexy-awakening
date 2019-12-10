@@ -10,7 +10,7 @@ import {
 
 import * as firebase from 'firebase'
 import { auth, db } from '../firebase';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 import CircleImage from '../components/circleImage'
 import { Feather } from '@expo/vector-icons'
@@ -77,12 +77,15 @@ export default class SignUp extends Component {
             var sanitizedEmail = email.replace(/(^\s+|\s+$)/g,'');
             auth.doCreateUserWithEmailAndPassword(sanitizedEmail, passwordOne)
             .then(authUser => {
+                console.log("user auth created: " + authUser.uid.toString() + " " + authUser.name.toString())
                 //alert("authUser: "+ authUser.toString())
                 db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
                 .then(authUser => {
                     //console.log('authhy '+authUser)
-                    this.setState({ ...INITIAL_STATE });
-                    this.setState(byPropKey('message', null))
+                    console.log("user data created")
+                    //this.setState({ ...INITIAL_STATE });
+                    //this.setState(byPropKey('message', null))
+                    //console.log('state set')
                     this.goHome(authUser)
                     //history.push(routes.HOME);
 
@@ -104,7 +107,7 @@ export default class SignUp extends Component {
 
     goHome(user) {
         console.log('signup gohome' + user)
-        const resetAction = NavigationActions.reset({
+        const resetAction = StackActions.reset({
             index: 0,
             actions: [
                 NavigationActions.navigate({ routeName: 'Home', params:{user}}),
