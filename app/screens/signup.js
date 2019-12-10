@@ -185,8 +185,8 @@ export default class SignUp extends Component {
                             mode="date"
                             placeholder={this.state.birthday != null ? this.state.birthday : "select birthday"}
                             format="MM/DD/YYYY"
-                            minDate="1800-05-01"
-                            maxDate="2216-06-01"
+                            minimumDate="1800-05-01"
+                            maximumDate="2216-06-01"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             customStyles={{
