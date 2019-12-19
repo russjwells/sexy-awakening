@@ -77,14 +77,14 @@ export default class SignUp extends Component {
             var sanitizedEmail = email.replace(/(^\s+|\s+$)/g,'');
             auth.doCreateUserWithEmailAndPassword(sanitizedEmail, passwordOne)
             .then(authUser => {
-                console.log(authUser)
-                console.log("user auth created: " + authUser.uid.toString() + " " + authUser.user.name)
-                //alert("authUser: "+ authUser.toString())
-                db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
+                console.log(authUser.user)
+                //let auth = authUser.toJSON()
+                console.log("user auth created: " + authUser.user.uid + " - " + authUser.user.name)
+                db.doCreateUser(authUser.user.uid, email, first_name, last_name, birthday, gender)
                 .then(authUser => {
-                    //console.log('authhy '+authUser)
                     console.log("user data created")
-                    //this.setState({ ...INITIAL_STATE });
+                    this.state.setState({ ...INITIAL_STATE });
+                    this.setState({ ...INITIAL_STATE });
                     //this.setState(byPropKey('message', null))
                     //console.log('state set')
                     this.goHome(authUser)
@@ -93,13 +93,13 @@ export default class SignUp extends Component {
                 })
                 .catch(error => {
                     this.setState(byPropKey('error', error));
-                    console.log("!!!! creating user failed"+error.message)
+                    console.log("!!!! creating user failed "+error.message)
                 });
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
-                console.log('obvious')
-                console.log(error)
+                console.log("::create user error::")
+                console.log(error.message)
             });
         }else{
             console.log('Age Restriction')
