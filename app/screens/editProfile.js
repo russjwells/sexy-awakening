@@ -11,7 +11,8 @@ import {
     Dimensions,
     Image
 } from 'react-native'
-import { ImagePicker, Permissions } from 'expo'
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
 import { Textarea } from 'native-base'
 
 import * as firebase from 'firebase'
@@ -44,8 +45,9 @@ export default class EditProfile extends Component {
     newpic = async () => {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (status === 'granted') {
-            let pic = await Expo.ImagePicker.launchImageLibraryAsync(
+            let pic = await ImagePicker.launchImageLibraryAsync(
                 {
+                    mediaTypes: ImagePicker.MediaTypeOptions.All,
                     allowsEditing: true,
                     aspect: [1, 1],
                     base64: true,
