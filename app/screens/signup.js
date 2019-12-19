@@ -77,7 +77,8 @@ export default class SignUp extends Component {
             var sanitizedEmail = email.replace(/(^\s+|\s+$)/g,'');
             auth.doCreateUserWithEmailAndPassword(sanitizedEmail, passwordOne)
             .then(authUser => {
-                console.log("user auth created: " + authUser.uid.toString() + " " + authUser.name.toString())
+                console.log(authUser)
+                console.log("user auth created: " + authUser.uid.toString() + " " + authUser.user.name)
                 //alert("authUser: "+ authUser.toString())
                 db.doCreateUser(authUser.uid, email, first_name, last_name, birthday, gender)
                 .then(authUser => {
@@ -97,6 +98,8 @@ export default class SignUp extends Component {
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
+                console.log('obvious')
+                console.log(error)
             });
         }else{
             console.log('Age Restriction')

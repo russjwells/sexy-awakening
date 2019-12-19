@@ -84,7 +84,8 @@ export default class Login extends Component {
         this.setState({showSpinner: true})
         auth.doSignInWithEmailAndPassword(sanitizedEmail, password)
             .then(user => {
-                this.state.setState({...INITIAL_STATE})
+                //this.state.setState({...INITIAL_STATE})
+                this.setState({...INITIAL_STATE})
                 this.goHome(user)
             })
             .catch(err => {
