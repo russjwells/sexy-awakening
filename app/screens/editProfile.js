@@ -23,6 +23,7 @@ import ModalDropdown from 'react-native-modal-dropdown'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment'
+import axios from 'axios'
 
 export default class EditProfile extends Component {
 
@@ -53,15 +54,17 @@ export default class EditProfile extends Component {
                     base64: true,
                 }
             )
-            console.log('le picker'+pic.uri)
-            
-            var picURI = `data:image/jpg;base64,${pic.base64}`
+            console.log('picker image uri' + pic.uri)
+            var picURI = pic.uri//`data:image/jpg;base64,${pic.base64}`
             this.setState({newPic: picURI})
     
-            const base64prepend = 'data:image/jpeg;base64,'
-            const data = base64prepend + pic.base64
-            const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
 
+
+            //const base64prepend = 'data:image/jpeg;base64,'
+            //const data = base64prepend + pic.base64
+
+            //compose thing to send
+            const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
             // Create the config object for the POST
             const config = {
                 method: 'POST',
@@ -72,26 +75,40 @@ export default class EditProfile extends Component {
             };
 
             const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-2/upload-file';
-    
+            //send it with fetch
             fetch(url, config)
-                .then(responseData => {
-                    // Log the response form the server
-                    //console.log("where did the file go? "+responseData._bodyText);
-                    //console.log(responseData)
+                .then(response => {
+                    console.log("response data: ")
+                    console.log(response)
+                    return response.json()
+                })
+                .then(data => {
+
+                    // Log the response from the server
+                    //console.log("where did the file go? "+responseData._bodyBlob.data);
+                    console.log("upload data: ")
+                    console.log(data)
+                    //console.log(JSON.parse(responseData._bodyBlob)
                     //alert('new pic: '+ responseData._bodyText);
                     //alert(responseData.file_url);
-                    const jsonPayload = responseData._bodyText;
-                    const obj = JSON.parse(jsonPayload)
-                    const fileurl = obj.url
-                    console.log('file url ' +fileurl)
-                    this.setState({picture: fileurl})
-                    this.updateUser('picture', this.state.picture)
+                    //const jsonPayload = responseData._bodyBlob;
+                    //const obj = JSON.parse(jsonPayload)
+                    //const fileurl = obj.url
+                    //console.log('file url ' + fileurl)
+                    //this.setState({picture: fileurl})
+                    //this.updateUser('picture', this.state.picture)
                 })
                 .catch(err => {
-                    console.log('ohh '+err);
-                    this.setState({newPic: null})
-                    //alert('error: '+err.message)
+                    console.log('image upload failed ')
+                    console.log(err.message)
+                    //this.setState({newPic: null})
+                    alert('error: '+ err.message)
                 });
+            //send it with axios
+
+
+
+            
         }
 
 
