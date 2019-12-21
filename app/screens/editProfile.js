@@ -55,13 +55,11 @@ export default class EditProfile extends Component {
                 }
             )
             console.log('picker image uri' + pic.uri)
-            var picURI = pic.uri//`data:image/jpg;base64,${pic.base64}`
-            this.setState({newPic: picURI})
-    
-
-
-            //const base64prepend = 'data:image/jpeg;base64,'
-            //const data = base64prepend + pic.base64
+            let picURI = pic.uri//`data:image/jpg;base64,${pic.base64}`
+            const base64prepend = 'data:image/jpeg;base64,'
+            const imgData = base64prepend + pic.base64
+            //set pic locally
+            this.setState({newPic: imgData})
 
             //compose thing to send
             const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
@@ -73,9 +71,10 @@ export default class EditProfile extends Component {
                 },
                 body: jsonData
             };
-
+            //const headers
             const url = 'https://qpfa7ske9k.execute-api.us-west-1.amazonaws.com/sexy-awakening-beta-2/upload-file';
             //send it with fetch
+            /*
             fetch(url, config)
                 .then(response => {
                     console.log("response data: ")
@@ -104,14 +103,23 @@ export default class EditProfile extends Component {
                     //this.setState({newPic: null})
                     alert('error: '+ err.message)
                 });
+            */
             //send it with axios
-
-
-
-            
+            axios.post(url, jsonData, { headers: {'Content-Type': 'application/json' }})
+            .then((response) => {
+                console.log('response: ')
+                console.log(response.data);
+                //set picture url locally and in db
+                this.setState({picture: response.data.url})
+                this.updateUser('picture', this.state.picture)
+                console.log('pic updated')
+              }, (error) => {
+                console.log(error);
+                console.log('pic error')
+              });
+        } else {
+            alert('Enable your camera roll permissions to upload!')
         }
-
-
     }
 
     save = (bio, gender, birthday) => {
