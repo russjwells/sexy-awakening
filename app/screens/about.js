@@ -43,11 +43,12 @@ export default class About extends Component {
                 <View style={styles.content}>
                     <ScrollView style={styles.about}>
                         <Text style={{fontSize:20, margin:20}}>We're so glad you're here, {first_name}.</Text>
-                        <Text style={{fontSize:20, margin:20, fontWeight:'bold'}}>Welcome to Sexy Awakening</Text>
+                        <Text style={{fontSize:20, margin:20, fontWeight:'bold', color:'#e54560'}}>Welcome to Sexy Awakening</Text>
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>This is a transformational space. </Text>
-                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Sexy Awakening is creating a culture of consent, sex positivity, and healthy boundaries in which all beings feel may safe to explore, express, and be received.</Text>
+                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Sexy Awakening is creating a culture of consent and sex positivity, and promotes clear healthy boundaries so that all beings feel may safe to explore, express, and be received in compassion.</Text>
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We agree to honor each other and our selves with reverence and compassion in each moment as we grow more authentic, present, alive, awake, and evolved.</Text>
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>We're here to guide your adventure into self knowledge by providing space for you to open up the deepest parts of your world, your heart, and your soul.</Text>
+                        <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Swipe right for sex, up for romance, left for friendship and down to pass.</Text>
                         
                         <Text style={{fontSize:15, color: 'darkgray', margin:20}}>Thank you for coming. Enjoy your self!</Text>
                     </ScrollView>
