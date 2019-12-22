@@ -162,6 +162,7 @@ export default class Settings extends Component {
                             />
                         </View>
                     </View>
+                    {/*
                     <View style={styles.sectionTitle}>
                             <Text style={styles.sectionTitleText}>What</Text>
                     </View>
@@ -240,6 +241,7 @@ export default class Settings extends Component {
                             }}
                         />
                     </View>
+                    */}
                 </ScrollView>
             </View>
         )
