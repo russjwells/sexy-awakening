@@ -59,7 +59,7 @@ export default class EditProfile extends Component {
             const base64prepend = 'data:image/jpeg;base64,'
             const imgData = base64prepend + pic.base64
             //set pic locally
-            this.setState({newPic: imgData})
+            this.setState({newPic: picURI})
 
             //compose thing to send
             const jsonData = `{"base64String":"${pic.base64}","uid":"${this.state.user.uid}"}`
@@ -138,6 +138,7 @@ export default class EditProfile extends Component {
         let bio = this.state.bio
         let gender = this.state.gender
         let birthday = this.state.birthday
+        let picURI = this.state.newPic
 
         const profileBday = moment(birthday, 'MM/DD/YYYY')
         const profileAge = moment().diff(profileBday, 'years')
@@ -163,7 +164,8 @@ export default class EditProfile extends Component {
                         this.state.newPic ?
                         <Image
                             style={{flex: 0, height: width, width: width}}
-                            source={{uri: `data:image/jpg;base64,${this.state.newPic}`}}
+                            //source={{uri: `data:image/jpg;base64,${this.state.newPic}`}}
+                            source={{uri: picURI}}
                         /> :
                         <TouchableHighlight onPress={() => this.newpic()}>
                              <SquareAvatar 
@@ -197,8 +199,8 @@ export default class EditProfile extends Component {
                             mode="date"
                             placeholder={this.state.birthday != null ? this.state.birthday : "select date"}
                             format="MM/DD/YYYY"
-                            minDate="1800-05-01"
-                            maxDate="2216-06-01"
+                            minimumDate="1800-05-01"
+                            maximumDate="2216-06-01"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             customStyles={{
@@ -211,7 +213,6 @@ export default class EditProfile extends Component {
                             dateInput: {
                                 marginLeft: 36
                             }
-                            // ... You can check the source to find the other keys.
                             }}
                             onDateChange={(date) => {
                                 this.setState({birthday: date})
@@ -231,7 +232,7 @@ export default class EditProfile extends Component {
                     </View>
                     <View style={styles.save}>
                         <TouchableHighlight style={styles.saveButton} onPress={() => this.save(bio, gender, birthday) }>
-                            <Text style={styles.saveText}>SAVE</Text>
+                            <Text style={styles.saveText}>SAVE CHANGES</Text>
                         </TouchableHighlight>
                     </View>
                 </ScrollView>
