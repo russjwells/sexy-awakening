@@ -47,7 +47,7 @@ export default class SimpleScroller extends Component {
         
     }
     toScreen = (screen) => {
-        console.log('child function runninng (a)', screen)
+        //console.log('child function runninng (a)', screen)
         const move = screen * width
         const minScroll = (this.props.screens.length - 1) * -width
         Animated.spring(this.pan, {
