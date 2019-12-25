@@ -135,7 +135,7 @@ export default class Home extends Component {
       const {latitude, longitude} = location.coords
       const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
       geoFireRef.set(uid, [latitude, longitude])
-      console.log('Permission Granted', location)
+      console.log('Location: ', location)
     } else {
       console.log('Permission Denied')
     }
