@@ -1,4 +1,6 @@
 import Expo from 'expo'
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableHighlight, Image, StatusBar } from 'react-native';
 import * as firebase from 'firebase'
@@ -116,20 +118,29 @@ export default class Home extends Component {
   }
 
   updateUserLocation = async (uid) => {
-    const {Permissions, Location} = Expo
+    
+    /*
+    //demo coords
+      const latitude = 37.39239
+      const longitude = -122.09072
+      const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
+      geoFireRef.set(uid, [latitude, longitude])
+      console.log('temp coordinates')
+    */
+    
+    
     const {status} = await Permissions.askAsync(Permissions.LOCATION)
     if (status === 'granted') {
       const location = await Location.getCurrentPositionAsync({enableHighAccuracy: false})
       const {latitude, longitude} = location.coords
-      //demo coords
-      //const latitude = 37.39239
-      //const longitude = -122.09072
       const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
       geoFireRef.set(uid, [latitude, longitude])
       console.log('Permission Granted', location)
     } else {
       console.log('Permission Denied')
     }
+    
+
   }
 
   relate = (userUid, profileUid, swipedDirection) => {
