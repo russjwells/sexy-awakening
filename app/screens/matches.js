@@ -140,7 +140,7 @@ export default class Matches extends Component {
                     <CircleAvatar 
                             uid={uid} 
                             pic={picture} 
-                            size={80, 80}
+                            size={(80, 80)}
                         />
                 </TouchableHighlight>
                 <View style={{justifyContent:'center', marginLeft:10}}>
@@ -149,7 +149,7 @@ export default class Matches extends Component {
                 </View>
             </View>
             </TouchableHighlight>
-        )
+        );
     }
 
     renderSeparator = (sectionID, rowID) => {

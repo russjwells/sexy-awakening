@@ -45,7 +45,7 @@ export default class YourProfile extends Component {
         const {ageRangeValues, distanceValue, showMen, showWomen} = this.state
         //const bio = (work && work[0] && work[0].position) ? work[0].position.name : null
         let bio = this.state.bio
-        return(
+        return (
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
@@ -65,14 +65,14 @@ export default class YourProfile extends Component {
                         <SquareAvatar 
                             uid={uid} 
                             pic={picture} 
-                            size={width, width}
+                            size={(width, width)}
                         />
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>
-        )
+        );
     }
 }
 const {width, height} = Dimensions.get('window')

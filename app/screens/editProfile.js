@@ -143,7 +143,7 @@ export default class EditProfile extends Component {
         const profileBday = moment(birthday, 'MM/DD/YYYY')
         const profileAge = moment().diff(profileBday, 'years')
         
-        return(
+        return (
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.navigate('Home', {user: this.props.navigation.state.params.user})}>
@@ -171,7 +171,7 @@ export default class EditProfile extends Component {
                              <SquareAvatar 
                                 uid={this.state.user.uid} 
                                 pic={this.state.user.picture} 
-                                size={width, width}
+                                size={(width, width)}
                              />
                         </TouchableHighlight>
                     }
@@ -237,7 +237,7 @@ export default class EditProfile extends Component {
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
-        )
+        );
     }
 }
 const {width, height} = Dimensions.get('window')

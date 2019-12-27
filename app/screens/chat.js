@@ -49,7 +49,7 @@ export default class Chat extends Component {
 
     render () {
         const avatar = `https://graph.facebook.com/${this.state.profile.uid}/picture?height=80` 
-        return(
+        return (
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={40}>
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.goBack()}>
@@ -61,7 +61,7 @@ export default class Chat extends Component {
                             <CircleAvatar 
                                 uid={this.state.profile.uid} 
                                 pic={this.state.profile.picture} 
-                                size={40, 40}
+                                size={(40, 40)}
                             />
                             <Text style={styles.navtext}> {this.state.profile.first_name}</Text>
                             </View>
@@ -76,7 +76,7 @@ export default class Chat extends Component {
                     onSend={this.onSend}
                 />
             </KeyboardAvoidingView>
-        )
+        );
     }
 }
 

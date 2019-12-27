@@ -25,7 +25,7 @@ export default class ViewProfile extends Component {
     render() {
         const {width, height} = Dimensions.get('window')
         const {first_name, bio, id, uid, picture} = this.props.navigation.state.params.profile
-        return(
+        return (
             <KeyboardAvoidingView style={styles.container} behavior={'padding'} keyboardVerticalOffset={60}>
                 <View style={styles.navbar}>
                     <TouchableHighlight style={styles.navback} onPress={() => this.props.navigation.goBack()}>
@@ -45,14 +45,14 @@ export default class ViewProfile extends Component {
                         <SquareAvatar 
                             uid={uid} 
                             pic={picture} 
-                            size={width, width}
+                            size={(width, width)}
                         />
                         <Text style={{fontSize:20}}>{first_name}</Text>
                         <Text style={{fontSize:15, color: 'darkgray'}}>{bio}</Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>
-        )
+        );
     }
 }
 const {width, height} = Dimensions.get('window')
