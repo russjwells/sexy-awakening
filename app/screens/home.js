@@ -119,16 +119,6 @@ export default class Home extends Component {
 
   updateUserLocation = async (uid) => {
     
-    /*
-    //demo coords
-      const latitude = 37.39239
-      const longitude = -122.09072
-      const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
-      geoFireRef.set(uid, [latitude, longitude])
-      console.log('temp coordinates')
-    */
-    
-    
     const {status} = await Permissions.askAsync(Permissions.LOCATION)
     if (status === 'granted') {
       const location = await Location.getCurrentPositionAsync({enableHighAccuracy: false})
@@ -139,6 +129,15 @@ export default class Home extends Component {
     } else {
       console.log('Permission Denied')
     }
+
+    
+    //demo coords
+      const latitude = 37.39239
+      const longitude = -122.09072
+      const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
+      geoFireRef.set(uid, [latitude, longitude])
+      console.log('temp coordinates')
+    
     
 
   }
