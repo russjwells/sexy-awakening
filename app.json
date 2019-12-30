@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "0.8.2",
+    "version": "0.8.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -30,7 +30,7 @@
     },
     "android": {
       "package": "com.DigitalHyperspace.SexyAwakening",
-      "versionCode": 7
+      "versionCode": 8
     },
     "githubUrl": "https://github.com/russjwells/sexy-awakening"
   }
