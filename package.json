@@ -33,7 +33,8 @@
     "react-native-side-menu": "^1.1.3",
     "react-native-vector-icons": "^4.6.0",
     "react-native-web": "^0.12.0-rc.1",
-    "react-navigation": "3.11.1"
+    "react-navigation": "3.11.1",
+    "react-primitives": "^0.8.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.4"
