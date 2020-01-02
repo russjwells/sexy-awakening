@@ -4,10 +4,7 @@
     "development": {
       "plugins": [
         ["@babel/plugin-transform-react-jsx-source"],
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
+        ["@babel/plugin-proposal-class-properties"],
       ]
     }
   }
