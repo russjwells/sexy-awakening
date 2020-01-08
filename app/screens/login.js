@@ -183,7 +183,7 @@ export default class Login extends Component {
                         </Form>
                         <Button prompt={'Create Account'} onPress={() => this.props.navigation.navigate('SignUp')}/>
                         <Text style={styles.tosText}>
-                        By logging in or creating an account you agree to our <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://www.sexyawakening.com/terms-of-service/')}>terms of service</Text> and <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://www.sexyawakening.com/privacy-policy/')}>privacy policy</Text>.
+                        By logging in or creating an account you agree to our <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://sexyawakening.netlify.com/terms-of-service/')}>terms of service</Text> and <Text style={{color: 'lightblue'}} onPress={() => Linking.openURL('https://sexyawakening.netlify.com/privacy-policy/')}>privacy policy</Text>.
                         </Text>
                         {
                             //<FacebookButton onPress={this.fblogin}/>
