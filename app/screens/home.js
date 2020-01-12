@@ -132,11 +132,11 @@ export default class Home extends Component {
 
     
     //demo coords
-      const latitude = 37.39239
-      const longitude = -122.09072
-      const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
-      geoFireRef.set(uid, [latitude, longitude])
-      console.log('temp coordinates')
+    //  const latitude = 37.39239
+    //  const longitude = -122.09072
+    //  const geoFireRef = new GeoFire(firebase.database().ref('geoData'))
+    //  geoFireRef.set(uid, [latitude, longitude])
+    //  console.log('temp coordinates')
     
     
 
