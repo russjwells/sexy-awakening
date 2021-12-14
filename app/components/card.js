@@ -22,7 +22,7 @@ export default class Card extends Component {
       onPanResponderMove: Animated.event([
         null,
         {dx:this.pan.x, dy:this.pan.y},
-      ]),
+      ], { useNativeDriver: true } ),
       onPanResponderRelease: (e, {dx, dy}) => {
         const absDx = Math.abs(dx)
         const absDy = Math.abs(dy)
