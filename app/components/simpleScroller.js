@@ -40,6 +40,7 @@ export default class SimpleScroller extends Component {
         Animated.spring(this.pan, {
         toValue: this.clamp(move, minScroll, 0),
         bounciness: 0,
+        useNativeDriver: true,
         }).start()
     } 
 
