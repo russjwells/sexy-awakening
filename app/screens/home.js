@@ -206,6 +206,7 @@ export default class Home extends Component {
       this.setState({activeScreen:currentView})
       //console.log('current view: ' + currentView)
     }
+    //Animated.event(this, {useNativeDriver: true})
   }
   scrollTo = (view) => {
     //console.log('goto', view)
@@ -258,6 +259,7 @@ export default class Home extends Component {
     //if (this.state.drawer == true){
     //  this.setState({drawer:false})
     //}
+    //Animated.event(this, {useNativeDriver: true})
   }
   
   render() {
@@ -269,6 +271,7 @@ export default class Home extends Component {
         onChange={isOpen => this.drawerChange(isOpen)}
         onAnimaitonComplete={() => this.drawerAnimationChange()}
         autoClosing={false}
+        
       >
         <View style={styles.container}>
           <StatusBar barStyle='dark-content' />
@@ -332,6 +335,7 @@ export default class Home extends Component {
               this.cardStack(),
               <Matches navigation={this.props.navigation} user={this.state.user}/>
             ]}
+            //onScroll={Animated.event(this.handleScroll, {useNativeDriver: true})}
             onScroll={this.handleScroll} 
             bounce={false}
             toScreen={this.scrollTo}

@@ -21,6 +21,7 @@ export default class SimpleScroller extends Component {
             onPanResponderMove: Animated.event([
                 null,
                 {dx:this.pan},
+                //Animated.event(this, {useNativeDriver: true})
             ]),
             onPanResponderReject: this.handlePanResponderEnd,
             onPanResponderRelease: this.handlePanResponderEnd,
@@ -45,7 +46,7 @@ export default class SimpleScroller extends Component {
     } 
 
     onScroll = () => {
-        
+        Animated.event(this, {useNativeDriver: true})
     }
     toScreen = (screen) => {
         //console.log('child function runninng (a)', screen)
@@ -74,6 +75,7 @@ export default class SimpleScroller extends Component {
                 style={[styles.scroller, animatedStyles, {width:scrollerWidth}]}
                 {...this.scrollResponder.panHandlers}>
                 {this.props.screens.map((screen, i) => <View key={i} style={{width, height}}>{screen}</View>)}
+                
             </Animated.View>
         )
     }
